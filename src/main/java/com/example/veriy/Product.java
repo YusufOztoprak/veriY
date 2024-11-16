@@ -1,10 +1,14 @@
 package com.example.veriy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
     private int id;
     private String name;
     private double price;
     private int quantity;
+
 
     public Product(int id, String name, double price, int quantity) {
         this.id = id;
