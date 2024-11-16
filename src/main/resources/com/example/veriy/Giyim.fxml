@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.InventoryController" spacing="10" alignment="CENTER">
+    <children>
+        <HBox spacing="10">
+            <Button text="alt giyim" onAction="#AltButton" />
+            <Button text="üst giyim" onAction="#Personal_Care" />
+
+        </HBox>
+    </children>
+</VBox>
