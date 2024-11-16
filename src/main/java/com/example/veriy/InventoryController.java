@@ -28,22 +28,21 @@ public class InventoryController {
     @FXML
     private TableColumn<Product, Integer> quantityColumn;
 
-    // Ürünleri saklamak için ObservableList
     private ObservableList<Product> productList = FXCollections.observableArrayList();
+    private InventoryFileHandler fileHandler = new InventoryFileHandler(); // Dosya yöneticisi
 
-    // Başlangıçta tabloyu ve sütunları ayarlayın
+    // Tabloyu ve dosyayı başlangıçta ayarla
     public void initialize() {
-        // Sütunları Product sınıfının özelliklerine bağlayın
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        // productTable'ı productList ile bağlayın
+        // Dosyadan verileri yükle ve tabloya ekle
+        productList.addAll(fileHandler.readFromFile());
         productTable.setItems(productList);
     }
 
-    // Ürün ekleme işlemi
     @FXML
     private void addProduct() {
         try {
@@ -51,31 +50,27 @@ public class InventoryController {
             double price = Double.parseDouble(priceField.getText());
             int quantity = Integer.parseInt(quantityField.getText());
 
-            // Yeni ürün oluştur ve listeye ekle
             Product newProduct = new Product(generateId(), name, price, quantity);
             productList.add(newProduct);
 
-            // Alanları temizle
-            nameField.clear();
-            priceField.clear();
-            quantityField.clear();
+            fileHandler.writeToFile(productList); // Listeyi dosyaya kaydet
+            clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Lütfen geçerli bir sayı girin.");
         }
     }
 
-    // Ürün silme işlemi
     @FXML
     private void deleteProduct() {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
-            productList.remove(selectedProduct); // ObservableList'ten kaldır, tablo otomatik güncellenecektir
+            productList.remove(selectedProduct);
+            fileHandler.writeToFile(productList); // Listeyi dosyaya kaydet
         } else {
             System.out.println("Lütfen silmek için bir ürün seçin.");
         }
     }
 
-    // Ürün güncelleme işlemi
     @FXML
     private void updateProduct() {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
@@ -85,7 +80,9 @@ public class InventoryController {
                 selectedProduct.setPrice(Double.parseDouble(priceField.getText()));
                 selectedProduct.setQuantity(Integer.parseInt(quantityField.getText()));
 
-                productTable.refresh(); // Tabloyu manuel olarak yenile
+                productTable.refresh(); // Tabloyu yenile
+                fileHandler.writeToFile(productList); // Listeyi dosyaya kaydet
+                clearFields();
             } catch (NumberFormatException e) {
                 System.out.println("Lütfen geçerli bir sayı girin.");
             }
@@ -94,8 +91,13 @@ public class InventoryController {
         }
     }
 
-    // Benzersiz ID üretmek için basit bir yöntem
+    private void clearFields() {
+        nameField.clear();
+        priceField.clear();
+        quantityField.clear();
+    }
+
     private int generateId() {
-        return productList.size() + 1;
+        return productList.isEmpty() ? 1 : productList.get(productList.size() - 1).getId() + 1;
     }
 }

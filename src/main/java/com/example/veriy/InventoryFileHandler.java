@@ -1,12 +1,15 @@
 package com.example.veriy;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryFileHandler {
-    private static final String FILE_PATH = "inventory.csv";
+    private static final String FILE_PATH = "inventory.txt";
 
     public void writeToFile(List<Product> products) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH))) {
@@ -15,7 +18,7 @@ public class InventoryFileHandler {
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Dosyaya yazılamadı: " + e.getMessage());
         }
     }
 
@@ -32,7 +35,7 @@ public class InventoryFileHandler {
                 products.add(new Product(id, name, price, quantity));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Dosya okunamadı: " + e.getMessage());
         }
         return products;
     }
