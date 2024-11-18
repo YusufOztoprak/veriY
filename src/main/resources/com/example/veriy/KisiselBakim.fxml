@@ -6,8 +6,8 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.InventoryController" spacing="10" alignment="CENTER">
     <children>
         <HBox spacing="10">
-            <Button text="şampuan" onAction="#ŞampuanButton" />
-            <Button text="parfüm" onAction="#ParfümButton" />
+            <Button text="şampuan" onAction="#ShampooButton" />
+            <Button text="parfüm" onAction="#ParfumeButton" />
         </HBox>
     </children>
 </VBox>
