@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PCController">
+    <TableView fx:id="productTable" layoutX="50" layoutY="50" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="200" />
+            <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <TextField fx:id="productNameField" layoutX="50" layoutY="300" promptText="Enter Product Name" />
+    <TextField fx:id="productPriceField" layoutX="250" layoutY="300" promptText="Enter Product Price" />
+
+    <Button text="Add Product" layoutX="450" layoutY="300" onAction="#addProduct"/>
+    <Button text="Delete Product" layoutX="450" layoutY="350" onAction="#deleteProduct"/>
+</StackPane>

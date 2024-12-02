@@ -1,13 +1,13 @@
 package com.example.veriy;
 
 public class Product {
-    private String id;
+    private int id;
     private String name;
     private double price;
     private int quantity;
 
 
-    public Product(String id, String name, double price, int quantity) {
+    public Product(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -15,11 +15,11 @@ public class Product {
     }
 
     // Getter ve setter metotları
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

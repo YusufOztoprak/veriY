@@ -5,8 +5,8 @@ public class Personal_Care extends Product {
     private String brand;
     private String userInstructions;
 
-    public Personal_Care(String id, String name, int price, int amount, int expiration_date, String brand, String userInstructions) {
-        super(id, name, price, amount);
+    public Personal_Care(int id, String name, int price, int amount, int expiration_date, String brand, String userInstructions) {
+        super(id, name, price);
         this.expiration_date = expiration_date;
         this.brand = brand;
         //this.ingredients = new ArrayList<>();

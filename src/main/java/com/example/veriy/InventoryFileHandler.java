@@ -32,7 +32,7 @@ public class InventoryFileHandler {
                 String name = parts[1];
                 double price = Double.parseDouble(parts[2]);
                 int quantity = Integer.parseInt(parts[3]);
-                products.add(new Product(id, name, price, quantity));
+                products.add(new Product(id, name, price));
             }
         } catch (IOException e) {
             System.out.println("Dosya okunamadı: " + e.getMessage());

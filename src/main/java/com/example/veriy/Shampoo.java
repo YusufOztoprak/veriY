@@ -8,7 +8,7 @@ public class Shampoo extends Personal_Care {
     // Constructor
 
 
-    public Shampoo(String id, String name, int price, int amount, int expiration_date, String brand, String userInstructions, String hairType, Double volume) {
+    public Shampoo(int id, String name, int price, int amount, int expiration_date, String brand, String userInstructions, String hairType, Double volume) {
         super(id, name, price, amount, expiration_date, brand, userInstructions);
         // this.paraben = paraben;
         this.hairType = hairType;
@@ -23,12 +23,6 @@ public class Shampoo extends Personal_Care {
     public void setParaben(boolean paraben) {
         this.paraben = paraben;
     }*/
-
-    @Override
-    public void get_info() {
-        super.get_info();
-        System.out.println("ürünün kullalıcağı saç tipi: " + hairType + "\nürünün miktarı(ml):" + volume);
-    }
 
     public String getHairType() {
         return hairType;

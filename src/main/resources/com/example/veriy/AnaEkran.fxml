@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.InventoryController" spacing="10" alignment="CENTER">
+<?import java.awt.Button?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.MainController" spacing="10" alignment="CENTER">
     <children>
-        <HBox spacing="10">
-            <Button text="Technology" onAction="#TechnologyButton" />
-            <Button text="Personal_Care" onAction="#Personal_Care" />
-            <Button text="Clothing" onAction="#ClothingButton"/>
-        </HBox>
+        <Button fx:id="technologyButton" text="Technology" onAction="#openTechnologyScene" />
+        <Button fx:id="personalCareButton" text="Personal Care" onAction="#openPersonalCareScene" />
+        <Button fx:id="clothingButton" text="Clothing" onAction="#openClothingScene"/>
     </children>
-</VBox>
+</HBox>

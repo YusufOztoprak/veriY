@@ -51,7 +51,7 @@ public class ShampooController {
         shampooTable.setItems(shampooRepo.getShampooList());
 
         // Add sample data
-        shampooRepo.addShampoo(new Shampoo("SH001", "Head & Shoulders", 50, 100, 2025, "P&G", "Apply to wet hair.", "All Hair Types", 400.0));
-        shampooRepo.addShampoo(new Shampoo("SH002", "Pantene", 40, 200, 2024, "P&G", "Use daily.", "Dry Hair", 300.0));
+        shampooRepo.addShampoo(new Shampoo(001, "Head & Shoulders", 50, 100, 2025, "P&G", "Apply to wet hair.", "All Hair Types", 400.0));
+        shampooRepo.addShampoo(new Shampoo(002, "Pantene", 40, 200, 2024, "P&G", "Use daily.", "Dry Hair", 300.0));
     }
 }

@@ -18,8 +18,7 @@ public class MainController {
 
     @FXML
     private void openTechnologyScene() throws IOException {
-        // Teknoloji kategorisi ekranını yükle
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TechnologyView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Teknoloji.fxml"));
         Scene technologyScene = new Scene(loader.load());
         Stage stage = (Stage) technologyButton.getScene().getWindow();
         stage.setScene(technologyScene);
@@ -28,8 +27,7 @@ public class MainController {
 
     @FXML
     private void openPersonalCareScene() throws IOException {
-        // Kişisel bakım kategorisi ekranını yükle
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonalCareView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Teknoloji.fxml"));
         Scene personalCareScene = new Scene(loader.load());
         Stage stage = (Stage) personalCareButton.getScene().getWindow();
         stage.setScene(personalCareScene);
@@ -38,8 +36,7 @@ public class MainController {
 
     @FXML
     private void openClothingScene() throws IOException {
-        // Giyim kategorisi ekranını yükle
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClothingView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Giyim.fxml"));
         Scene clothingScene = new Scene(loader.load());
         Stage stage = (Stage) clothingButton.getScene().getWindow();
         stage.setScene(clothingScene);
