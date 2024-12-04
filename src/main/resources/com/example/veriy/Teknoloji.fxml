@@ -1,8 +1,9 @@
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TeknolojiController" spacing="10" alignment="CENTER">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TeknolojiController" spacing="10" alignment="CENTER">
     <children>
-        <HBox spacing="10">
-            <Button fx:id="TelefonButton" text="Telefon" onAction="#openTelefonScene" />
-            <Button fx:id="PCButton" text="Bilgisayar" onAction="#openPCScene" />
-        </HBox>
+        <Button fx:id="PhoneButton" text="Phone" onAction="#openTelefonScene" />
+        <Button fx:id="PCButton" text="PC" onAction="#openPCScene" />
     </children>
-</VBox>
+</HBox>
