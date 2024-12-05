@@ -1,4 +1,34 @@
 package com.example.veriy;
 
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
+
 public class GiyimController {
+
+    @FXML
+    private Button TopButton;
+    @FXML
+    private Button BottomButton;
+
+    @FXML
+    private void openTopScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Top.fxml"));
+        Scene TopScene = new Scene(loader.load());
+        Stage stage = (Stage) TopButton.getScene().getWindow();
+        stage.setScene(TopScene);
+        stage.show();
+    }
+
+    @FXML
+    private void openBottomScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Bottom.fxml"));
+        Scene BottomScene = new Scene(loader.load());
+        Stage stage = (Stage) BottomButton.getScene().getWindow();
+        stage.setScene(BottomScene);
+        stage.show();
+    }
 }

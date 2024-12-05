@@ -10,27 +10,25 @@ import java.io.IOException;
 public class KisiselBakimController {
 
     @FXML
-    private Button ShampooButton;
-    @FXML
     private Button ParfumeButton;
+    @FXML
+    private Button ShampooButton;
 
     @FXML
-    private void openShampooScene() throws IOException {
-        // Teknoloji kategorisi ekranını yükle
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Shampoo.fxml"));
-        Scene ShampooScene = new Scene(loader.load());
-        Stage stage = (Stage) ShampooButton.getScene().getWindow();
-        stage.setScene(ShampooScene);
+    private void openParfumeScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Parfume.fxml"));
+        Scene ParfumeScene = new Scene(loader.load());
+        Stage stage = (Stage) ParfumeButton.getScene().getWindow();
+        stage.setScene(ParfumeScene);
         stage.show();
     }
 
     @FXML
-    private void openParfumeScene() throws IOException {
-        // Kişisel bakım kategorisi ekranını yükle
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Parfume.fxml"));
-        Scene ParfumeScene = new Scene(loader.load());
-        Stage stage = (Stage) ParfumeButton.getScene().getWindow();
-        stage.setScene(ParfumeScene);
+    private void openShampooScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Shampoo.fxml"));
+        Scene ShampooScene = new Scene(loader.load());
+        Stage stage = (Stage) ShampooButton.getScene().getWindow();
+        stage.setScene(ShampooScene);
         stage.show();
     }
 }
