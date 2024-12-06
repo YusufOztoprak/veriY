@@ -1,10 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.MainController" spacing="10" alignment="CENTER">
+<HBox alignment="CENTER" prefHeight="550.0" prefWidth="680.0" spacing="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.MainController">
     <children>
-        <Button fx:id="technologyButton" text="Technology" onAction="#openTechnologyScene" />
-        <Button fx:id="personalCareButton" text="Personal Care" onAction="#openPersonalCareScene" />
-        <Button fx:id="clothingButton" text="Clothing" onAction="#openClothingScene" />
+        <Button fx:id="technologyButton" onAction="#openTechnologyScene" prefHeight="335.0" prefWidth="207.0" text="Technology">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+        <Button fx:id="personalCareButton" onAction="#openPersonalCareScene" prefHeight="334.0" prefWidth="241.0" text="Personal Care">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+        <Button fx:id="clothingButton" onAction="#openClothingScene" prefHeight="333.0" prefWidth="214.0" text="Clothing">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
     </children>
 </HBox>

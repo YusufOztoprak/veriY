@@ -17,9 +17,9 @@ public class KisiselBakimController {
     @FXML
     private void openParfumeScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Parfume.fxml"));
-        Scene ParfumeScene = new Scene(loader.load());
+        Scene parfumeScene = new Scene(loader.load());
         Stage stage = (Stage) ParfumeButton.getScene().getWindow();
-        stage.setScene(ParfumeScene);
+        stage.setScene(parfumeScene);
         stage.show();
     }
 

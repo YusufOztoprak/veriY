@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.veriy.ShampooController"
-            prefHeight="400.0" prefWidth="600.0">
-    <TableView fx:id="shampooTable" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
+    <TableView fx:id="shampooTable" layoutY="20" prefHeight="360" prefWidth="682.0">
         <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="80"/>
-            <TableColumn fx:id="nameColumn" text="Name" prefWidth="100"/>
-            <TableColumn fx:id="priceColumn" text="Price" prefWidth="80"/>
-            <TableColumn fx:id="amountColumn" text="Amount" prefWidth="80"/>
-            <TableColumn fx:id="expirationColumn" text="Expiration" prefWidth="80"/>
-            <TableColumn fx:id="brandColumn" text="Brand" prefWidth="80"/>
-            <TableColumn fx:id="hairTypeColumn" text="Hair Type" prefWidth="80"/>
-            <TableColumn fx:id="volumeColumn" text="Volume (ml)" prefWidth="80"/>
+            <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
+            <TableColumn fx:id="priceColumn" prefWidth="80" text="Price" />
+            <TableColumn fx:id="amountColumn" prefWidth="80" text="Amount" />
+            <TableColumn fx:id="expirationColumn" prefWidth="80" text="Expiration" />
+            <TableColumn fx:id="brandColumn" prefWidth="80" text="Brand" />
+            <TableColumn fx:id="hairTypeColumn" prefWidth="80" text="Hair Type" />
+            <TableColumn fx:id="volumeColumn" prefWidth="80" text="Volume (ml)" />
         </columns>
     </TableView>
 </AnchorPane>
