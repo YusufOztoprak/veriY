@@ -1,19 +1,28 @@
-package com.example.veriy;
+package Models;
 
 public class Personal_Care extends Product {
     private int expiration_date;
     private String brand;
     private String userInstructions;
 
-    public Personal_Care(int id, String name, int price, int amount, int expiration_date, String brand, String userInstructions) {
-        super(id, name, price);
+    // Constructor for Personal_Care
+    public Personal_Care(String id, String name, int price, int amount, int expiration_date, String brand, String userInstructions) {
+        super(id, name, price, amount);  // Call the constructor of the Product class
         this.expiration_date = expiration_date;
         this.brand = brand;
-        //this.ingredients = new ArrayList<>();
         this.userInstructions = userInstructions;
     }
 
+    // Method to display product details (overridden)
+    @Override
+    public void get_info() {
+        super.get_info();  // Call the get_info() method from Product
+        System.out.println("Expiration Date: " + expiration_date);
+        System.out.println("Brand: " + brand);
+        System.out.println("User Instructions: " + userInstructions);
+    }
 
+    // Getters and Setters for the new properties
     public int getExpiration_date() {
         return expiration_date;
     }

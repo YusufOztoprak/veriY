@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="com.example.veriy.TopWearController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox spacing="10" alignment="TOP_CENTER" layoutX="50" layoutY="20" prefWidth="500">
+            <Label text="Top Wear Details" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+            <HBox spacing="10">
+                <Label text="ID:" />
+                <TextField fx:id="idField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Name:" />
+                <TextField fx:id="nameField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Price:" />
+                <TextField fx:id="priceField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Stock Amount:" />
+                <TextField fx:id="stockAmountField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Size:" />
+                <TextField fx:id="sizeField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Color:" />
+                <TextField fx:id="colorField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Cloth:" />
+                <TextField fx:id="clothField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Gender:" />
+                <TextField fx:id="genderField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Sleeve Type:" />
+                <TextField fx:id="sleeveTypeField" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Neck Type:" />
+                <TextField fx:id="neckTypeField" />
+            </HBox>
+
+            <Button text="Save" fx:id="saveButton" onAction="#handleSave" />
+        </VBox>
+    </children>
+</AnchorPane>

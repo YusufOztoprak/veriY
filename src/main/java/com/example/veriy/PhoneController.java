@@ -1,68 +1,102 @@
 package com.example.veriy;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import Models.Phone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class PhoneController {
 
     @FXML
-    private TableView<Product> productTable;
+    private TableView<Phone> phoneTable;
     @FXML
-    private TableColumn<Product, Integer> idColumn;
+    private TableColumn<Phone, String> idColumn;
     @FXML
-    private TableColumn<Product, String> nameColumn;
+    private TableColumn<Phone, String> nameColumn;
     @FXML
-    private TableColumn<Product, Double> priceColumn;
+    private TableColumn<Phone, Integer> priceColumn;
+    @FXML
+    private TableColumn<Phone, Integer> amountColumn;
+    @FXML
+    private TableColumn<Phone, String> fiveGColumn;
+    @FXML
+    private TableColumn<Phone, Integer> cameraColumn;
+    @FXML
+    private TableColumn<Phone, String> fastChargingColumn;
 
     @FXML
-    private TextField productNameField;
+    private TextField idField;
     @FXML
-    private TextField productPriceField;
-
-    private ObservableList<Product> phoneList = FXCollections.observableArrayList();
-    private int idCounter = 1;
+    private TextField nameField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField amountField;
+    @FXML
+    private TextField cameraField;
 
     @FXML
-    private void initialize() {
-        // Table column'larını ayarlıyoruz
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    private CheckBox fiveGCheckbox;
+    @FXML
+    private CheckBox fastChargingCheckbox;
 
-        // Tabloyu güncelle
-        productTable.setItems(phoneList);
+    private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
+        nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        fiveGColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().isFiveGsupport() ? "Yes" : "No"));
+        cameraColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
+        fastChargingColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().isFastCharging() ? "Yes" : "No"));
+
+        phoneTable.setItems(phoneList);
     }
 
-    // Ürün ekleme
     @FXML
-    private void addProduct() {
-        String name = productNameField.getText();
-        String priceText = productPriceField.getText();
+    private void addPhone() {
+        try {
+            String id = idField.getText();
+            String name = nameField.getText();
+            int price = Integer.parseInt(priceField.getText());
+            int amount = Integer.parseInt(amountField.getText());
+            int cameras = Integer.parseInt(cameraField.getText());
+            boolean fiveGSupport = fiveGCheckbox.isSelected();
+            boolean fastCharging = fastChargingCheckbox.isSelected();
 
-        if (name.isEmpty() || priceText.isEmpty()) {
-            return; // Boş alan varsa hiçbir şey yapma
+            Phone phone = new Phone(id, name, price, amount, 0, 0, "N/A", 0, "N/A", fiveGSupport, cameras, fastCharging);
+            phoneList.add(phone);
+
+            idField.clear();
+            nameField.clear();
+            priceField.clear();
+            amountField.clear();
+            cameraField.clear();
+            fiveGCheckbox.setSelected(false);
+            fastChargingCheckbox.setSelected(false);
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter valid data.");
         }
-
-        double price = Double.parseDouble(priceText);
-        Product newProduct = new Product(idCounter++, name, price);
-        phoneList.add(newProduct);
-
-        // Alanları temizle
-        productNameField.clear();
-        productPriceField.clear();
     }
 
-    // Ürün silme
     @FXML
-    private void deleteProduct() {
-        Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
-        if (selectedProduct != null) {
-            phoneList.remove(selectedProduct);
+    private void deletePhone() {
+        Phone selectedPhone = phoneTable.getSelectionModel().getSelectedItem();
+        if (selectedPhone != null) {
+            phoneList.remove(selectedPhone);
+        } else {
+            showAlert("Selection Error", "No phone selected.");
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

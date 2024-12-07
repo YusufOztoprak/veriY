@@ -16,7 +16,7 @@ public class TeknolojiController {
 
     @FXML
     private void openTelefonScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Telefon.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Phone.fxml"));
         Scene telefonScene = new Scene(loader.load());
         Stage stage = (Stage) TelefonButton.getScene().getWindow();
         stage.setScene(telefonScene);

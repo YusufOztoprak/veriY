@@ -1,27 +1,29 @@
 package com.example.veriy;
 
-import Models.Shampoo;
+import Models.Parfume;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ShampooController {
+public class ParfumeController {
 
     @FXML
-    private TableView<Shampoo> shampooTable;
+    private TableView<Parfume> parfumeTable;
     @FXML
-    private TableColumn<Shampoo, String> idColumn;
+    private TableColumn<Parfume, String> idColumn;
     @FXML
-    private TableColumn<Shampoo, String> nameColumn;
+    private TableColumn<Parfume, String> nameColumn;
     @FXML
-    private TableColumn<Shampoo, Integer> priceColumn;
+    private TableColumn<Parfume, Integer> priceColumn;
     @FXML
-    private TableColumn<Shampoo, Integer> amountColumn;
+    private TableColumn<Parfume, Integer> amountColumn;
     @FXML
-    private TableColumn<Shampoo, String> hairTypeColumn;
+    private TableColumn<Parfume, Double> volumeColumn;
     @FXML
-    private TableColumn<Shampoo, Double> volumeColumn;
+    private TableColumn<Parfume, String> genderTargetColumn;
+    @FXML
+    private TableColumn<Parfume, Double> alcoholContentColumn;
 
     @FXML
     private TextField idField;
@@ -32,58 +34,63 @@ public class ShampooController {
     @FXML
     private TextField amountField;
     @FXML
-    private TextField hairTypeField;
-    @FXML
     private TextField volumeField;
+    @FXML
+    private TextField genderTargetField;
+    @FXML
+    private TextField alcoholContentField;
 
-    private ObservableList<Shampoo> shampooList = FXCollections.observableArrayList();
+    private ObservableList<Parfume> parfumeList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // TableView sütunlarını Shampoo sınıfındaki özelliklerle eşleştir
+        // TableView sütunlarını Parfume sınıfındaki özelliklerle eşleştir
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
-        hairTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getHairType()));
         volumeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getVolume()).asObject());
+        genderTargetColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenderTarget()));
+        alcoholContentColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getAlcoholContent()).asObject());
 
         // TableView'e liste bağla
-        shampooTable.setItems(shampooList);
+        parfumeTable.setItems(parfumeList);
     }
 
     @FXML
-    private void handleAddShampoo() {
+    private void handleAddParfume() {
         try {
             String id = idField.getText();
             String name = nameField.getText();
             int price = Integer.parseInt(priceField.getText());
             int amount = Integer.parseInt(amountField.getText());
-            String hairType = hairTypeField.getText();
             double volume = Double.parseDouble(volumeField.getText());
+            String genderTarget = genderTargetField.getText();
+            double alcoholContent = Double.parseDouble(alcoholContentField.getText());
 
-            Shampoo newShampoo = new Shampoo(id, name, price, amount, 0, "N/A", "N/A", hairType, volume);
-            shampooList.add(newShampoo);
+            Parfume newParfume = new Parfume(id, name, price, amount, 0, "N/A", "N/A", volume, genderTarget, alcoholContent);
+            parfumeList.add(newParfume);
 
             // Alanları temizle
             idField.clear();
             nameField.clear();
             priceField.clear();
             amountField.clear();
-            hairTypeField.clear();
             volumeField.clear();
+            genderTargetField.clear();
+            alcoholContentField.clear();
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
     }
 
     @FXML
-    private void handleDeleteShampoo() {
-        Shampoo selectedShampoo = shampooTable.getSelectionModel().getSelectedItem();
-        if (selectedShampoo != null) {
-            shampooList.remove(selectedShampoo);
+    private void handleDeleteParfume() {
+        Parfume selectedParfume = parfumeTable.getSelectionModel().getSelectedItem();
+        if (selectedParfume != null) {
+            parfumeList.remove(selectedParfume);
         } else {
-            showAlert("Selection Error", "No shampoo selected.");
+            showAlert("Selection Error", "No parfume selected.");
         }
     }
 

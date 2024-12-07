@@ -1,68 +1,90 @@
 package com.example.veriy;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import Models.PC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class PCController {
 
     @FXML
-    private TableView<Product> productTable;
+    private TableView<PC> productTable;
     @FXML
-    private TableColumn<Product, Integer> idColumn;
+    private TableColumn<PC, String> idColumn;
     @FXML
-    private TableColumn<Product, String> nameColumn;
+    private TableColumn<PC, String> nameColumn;
     @FXML
-    private TableColumn<Product, Double> priceColumn;
+    private TableColumn<PC, Integer> priceColumn;
+    @FXML
+    private TableColumn<PC, Integer> amountColumn;
+    @FXML
+    private TableColumn<PC, Integer> screenSizeColumn;
 
     @FXML
-    private TextField productNameField;
+    private TextField idField;
     @FXML
-    private TextField productPriceField;
+    private TextField nameField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField amountField;
+    @FXML
+    private TextField screenSizeField;
 
-    private ObservableList<Product> pcList = FXCollections.observableArrayList();
-    private int idCounter = 1;
+    private ObservableList<PC> productList = FXCollections.observableArrayList();
 
     @FXML
-    private void initialize() {
-        // Table column'larını ayarlıyoruz
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    public void initialize() {
+        // TableView sütunlarını PC sınıfındaki özelliklerle eşleştir
+        idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
+        nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        screenSizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getEkranboyutu()).asObject());
 
-        // Tabloyu güncelle
-        productTable.setItems(pcList);
+        // TableView'e liste bağla
+        productTable.setItems(productList);
     }
 
-    // Ürün ekleme
     @FXML
-    private void addProduct() {
-        String name = productNameField.getText();
-        String priceText = productPriceField.getText();
+    private void handleAddProduct() {
+        try {
+            String id = idField.getText();
+            String name = nameField.getText();
+            int price = Integer.parseInt(priceField.getText());
+            int amount = Integer.parseInt(amountField.getText());
+            int screenSize = Integer.parseInt(screenSizeField.getText());
 
-        if (name.isEmpty() || priceText.isEmpty()) {
-            return; // Boş alan varsa hiçbir şey yapma
+            PC newProduct = new PC(id, name, price, amount, 0, 0, "N/A", 0, "N/A", screenSize);
+            productList.add(newProduct);
+
+            // Alanları temizle
+            idField.clear();
+            nameField.clear();
+            priceField.clear();
+            amountField.clear();
+            screenSizeField.clear();
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter valid data.");
         }
-
-        double price = Double.parseDouble(priceText);
-        Product newProduct = new Product(idCounter++, name, price);
-        pcList.add(newProduct);
-
-        // Alanları temizle
-        productNameField.clear();
-        productPriceField.clear();
     }
 
-    // Ürün silme
     @FXML
-    private void deleteProduct() {
-        Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
+    private void handleDeleteProduct() {
+        PC selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
-            pcList.remove(selectedProduct);
+            productList.remove(selectedProduct);
+        } else {
+            showAlert("Selection Error", "No product selected.");
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

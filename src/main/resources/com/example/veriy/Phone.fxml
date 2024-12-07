@@ -2,15 +2,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PCController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="600" prefHeight="400">
-        <TableView fx:id="productTable" prefWidth="550">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
+    <VBox spacing="10" alignment="CENTER" prefWidth="600" prefHeight="400">
+        <TableView fx:id="phoneTable" prefWidth="550">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
                 <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
                 <TableColumn fx:id="amountColumn" text="Amount" prefWidth="100" />
-                <TableColumn fx:id="screenSizeColumn" text="Screen Size" prefWidth="100" />
+                <TableColumn fx:id="fiveGColumn" text="5G Support" prefWidth="100" />
+                <TableColumn fx:id="cameraColumn" text="Cameras" prefWidth="100" />
+                <TableColumn fx:id="fastChargingColumn" text="Fast Charging" prefWidth="100" />
             </columns>
         </TableView>
 
@@ -19,12 +21,17 @@
             <TextField fx:id="nameField" promptText="Enter Name" />
             <TextField fx:id="priceField" promptText="Enter Price" />
             <TextField fx:id="amountField" promptText="Enter Amount" />
-            <TextField fx:id="screenSizeField" promptText="Enter Screen Size" />
+            <TextField fx:id="cameraField" promptText="Enter Cameras" />
         </HBox>
 
         <HBox spacing="10" alignment="CENTER">
-            <Button text="Add Product" onAction="#handleAddProduct" />
-            <Button text="Delete Selected" onAction="#handleDeleteProduct" />
+            <CheckBox fx:id="fiveGCheckbox" text="5G Support" />
+            <CheckBox fx:id="fastChargingCheckbox" text="Fast Charging" />
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Add Phone" onAction="#addPhone" />
+            <Button text="Delete Selected" onAction="#deletePhone" />
         </HBox>
     </VBox>
 </StackPane>

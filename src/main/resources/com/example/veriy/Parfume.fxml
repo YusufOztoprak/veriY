@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
-    <TableView fx:id="shampooTable" layoutY="20" prefHeight="360" prefWidth="682.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ParfumeController">
+    <TableView fx:id="parfumeTable" layoutY="20" prefHeight="360" prefWidth="682.0">
         <columns>
             <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
             <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
@@ -15,7 +15,7 @@
             <TableColumn fx:id="amountColumn" prefWidth="80" text="Amount" />
             <TableColumn fx:id="expirationColumn" prefWidth="80" text="Expiration" />
             <TableColumn fx:id="brandColumn" prefWidth="80" text="Brand" />
-            <TableColumn fx:id="hairTypeColumn" prefWidth="80" text="Hair Type" />
+            <TableColumn fx:id="genderTargetColumn" prefWidth="80" text="Gender Target" />
             <TableColumn fx:id="volumeColumn" prefWidth="80" text="Volume (ml)" />
         </columns>
     </TableView>
@@ -26,8 +26,8 @@
     <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount"/>
     <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration"/>
     <TextField fx:id="brandField" layoutX="50" layoutY="450" promptText="Brand"/>
-    <TextField fx:id="hairTypeField" layoutX="150" layoutY="450" promptText="Hair Type"/>
+    <TextField fx:id="genderTargetField" layoutX="150" layoutY="450" promptText="Gender Target"/>
     <TextField fx:id="volumeField" layoutX="250" layoutY="450" promptText="Volume"/>
 
-    <Button text="Add Shampoo" layoutX="450" layoutY="500" onAction="#addShampoo"/>
+    <Button text="Add Parfume" layoutX="450" layoutY="500" onAction="#addParfume"/>
 </AnchorPane>
