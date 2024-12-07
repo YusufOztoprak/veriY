@@ -26,9 +26,10 @@ public class KisiselBakimController {
     @FXML
     private void openShampooScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Shampoo.fxml"));
-        Scene ShampooScene = new Scene(loader.load());
+        Scene shampooScene = new Scene(loader.load());
         Stage stage = (Stage) ShampooButton.getScene().getWindow();
-        stage.setScene(ShampooScene);
+        stage.setScene(shampooScene);
         stage.show();
     }
+
 }

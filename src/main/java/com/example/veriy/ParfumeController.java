@@ -58,7 +58,8 @@ public class ParfumeController {
     }
 
     @FXML
-    private void handleAddParfume() {
+    private void addParfume() {
+        // method implementation
         try {
             String id = idField.getText();
             String name = nameField.getText();
