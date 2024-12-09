@@ -4,9 +4,11 @@ public class PC extends Technology{
 
     private int ekranboyutu;
 
-    public PC(String id, String name, int price, int amount, int ram, int storage, String Cpu, int warranty, String brand, int ekranboyutu) {
+
+    public PC(String id, String name, int price, int amount, int ram, int storage, String Cpu, int warranty, int ekranboyutu) {
         super(id, name, price, amount,ram, storage, Cpu, warranty);
         this.ekranboyutu = ekranboyutu;
+
 
     }
 

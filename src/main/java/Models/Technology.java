@@ -17,7 +17,7 @@ public class Technology extends Product {
         this.storage = storage;
         this.Cpu = Cpu;
         this.warranty = warranty;
-        //this.brand = brand;
+
     }
 
     @Override
@@ -58,8 +58,6 @@ public class Technology extends Product {
         this.warranty = warranty;
     }
 
-    //public String getBrand() {
-    // return brand;
 }
 //public void setBrand(String brand) {
 //  this.brand = brand;
