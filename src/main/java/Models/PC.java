@@ -23,4 +23,5 @@ public class PC extends Technology{
     public void setEkranboyutu(int ekranboyutu) {
         this.ekranboyutu = ekranboyutu;
     }
+
 }
