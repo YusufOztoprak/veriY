@@ -1,12 +1,13 @@
 package com.example.veriy;
 
 import Models.Phone;
-import utils.FileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhoneController {
 
@@ -44,7 +45,7 @@ public class PhoneController {
     private CheckBox fastChargingCheckbox;
 
     private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
-    private final String dataFile = "phone.txt"; // Telefonlar için dosya
+    private final String dataFile = "phone.txt";
 
     @FXML
     public void initialize() {
@@ -58,7 +59,6 @@ public class PhoneController {
 
         phoneTable.setItems(phoneList);
 
-        // Telefonları dosyadan yükle
         loadPhones();
     }
 
@@ -76,10 +76,8 @@ public class PhoneController {
             Phone phone = new Phone(id, name, price, amount, 0, 0, "N/A", 0, "N/A", fiveGSupport, cameras, fastCharging);
             phoneList.add(phone);
 
-            // Telefonu dosyaya kaydet
             savePhones();
 
-            // Alanları temizle
             idField.clear();
             nameField.clear();
             priceField.clear();
@@ -97,7 +95,6 @@ public class PhoneController {
         Phone selectedPhone = phoneTable.getSelectionModel().getSelectedItem();
         if (selectedPhone != null) {
             phoneList.remove(selectedPhone);
-            // Dosyayı güncelle
             savePhones();
         } else {
             showAlert("Selection Error", "No phone selected.");
@@ -106,7 +103,7 @@ public class PhoneController {
 
     private void savePhones() {
         try {
-            FileManager.saveData(new java.util.ArrayList<>(phoneList), dataFile);
+            FileManagerPhone.saveData(new ArrayList<>(phoneList), dataFile);
         } catch (IOException e) {
             showAlert("Save Error", "Failed to save phones to file.");
         }
@@ -114,11 +111,11 @@ public class PhoneController {
 
     private void loadPhones() {
         try {
-            java.util.List<Phone> loadedPhones = FileManager.loadData(dataFile, Phone.class);
+            List<Phone> loadedPhones = FileManagerPhone.loadData(dataFile);
             phoneList.clear();
             phoneList.addAll(loadedPhones);
         } catch (IOException e) {
-            showAlert("Load Error", "Failed to load phones from file.");
+            System.out.println("No existing data found, starting fresh.");
         }
     }
 

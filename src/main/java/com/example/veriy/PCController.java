@@ -1,12 +1,13 @@
 package com.example.veriy;
 
 import Models.PC;
-import utils.FileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PCController {
 
@@ -21,7 +22,7 @@ public class PCController {
     @FXML
     private TableColumn<PC, Integer> amountColumn;
     @FXML
-    private TableColumn<PC, String> screenSizeColumn;
+    private TableColumn<PC, Integer> screenSizeColumn; // `String` yerine `Integer` kullanılmalı
     @FXML
     private TableColumn<PC, Integer> ramColumn;
     @FXML
@@ -51,17 +52,15 @@ public class PCController {
     private TextField warrantyField;
 
     private ObservableList<PC> pcList = FXCollections.observableArrayList();
-    private final String dataFile = "PC.txt"; // Bilgisayarlar için dosya
+    private final String dataFile = "PC.txt";
 
-    // Tabloyu başlatırken
     @FXML
     public void initialize() {
-        // ID, Name, Price, Amount, ScreenSize, RAM, Storage, CPU, Warranty, için cellValueFactory tanımlandı
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
-        screenSizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(String.valueOf(data.getValue().getEkranboyutu())));
+        screenSizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getEkranboyutu()).asObject());
         ramColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getRam()).asObject());
         storageColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getStorage()).asObject());
         cpuColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCpu()));
@@ -69,11 +68,10 @@ public class PCController {
 
         productTable.setItems(pcList);
 
-        // Ürünleri dosyadan yükle
+        // Verileri dosyadan yükle
         loadProducts();
     }
 
-    // Ürün ekleme
     @FXML
     private void handleAddProduct() {
         try {
@@ -87,11 +85,9 @@ public class PCController {
             String cpu = cpuField.getText();
             int warranty = Integer.parseInt(warrantyField.getText());
 
-            // PC nesnesi oluşturuluyor
             PC pc = new PC(id, name, price, amount, ram, storage, cpu, warranty, ekranboyutu);
             pcList.add(pc);
 
-            // Ürünü dosyaya kaydet
             saveProducts();
 
             // Alanları temizle
@@ -109,40 +105,36 @@ public class PCController {
         }
     }
 
-    // Ürün silme
     @FXML
     private void handleDeleteProduct() {
         PC selectedPC = productTable.getSelectionModel().getSelectedItem();
         if (selectedPC != null) {
             pcList.remove(selectedPC);
-            // Dosyayı güncelle
             saveProducts();
         } else {
             showAlert("Selection Error", "No product selected.");
         }
     }
 
-    // Ürünleri dosyaya kaydetme
     private void saveProducts() {
         try {
-            FileManager.saveData(new java.util.ArrayList<>(pcList), dataFile);
+            List<PC> data = new ArrayList<>(pcList);
+            FileManagerPC.savePCData(data, dataFile); // saveData yerine savePCData kullanılmalı
         } catch (IOException e) {
             showAlert("Save Error", "Failed to save products to file.");
         }
     }
 
-    // Ürünleri dosyadan yükleme
     private void loadProducts() {
         try {
-            java.util.List<PC> loadedPCs = FileManager.loadData(dataFile, PC.class);
+            List<PC> loadedProducts = FileManagerPC.loadPCData(dataFile); // loadData yerine loadPCData kullanılmalı
             pcList.clear();
-            pcList.addAll(loadedPCs);
+            pcList.addAll(loadedProducts);
         } catch (IOException e) {
-            showAlert("Load Error", "Failed to load products from file.");
+            System.out.println("No existing data found, starting fresh.");
         }
     }
 
-    // Hata mesajı gösterme
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -151,4 +143,3 @@ public class PCController {
         alert.showAndWait();
     }
 }
-
