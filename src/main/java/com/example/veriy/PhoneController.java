@@ -83,6 +83,11 @@ public class PhoneController {
     }
 
     @FXML
+    private void beforeScene(){
+
+    }
+
+    @FXML
     private void addPhone() {
         try {
             String id = idField.getText();
