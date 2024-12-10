@@ -1,58 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="com.example.veriy.TopWearController"
-            prefHeight="400.0" prefWidth="600.0">
-    <children>
-        <VBox spacing="10" alignment="TOP_CENTER" layoutX="50" layoutY="20" prefWidth="500">
-            <Label text="Top Wear Details" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TopWearController">
+    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+        <!-- TableView for displaying TopWear items -->
+        <TableView fx:id="topWearTable" prefWidth="750" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
+                <TableColumn fx:id="stockAmountColumn" text="Stock Amount" prefWidth="100" />
+                <TableColumn fx:id="sizeColumn" text="Size" prefWidth="100" />
+                <TableColumn fx:id="colorColumn" text="Color" prefWidth="100" />
+                <TableColumn fx:id="clothColumn" text="Cloth" prefWidth="100" />
+                <TableColumn fx:id="genderColumn" text="Gender" prefWidth="100" />
+                <TableColumn fx:id="sleeveTypeColumn" text="Sleeve Type" prefWidth="100" />
+                <TableColumn fx:id="neckTypeColumn" text="Neck Type" prefWidth="100" />
+            </columns>
+        </TableView>
 
-            <HBox spacing="10">
-                <Label text="ID:" />
-                <TextField fx:id="idField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Name:" />
-                <TextField fx:id="nameField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Price:" />
-                <TextField fx:id="priceField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Stock Amount:" />
-                <TextField fx:id="stockAmountField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Size:" />
-                <TextField fx:id="sizeField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Color:" />
-                <TextField fx:id="colorField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Cloth:" />
-                <TextField fx:id="clothField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Gender:" />
-                <TextField fx:id="genderField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Sleeve Type:" />
-                <TextField fx:id="sleeveTypeField" />
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Neck Type:" />
-                <TextField fx:id="neckTypeField" />
-            </HBox>
+        <!-- Form for adding TopWear -->
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="idField" promptText="Enter ID" />
+            <TextField fx:id="nameField" promptText="Enter Name" />
+            <TextField fx:id="priceField" promptText="Enter Price" />
+            <TextField fx:id="stockAmountField" promptText="Enter Stock Amount" />
+            <TextField fx:id="sizeField" promptText="Enter Size" />
+            <TextField fx:id="colorField" promptText="Enter Color" />
+            <TextField fx:id="clothField" promptText="Enter Cloth" />
+            <TextField fx:id="genderField" promptText="Enter Gender" />
+            <TextField fx:id="sleeveTypeField" promptText="Enter Sleeve Type" />
+            <TextField fx:id="neckTypeField" promptText="Enter Neck Type" />
+        </HBox>
 
-            <Button text="Save" fx:id="saveButton" onAction="#handleSave" />
-        </VBox>
-    </children>
-</AnchorPane>
+        <!-- Buttons for adding and deleting TopWear items -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Add TopWear" onAction="#handleAddTopWear" />
+            <Button text="Delete Selected" onAction="#handleDeleteTopWear" />
+        </HBox>
+    </VBox>
+</StackPane>

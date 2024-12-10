@@ -16,7 +16,7 @@ public class GiyimController {
 
     @FXML
     private void openTopScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Top.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/TopWear.fxml"));
         Scene TopScene = new Scene(loader.load());
         Stage stage = (Stage) TopButton.getScene().getWindow();
         stage.setScene(TopScene);
@@ -25,7 +25,7 @@ public class GiyimController {
 
     @FXML
     private void openBottomScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Bottom.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/BottomWear.fxml"));
         Scene BottomScene = new Scene(loader.load());
         Stage stage = (Stage) BottomButton.getScene().getWindow();
         stage.setScene(BottomScene);
