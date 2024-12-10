@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
-    <VBox spacing="10" alignment="CENTER" prefWidth="600" prefHeight="400">
-        <!-- Phone TableView -->
-        <TableView fx:id="phoneTable" prefWidth="550">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.veriy.PhoneController">
+    <children>
+        <TableView fx:id="productTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="600.0">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
-                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
-                <TableColumn fx:id="amountColumn" text="Amount" prefWidth="100" />
-                <TableColumn fx:id="fiveGColumn" text="5G Support" prefWidth="100" />
-                <TableColumn fx:id="cameraColumn" text="Cameras" prefWidth="100" />
-                <TableColumn fx:id="fastChargingColumn" text="Fast Charging" prefWidth="100" />
+                <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="nameColumn" text="Name"/>
+                <TableColumn fx:id="priceColumn" text="Price"/>
+                <TableColumn fx:id="amountColumn" text="Amount"/>
+                <TableColumn fx:id="ramColumn" text="RAM"/>
+                <TableColumn fx:id="storageColumn" text="Storage"/>
+                <TableColumn fx:id="cpuColumn" text="CPU"/>
+                <TableColumn fx:id="warrantyColumn" text="Warranty"/>
+                <TableColumn fx:id="fiveGSupportColumn" text="5G Support"/>
+                <TableColumn fx:id="numberOfCamerasColumn" text="Cameras"/>
+                <TableColumn fx:id="fastChargingColumn" text="Fast Charging"/>
             </columns>
         </TableView>
-
-        <!-- Input Fields for Phone Details -->
-        <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="idField" promptText="Enter ID" />
-            <TextField fx:id="nameField" promptText="Enter Name" />
-            <TextField fx:id="priceField" promptText="Enter Price" />
-            <TextField fx:id="amountField" promptText="Enter Amount" />
-            <TextField fx:id="cameraField" promptText="Enter Cameras" />
+        <VBox layoutX="14.0" layoutY="230.0" spacing="10.0">
+            <children>
+                <HBox spacing="10.0">
+                    <Label text="ID:"/>
+                    <TextField fx:id="idField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Name:"/>
+                    <TextField fx:id="nameField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Price:"/>
+                    <TextField fx:id="priceField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Amount:"/>
+                    <TextField fx:id="amountField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="RAM:"/>
+                    <TextField fx:id="ramField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Storage:"/>
+                    <TextField fx:id="storageField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="CPU:"/>
+                    <TextField fx:id="cpuField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Warranty:"/>
+                    <TextField fx:id="warrantyField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="5G Support:"/>
+                    <TextField fx:id="fiveGSupportField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Number of Cameras:"/>
+                    <TextField fx:id="numberOfCamerasField"/>
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Fast Charging:"/>
+                    <TextField fx:id="fastChargingField"/>
+                </HBox>
+            </children>
+        </VBox>
+        <HBox layoutX="14.0" layoutY="500.0" spacing="10.0">
+            <children>
+                <Button text="Add Product" onAction="#addPhone"/>
+                <Button text="Delete Product" onAction="#deletePhone"/>
+            </children>
         </HBox>
-
-        <!-- Checkboxes for Phone Features -->
-        <HBox spacing="10" alignment="CENTER">
-            <CheckBox fx:id="fiveGCheckbox" text="5G Support" />
-            <CheckBox fx:id="fastChargingCheckbox" text="Fast Charging" />
-        </HBox>
-
-        <!-- Action Buttons -->
-        <HBox spacing="10" alignment="CENTER">
-            <Button text="Add Phone" onAction="#addPhone" />
-            <Button text="Delete Selected" onAction="#deletePhone" />
-        </HBox>
-    </VBox>
-</StackPane>
+    </children>
+</AnchorPane>

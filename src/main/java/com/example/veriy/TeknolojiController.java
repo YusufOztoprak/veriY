@@ -10,16 +10,16 @@ import java.io.IOException;
 public class TeknolojiController {
 
     @FXML
-    private Button TelefonButton;
+    private Button PhoneButton;
     @FXML
     private Button PCButton;
 
     @FXML
     private void openTelefonScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Phone.fxml"));
-        Scene telefonScene = new Scene(loader.load());
-        Stage stage = (Stage) TelefonButton.getScene().getWindow();
-        stage.setScene(telefonScene);
+        Scene PhoneScene = new Scene(loader.load());
+        Stage stage = (Stage) PhoneButton.getScene().getWindow();
+        stage.setScene(PhoneScene);
         stage.show();
     }
 

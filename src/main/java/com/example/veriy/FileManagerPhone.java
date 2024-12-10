@@ -1,6 +1,6 @@
 package com.example.veriy;
 
-import Models.Phone;
+/*import Models.Phone;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -57,4 +57,34 @@ public class FileManagerPhone {
 
         return phones;
     }
+}*/
+
+
+import Models.Phone;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FileManagerPhone {
+
+    public static void saveData(List<Phone> phones, String fileName) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(phones);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Phone> loadData(String fileName) throws IOException {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Phone>) ois.readObject();
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Data format error", e);
+        }
+    }
 }
+

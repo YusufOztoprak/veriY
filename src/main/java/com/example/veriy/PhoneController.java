@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class PhoneController {
 
     @FXML
-    private TableView<Phone> phoneTable;
+    private TableView<Phone> productTable;
     @FXML
     private TableColumn<Phone, String> idColumn;
     @FXML
@@ -22,11 +23,19 @@ public class PhoneController {
     @FXML
     private TableColumn<Phone, Integer> amountColumn;
     @FXML
-    private TableColumn<Phone, String> fiveGColumn;
+    private TableColumn<Phone, Integer> ramColumn;
     @FXML
-    private TableColumn<Phone, Integer> cameraColumn;
+    private TableColumn<Phone, Integer> storageColumn;
     @FXML
-    private TableColumn<Phone, String> fastChargingColumn;
+    private TableColumn<Phone, String> cpuColumn;
+    @FXML
+    private TableColumn<Phone, Integer> warrantyColumn;
+    @FXML
+    private TableColumn<Phone, Boolean> fiveGSupportColumn;
+    @FXML
+    private TableColumn<Phone, Integer> numberOfCamerasColumn;
+    @FXML
+    private TableColumn<Phone, Boolean> fastChargingColumn;
 
     @FXML
     private TextField idField;
@@ -37,15 +46,22 @@ public class PhoneController {
     @FXML
     private TextField amountField;
     @FXML
-    private TextField cameraField;
-
+    private TextField ramField;
     @FXML
-    private CheckBox fiveGCheckbox;
+    private TextField storageField;
     @FXML
-    private CheckBox fastChargingCheckbox;
+    private TextField cpuField;
+    @FXML
+    private TextField warrantyField;
+    @FXML
+    private TextField fiveGSupportField;
+    @FXML
+    private TextField numberOfCamerasField;
+    @FXML
+    private TextField fastChargingField;
 
     private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
-    private final String dataFile = "phone.txt";
+    private final String dataFile = "Phone.txt";
 
     @FXML
     public void initialize() {
@@ -53,13 +69,17 @@ public class PhoneController {
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
-        fiveGColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().isFiveGsupport() ? "Yes" : "No"));
-        cameraColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
-        fastChargingColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().isFastCharging() ? "Yes" : "No"));
+        ramColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getRam()).asObject());
+        storageColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getStorage()).asObject());
+        cpuColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCpu()));
+        warrantyColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getWarranty()).asObject());
+        fiveGSupportColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFiveGsupport()).asObject());
+        numberOfCamerasColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
+        fastChargingColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFastCharging()).asObject());
 
-        phoneTable.setItems(phoneList);
+        productTable.setItems(phoneList);
 
-        loadPhones();
+        loadProducts();
     }
 
     @FXML
@@ -69,22 +89,20 @@ public class PhoneController {
             String name = nameField.getText();
             int price = Integer.parseInt(priceField.getText());
             int amount = Integer.parseInt(amountField.getText());
-            int cameras = Integer.parseInt(cameraField.getText());
-            boolean fiveGSupport = fiveGCheckbox.isSelected();
-            boolean fastCharging = fastChargingCheckbox.isSelected();
+            int ram = Integer.parseInt(ramField.getText());
+            int storage = Integer.parseInt(storageField.getText());
+            String cpu = cpuField.getText();
+            int warranty = Integer.parseInt(warrantyField.getText());
+            boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
+            int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
+            boolean fastCharging = Boolean.parseBoolean(fastChargingField.getText());
 
-            Phone phone = new Phone(id, name, price, amount, 0, 0, "N/A", 0, "N/A", fiveGSupport, cameras, fastCharging);
+            Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty, "Brand", fiveGSupport, numberOfCameras, fastCharging);
             phoneList.add(phone);
 
-            savePhones();
+            saveProducts();
 
-            idField.clear();
-            nameField.clear();
-            priceField.clear();
-            amountField.clear();
-            cameraField.clear();
-            fiveGCheckbox.setSelected(false);
-            fastChargingCheckbox.setSelected(false);
+            clearFields();
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
@@ -92,31 +110,46 @@ public class PhoneController {
 
     @FXML
     private void deletePhone() {
-        Phone selectedPhone = phoneTable.getSelectionModel().getSelectedItem();
+        Phone selectedPhone = productTable.getSelectionModel().getSelectedItem();
         if (selectedPhone != null) {
             phoneList.remove(selectedPhone);
-            savePhones();
+            saveProducts();
         } else {
-            showAlert("Selection Error", "No phone selected.");
+            showAlert("Selection Error", "No product selected.");
         }
     }
 
-    private void savePhones() {
+    private void saveProducts() {
         try {
-            FileManagerPhone.saveData(new ArrayList<>(phoneList), dataFile);
+            List<Phone> data = new ArrayList<>(phoneList);
+            FileManagerPhone.saveData(data, dataFile);
         } catch (IOException e) {
-            showAlert("Save Error", "Failed to save phones to file.");
+            showAlert("Save Error", "Failed to save products to file.");
         }
     }
 
-    private void loadPhones() {
+    private void loadProducts() {
         try {
-            List<Phone> loadedPhones = FileManagerPhone.loadData(dataFile);
+            List<Phone> loadedProducts = FileManagerPhone.loadData(dataFile);
             phoneList.clear();
-            phoneList.addAll(loadedPhones);
+            phoneList.addAll(loadedProducts);
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }
+    }
+
+    private void clearFields() {
+        idField.clear();
+        nameField.clear();
+        priceField.clear();
+        amountField.clear();
+        ramField.clear();
+        storageField.clear();
+        cpuField.clear();
+        warrantyField.clear();
+        fiveGSupportField.clear();
+        numberOfCamerasField.clear();
+        fastChargingField.clear();
     }
 
     private void showAlert(String title, String message) {
