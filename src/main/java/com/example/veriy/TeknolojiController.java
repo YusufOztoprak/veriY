@@ -13,6 +13,8 @@ public class TeknolojiController {
     private Button PhoneButton;
     @FXML
     private Button PCButton;
+    @FXML
+    private Button backButton;
 
     @FXML
     private void openTelefonScene() throws IOException {
@@ -31,4 +33,14 @@ public class TeknolojiController {
         stage.setScene(pcScene);
         stage.show();
     }
+
+    @FXML
+    private void goToMainScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/AnaEkran.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
+    }
+
 }
