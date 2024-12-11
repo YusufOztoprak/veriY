@@ -109,8 +109,7 @@ public class FileManagerPhone{
                         phone.getCpu() + "," +
                         phone.getWarranty() + "," +
                         phone.getNumberofCameras() + "," +
-                        phone.isFiveGsupport() + "," +
-                        phone.isFastCharging());
+                        phone.isFiveGsupport());
                 writer.newLine();
             }
         }
@@ -124,7 +123,7 @@ public class FileManagerPhone{
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 11) {
-                    Phone phone = new Phone(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), parts[6], Integer.parseInt(parts[7], Integer.parseInt(parts[8]), Boolean.parseBoolean(parts[9]), parts[10]));
+                    Phone phone = new Phone(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), parts[6], Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),Boolean.parseBoolean(parts[9]));
                     phoneList.add(phone);
                 }
             }

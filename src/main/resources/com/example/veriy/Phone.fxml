@@ -18,7 +18,6 @@
                 <TableColumn fx:id="warrantyColumn" text="Warranty"/>
                 <TableColumn fx:id="numberOfCamerasColumn" text="Cameras"/>
                 <TableColumn fx:id="fiveGSupportColumn" text="5G Support"/>
-                <TableColumn fx:id="fastChargingColumn" text="Fast Charging"/>
             </columns>
         </TableView>
 
@@ -34,15 +33,15 @@
             <TextField fx:id="warrantyField" promptText="Enter Warranty" />
             <TextField fx:id="numberOfCamerasField" promptText="Enter numberOfCameras" />
             <TextField fx:id="fiveGSupportField" promptText="Enter fiveGSupport" />
-            <TextField fx:id="fastChargingField" promptText="Enter fastCharging" />
         </HBox>
 
         <!-- Buttons for adding and deleting products -->
         <HBox spacing="10" alignment="CENTER">
-            <Button text="update Product" onAction="#updateProduct" />
-            <Button text="before Screne" onAction="#beforeScene" />
-            <Button text="Add Product" onAction="#addPhone" />
-            <Button text="Delete Selected" onAction="#deletePhone" />
+
+            <Button text="updateProduct" onAction="#updateProduct" />
+            <Button fx:id="backButton" text="Back to Technology" onAction="#goToScene" />
+            <Button text="AddProduct" onAction="#addPhone" />
+            <Button text="DeleteSelected" onAction="#deletePhone" />
         </HBox>
     </VBox>
 </StackPane>

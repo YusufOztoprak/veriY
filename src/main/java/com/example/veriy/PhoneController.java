@@ -4,13 +4,20 @@ import Models.Phone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneController {
+    @FXML
+    private Button backButton;
+
+
 
     @FXML
     private TableView<Phone> productTable;
@@ -34,8 +41,6 @@ public class PhoneController {
     private TableColumn<Phone, Integer> numberOfCamerasColumn;
     @FXML
     private TableColumn<Phone, Boolean> fiveGSupportColumn;
-    @FXML
-    private TableColumn<Phone, Boolean> fastChargingColumn;
 
     @FXML
     private TextField idField;
@@ -57,8 +62,7 @@ public class PhoneController {
     private TextField numberOfCamerasField;
     @FXML
     private TextField fiveGSupportField;
-    @FXML
-    private TextField fastChargingField;
+
 
     private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
     private final String dataFile = "Phone.txt";
@@ -75,7 +79,6 @@ public class PhoneController {
         warrantyColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getWarranty()).asObject());
         numberOfCamerasColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
         fiveGSupportColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFiveGsupport()).asObject());
-        fastChargingColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFastCharging()).asObject());
 
         productTable.setItems(phoneList);
 
@@ -83,10 +86,13 @@ public class PhoneController {
     }
 
     @FXML
-    private void beforeScene(){
-
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Teknoloji.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
     }
-
     @FXML
     private void addPhone() {
         try {
@@ -100,9 +106,8 @@ public class PhoneController {
             int warranty = Integer.parseInt(warrantyField.getText());
             int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
             boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
-            boolean fastCharging = Boolean.parseBoolean(fastChargingField.getText());
 
-            Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty, "Brand", fiveGSupport, numberOfCameras, fastCharging);
+            Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty,numberOfCameras, fiveGSupport);
             phoneList.add(phone);
 
             saveProducts();
@@ -161,7 +166,6 @@ public class PhoneController {
                 int warranty = Integer.parseInt(warrantyField.getText());
                 int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
                 boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
-                boolean fastCharging = Boolean.parseBoolean(fastChargingField.getText());
                 saveProducts();
 
 
@@ -204,7 +208,6 @@ public class PhoneController {
         warrantyField.clear();
         numberOfCamerasField.clear();
         fiveGSupportField.clear();
-        fastChargingField.clear();
     }
 
     private void showAlert(String title, String message) {
