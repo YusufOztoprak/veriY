@@ -21,7 +21,7 @@
             </columns>
         </TableView>
 
-        <!-- Form for adding TopWear -->
+        <!-- Form for adding or updating TopWear -->
         <HBox spacing="10" alignment="CENTER">
             <TextField fx:id="idField" promptText="Enter ID" />
             <TextField fx:id="nameField" promptText="Enter Name" />
@@ -35,12 +35,13 @@
             <TextField fx:id="neckTypeField" promptText="Enter Neck Type" />
         </HBox>
 
-        <!-- Buttons for adding and deleting TopWear items -->
+        <!-- Buttons for adding, updating, and deleting TopWear items -->
         <HBox spacing="10" alignment="CENTER">
-            <Button text="update Product" onAction="#updateProduct" />
-            <Button fx:id="BackButton" text="Back To Giyim" onAction="#goToScene"/>
+            <Button text="Update Product" onAction="#updateProduct" />
+            <Button fx:id="backButton" text="Back To Giyim" onAction="#goToScene"/>
             <Button text="Add TopWear" onAction="#handleAddTopWear" />
             <Button text="Delete Selected" onAction="#handleDeleteTopWear" />
         </HBox>
+
     </VBox>
 </StackPane>

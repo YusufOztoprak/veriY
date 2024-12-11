@@ -27,7 +27,7 @@ public class MainController {
 
     @FXML
     private void openPersonalCareScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Teknoloji.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("KisiselBakim.fxml"));
         Scene personalCareScene = new Scene(loader.load());
         Stage stage = (Stage) personalCareButton.getScene().getWindow();
         stage.setScene(personalCareScene);

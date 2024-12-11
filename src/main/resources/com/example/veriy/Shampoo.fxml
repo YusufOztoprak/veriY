@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Button?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
+    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+        <!-- TableView for displaying PCs -->
+        <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="80" text="Price" />
+                <TableColumn fx:id="amountColumn" prefWidth="80" text="Amount" />
+                <TableColumn fx:id="expirationColumn" prefWidth="80" text="Expiration" />
+                <TableColumn fx:id="brandColumn" prefWidth="80" text="Brand" />
+                <TableColumn fx:id="hairTypeColumn" prefWidth="80" text="Hair Type" />
+                <TableColumn fx:id="volumeColumn" prefWidth="80" text="Volume (ml)" />
+            </columns>
+        </TableView>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
-    <TableView fx:id="shampooTable" layoutY="20" prefHeight="360" prefWidth="682.0">
-        <columns>
-            <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
-            <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
-            <TableColumn fx:id="priceColumn" prefWidth="80" text="Price" />
-            <TableColumn fx:id="amountColumn" prefWidth="80" text="Amount" />
-            <TableColumn fx:id="expirationColumn" prefWidth="80" text="Expiration" />
-            <TableColumn fx:id="brandColumn" prefWidth="80" text="Brand" />
-            <TableColumn fx:id="hairTypeColumn" prefWidth="80" text="Hair Type" />
-            <TableColumn fx:id="volumeColumn" prefWidth="80" text="Volume (ml)" />
-        </columns>
-    </TableView>
+        <!-- Form for adding products -->
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="idField" layoutX="50" layoutY="400" promptText="ID"/>
+            <TextField fx:id="nameField" layoutX="150" layoutY="400" promptText="Name"/>
+            <TextField fx:id="priceField" layoutX="250" layoutY="400" promptText="Price"/>
+            <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount"/>
+            <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration"/>
+            <TextField fx:id="brandField" layoutX="50" layoutY="450" promptText="Brand"/>
+            <TextField fx:id="hairTypeField" layoutX="150" layoutY="450" promptText="Hair Type"/>
+            <TextField fx:id="volumeField" layoutX="250" layoutY="450" promptText="Volume"/>
+        </HBox>
 
-    <TextField fx:id="idField" layoutX="50" layoutY="400" promptText="ID"/>
-    <TextField fx:id="nameField" layoutX="150" layoutY="400" promptText="Name"/>
-    <TextField fx:id="priceField" layoutX="250" layoutY="400" promptText="Price"/>
-    <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount"/>
-    <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration"/>
-    <TextField fx:id="brandField" layoutX="50" layoutY="450" promptText="Brand"/>
-    <TextField fx:id="hairTypeField" layoutX="150" layoutY="450" promptText="Hair Type"/>
-    <TextField fx:id="volumeField" layoutX="250" layoutY="450" promptText="Volume"/>
-
-    <Button text="Add Shampoo" layoutX="450" layoutY="500" onAction="#addShampoo"/>
-</AnchorPane>
+        <!-- Buttons for adding and deleting products -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="BackButton" onAction="#goToScene" text="Back to Technology"/>
+            <Button text="Add Product" onAction="#handleAddShampoo" />
+            <Button text="Delete Selected" onAction="#handleDeleteShampoo" />
+        </HBox>
+    </VBox>
+</StackPane>

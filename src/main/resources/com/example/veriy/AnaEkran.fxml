@@ -6,15 +6,15 @@
 
 <HBox alignment="CENTER" prefHeight="551.0" prefWidth="684.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.MainController">
     <children>
-        <Button fx:id="technologyButton" onAction="#openTechnologyScene" prefHeight="335.0" prefWidth="207.0" text="Technology">
+        <Button fx:id="technologyButton" onAction="#openTechnologyScene" prefHeight="247.0" prefWidth="207.0" text="Technology">
          <font>
             <Font size="24.0" />
          </font></Button>
-        <Button fx:id="personalCareButton" onAction="#openPersonalCareScene" prefHeight="334.0" prefWidth="241.0" text="Personal Care">
+        <Button fx:id="personalCareButton" onAction="#openPersonalCareScene" prefHeight="250.0" prefWidth="242.0" text="Personal Care">
          <font>
             <Font size="24.0" />
          </font></Button>
-        <Button fx:id="clothingButton" onAction="#openClothingScene" prefHeight="333.0" prefWidth="214.0" text="Clothing">
+        <Button fx:id="clothingButton" onAction="#openClothingScene" prefHeight="246.0" prefWidth="214.0" text="Clothing">
          <font>
             <Font size="24.0" />
          </font></Button>

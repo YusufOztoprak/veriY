@@ -4,9 +4,16 @@ import Models.Parfume;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ParfumeController {
+    @FXML
+    private Button BackButton;
 
     @FXML
     private TableView<Parfume> parfumeTable;
@@ -51,10 +58,17 @@ public class ParfumeController {
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
         volumeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getVolume()).asObject());
         genderTargetColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenderTarget()));
-        alcoholContentColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getAlcoholContent()).asObject());
 
         // TableView'e liste bağla
         parfumeTable.setItems(parfumeList);
+    }
+    @FXML
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/KisiselBakim.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
     }
 
     @FXML
@@ -67,9 +81,9 @@ public class ParfumeController {
             int amount = Integer.parseInt(amountField.getText());
             double volume = Double.parseDouble(volumeField.getText());
             String genderTarget = genderTargetField.getText();
-            double alcoholContent = Double.parseDouble(alcoholContentField.getText());
 
-            Parfume newParfume = new Parfume(id, name, price, amount, 0, "N/A", "N/A", volume, genderTarget, alcoholContent);
+
+            Parfume newParfume = new Parfume(id, name, price, amount, 0, "N/A", "N/A", volume, genderTarget);
             parfumeList.add(newParfume);
 
             // Alanları temizle
@@ -79,7 +93,6 @@ public class ParfumeController {
             amountField.clear();
             volumeField.clear();
             genderTargetField.clear();
-            alcoholContentField.clear();
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }

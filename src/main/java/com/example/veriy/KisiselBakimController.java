@@ -13,6 +13,8 @@ public class KisiselBakimController {
     private Button ParfumeButton;
     @FXML
     private Button ShampooButton;
+    @FXML
+    private Button  BackButton;
 
     @FXML
     private void openParfumeScene() throws IOException {
@@ -29,6 +31,14 @@ public class KisiselBakimController {
         Scene shampooScene = new Scene(loader.load());
         Stage stage = (Stage) ShampooButton.getScene().getWindow();
         stage.setScene(shampooScene);
+        stage.show();
+    }
+    @FXML
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/AnaEkran.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
         stage.show();
     }
 
