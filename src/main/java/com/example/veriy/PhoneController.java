@@ -31,9 +31,9 @@ public class PhoneController {
     @FXML
     private TableColumn<Phone, Integer> warrantyColumn;
     @FXML
-    private TableColumn<Phone, Boolean> fiveGSupportColumn;
-    @FXML
     private TableColumn<Phone, Integer> numberOfCamerasColumn;
+    @FXML
+    private TableColumn<Phone, Boolean> fiveGSupportColumn;
     @FXML
     private TableColumn<Phone, Boolean> fastChargingColumn;
 
@@ -54,9 +54,9 @@ public class PhoneController {
     @FXML
     private TextField warrantyField;
     @FXML
-    private TextField fiveGSupportField;
-    @FXML
     private TextField numberOfCamerasField;
+    @FXML
+    private TextField fiveGSupportField;
     @FXML
     private TextField fastChargingField;
 
@@ -73,8 +73,8 @@ public class PhoneController {
         storageColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getStorage()).asObject());
         cpuColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCpu()));
         warrantyColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getWarranty()).asObject());
-        fiveGSupportColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFiveGsupport()).asObject());
         numberOfCamerasColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
+        fiveGSupportColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFiveGsupport()).asObject());
         fastChargingColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFastCharging()).asObject());
 
         productTable.setItems(phoneList);
@@ -98,8 +98,8 @@ public class PhoneController {
             int storage = Integer.parseInt(storageField.getText());
             String cpu = cpuField.getText();
             int warranty = Integer.parseInt(warrantyField.getText());
-            boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
             int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
+            boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
             boolean fastCharging = Boolean.parseBoolean(fastChargingField.getText());
 
             Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty, "Brand", fiveGSupport, numberOfCameras, fastCharging);
@@ -113,7 +113,7 @@ public class PhoneController {
         }
     }
 
-    @FXML
+    /*@FXML
     private void deletePhone() {
         Phone selectedPhone = productTable.getSelectionModel().getSelectedItem();
         if (selectedPhone != null) {
@@ -122,20 +122,70 @@ public class PhoneController {
         } else {
             showAlert("Selection Error", "No product selected.");
         }
+    }*/
+    @FXML
+    private void deletePhone() {
+        Phone selectedPhone = productTable.getSelectionModel().getSelectedItem();
+        if (selectedPhone != null) {
+            // Onay penceresi oluşturuluyor
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete Confirmation");
+            confirmationAlert.setHeaderText("Are you sure you want to delete this product?");
+            confirmationAlert.setContentText("Product: " + selectedPhone.getName());
+
+            // Kullanıcı yanıtını kontrol ediyoruz
+            var result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                phoneList.remove(selectedPhone);
+                saveProducts();
+                showAlert("Success", "Product deleted successfully.");
+            }
+        } else {
+            showAlert("Selection Error", "No product selected.");
+        }
     }
+
+
+    @FXML
+    private void updateProduct() {
+        Phone selectedPhone = productTable.getSelectionModel().getSelectedItem();
+        if (selectedPhone != null) {
+            try {
+                String id = idField.getText();
+                String name = nameField.getText();
+                int price = Integer.parseInt(priceField.getText());
+                int amount = Integer.parseInt(amountField.getText());
+                int ram = Integer.parseInt(ramField.getText());
+                int storage = Integer.parseInt(storageField.getText());
+                String cpu = cpuField.getText();
+                int warranty = Integer.parseInt(warrantyField.getText());
+                int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
+                boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
+                boolean fastCharging = Boolean.parseBoolean(fastChargingField.getText());
+                saveProducts();
+
+
+
+                clearFields();
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Please enter valid data.");
+            }
+
+        }showAlert("Selection Error", "No product selected.");
+    }
+
 
     private void saveProducts() {
         try {
-            List<Phone> data = new ArrayList<>(phoneList);
-            FileManagerPhone.saveData(data, dataFile);
+            FileManagerPhone.savePhoneData(phoneList, dataFile);
         } catch (IOException e) {
-            showAlert("Save Error", "Failed to save products to file.");
+            showAlert("Save Error", "Failed to save TopWear data.");
         }
     }
 
     private void loadProducts() {
         try {
-            List<Phone> loadedProducts = FileManagerPhone.loadData(dataFile);
+            List<Phone> loadedProducts = FileManagerPhone.loadProducts(dataFile);
             phoneList.clear();
             phoneList.addAll(loadedProducts);
         } catch (IOException e) {
@@ -152,8 +202,8 @@ public class PhoneController {
         storageField.clear();
         cpuField.clear();
         warrantyField.clear();
-        fiveGSupportField.clear();
         numberOfCamerasField.clear();
+        fiveGSupportField.clear();
         fastChargingField.clear();
     }
 

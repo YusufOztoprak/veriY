@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.Phone;
 import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,6 +77,23 @@ public class TopWearController {
         // Verileri dosyadan yükle
         loadTopWears();
     }
+    @FXML
+    private void updateProduct(){
+        TopWear selectedPhone = topWearTable.getSelectionModel().getSelectedItem();
+        if (selectedPhone != null){
+            handleAddTopWear();
+        }else {
+            showAlert("Selection Error", "No product selected.");
+        }
+
+
+    }
+
+    @FXML
+    private void beforeScene(){
+
+    }
+
 
     @FXML
     private void handleAddTopWear() {
@@ -103,7 +121,7 @@ public class TopWearController {
         }
     }
 
-    @FXML
+   /* @FXML
     private void handleDeleteTopWear() {
         TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
         if (selectedTopWear != null) {
@@ -112,7 +130,30 @@ public class TopWearController {
         } else {
             showAlert("Selection Error", "No item selected.");
         }
-    }
+    }*/
+   @FXML
+   private void handleDeleteTopWear() {
+       TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
+       if (selectedTopWear != null) {
+           // Onay penceresi oluşturuluyor
+           Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+           confirmationAlert.setTitle("Delete Confirmation");
+           confirmationAlert.setHeaderText("Are you sure you want to delete this product?");
+           confirmationAlert.setContentText("Product: " + selectedTopWear.getName());
+
+           // Kullanıcı yanıtını kontrol ediyoruz
+           var result = confirmationAlert.showAndWait();
+           if (result.isPresent() && result.get() == ButtonType.OK) {
+               topWearList.remove(selectedTopWear);
+               saveTopWears();
+               showAlert("Success", "Product deleted successfully.");
+           }
+       } else {
+           showAlert("Selection Error", "No product selected.");
+       }
+   }
+
+
 
     private void saveTopWears() {
         try {

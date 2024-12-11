@@ -37,6 +37,8 @@
 
         <!-- Buttons for adding and deleting TopWear items -->
         <HBox spacing="10" alignment="CENTER">
+            <Button text="update Product" onAction="#updateProduct" />
+            <Button text="before Screne" onAction="#beforeScene" />
             <Button text="Add TopWear" onAction="#handleAddTopWear" />
             <Button text="Delete Selected" onAction="#handleDeleteTopWear" />
         </HBox>

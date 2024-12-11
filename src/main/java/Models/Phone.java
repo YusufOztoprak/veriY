@@ -5,10 +5,10 @@ public class Phone extends Technology{
     private int numberofCameras;
     private  boolean fastCharging;
 
-    public Phone(String id,String name, int price, int amount, int ram, int storage, String Cpu, int warranty, String brand, boolean fiveGsupport, int numberofCameras, boolean fastCharging) {
+    public Phone(String id,String name, int price, int amount, int ram, int storage, String Cpu, int warranty, boolean fiveGsupport, int numberofCameras, boolean fastCharging) {
         super(id,name, price, amount, ram, storage, Cpu, warranty);
-        this.fiveGsupport = fiveGsupport;
         this.numberofCameras = numberofCameras;
+        this.fiveGsupport = fiveGsupport;
         this.fastCharging = fastCharging;
     }
 

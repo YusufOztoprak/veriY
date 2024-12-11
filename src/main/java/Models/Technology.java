@@ -9,7 +9,6 @@ public class Technology extends Product {
     private  int storage;
     private String Cpu;
     private  int warranty;
-    //private String brand;
 
     public Technology(String id, String name, int price, int amount, int ram, int storage, String Cpu, int warranty) {
         super(id,name,price,amount);
