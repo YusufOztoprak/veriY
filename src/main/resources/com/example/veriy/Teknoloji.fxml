@@ -3,7 +3,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TeknolojiController" spacing="10" alignment="CENTER">
     <children>
-        <Button fx:id="backButton" text="back" onAction="#goToMainScene" />
+        <Button fx:id="backButton" text="back to Anaekran" onAction="#goToMainScene" />
         <Button fx:id="PhoneButton" text="Phone" onAction="#openTelefonScene" />
         <Button fx:id="PCButton" text="PC" onAction="#openPCScene" />
     </children>

@@ -68,6 +68,7 @@
 
         <!-- İşlem Butonları -->
         <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="BackButton" text=" Back To Giyim" onAction="#goToScene"/>
             <Button text="Kaydet" fx:id="saveButton" onAction="#saveBottomWear"/>
             <Button text="İptal" fx:id="cancelButton" onAction="#cancelAction"/>
         </HBox>

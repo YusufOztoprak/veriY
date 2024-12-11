@@ -15,11 +15,22 @@ public class GiyimController {
     private Button BottomButton;
 
     @FXML
+    private Button BackButton;
+
+    @FXML
     private void openTopScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/TopWear.fxml"));
         Scene TopScene = new Scene(loader.load());
         Stage stage = (Stage) TopButton.getScene().getWindow();
         stage.setScene(TopScene);
+        stage.show();
+    }
+    @FXML
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/AnaEkran.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
         stage.show();
     }
 

@@ -16,6 +16,8 @@ public class TeknolojiController {
     @FXML
     private Button backButton;
 
+
+
     @FXML
     private void openTelefonScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Phone.fxml"));

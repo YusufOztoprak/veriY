@@ -5,12 +5,17 @@ import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.List;
 
 public class TopWearController {
-
+    @FXML
+    private Button BackButton;
     @FXML
     private TableView<TopWear> topWearTable;
     @FXML
@@ -192,6 +197,15 @@ public class TopWearController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Giyim.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
     }
 }
 

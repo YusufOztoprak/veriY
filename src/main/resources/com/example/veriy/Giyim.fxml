@@ -3,6 +3,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GiyimController" spacing="10" alignment="CENTER">
     <children>
+        <Button fx:id="BackButton" text="Back to Ana Ekran" onAction="#goToScene" />
         <Button fx:id="TopButton" text="TopWear" onAction="#openTopScene" />
         <Button fx:id="BottomButton" text="BottomWear" onAction="#openBottomScene" />
     </children>

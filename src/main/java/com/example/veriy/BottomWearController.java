@@ -2,9 +2,16 @@ package com.example.veriy;
 
 import Models.BottomWear;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class BottomWearController {
+    @FXML
+    private Button BackButton;
 
     @FXML
     private TextField idField;
@@ -58,6 +65,14 @@ public class BottomWearController {
         clothField.setText(bottomWear.getCloth());
         genderField.setText(bottomWear.getGender());
         hasPocketsCheckBox.setSelected(bottomWear.hasPockets());
+    }
+    @FXML
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Giyim.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
     }
 
     /**
