@@ -6,7 +6,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
         <!-- TableView for displaying PCs -->
-        <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
+        <TableView fx:id="shampooTable" prefWidth="750" prefHeight="400">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
                 <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
