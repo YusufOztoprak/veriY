@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.veriy.KayitOlEkranı"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label text="Yeni Kullanıcı Adı" layoutX="50.0" layoutY="100.0"/>
+        <TextField fx:id="yeniKullaniciAdiField" layoutX="200.0" layoutY="100.0" prefWidth="200.0"/>
+        <Label text="Yeni Şifre" layoutX="50.0" layoutY="150.0"/>
+        <PasswordField fx:id="yeniSifreField" layoutX="200.0" layoutY="150.0" prefWidth="200.0"/>
+        <Button text="Kayıt Ol" layoutX="200.0" layoutY="200.0" onAction="#handleKayitOl"/>
+        <Label fx:id="mesajLabel" layoutX="200.0" layoutY="250.0" textFill="green"/>
+    </children>
+</AnchorPane>

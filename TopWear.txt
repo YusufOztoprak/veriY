@@ -1,1 +1,2 @@
+1,aaa,10,3,M,blue,kumaş,erkek,uzun,v
 2,gömlek,1,1,1,1,1,1,1,1

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.veriy.GirisEkranı"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label text="Kullanıcı Adı" layoutX="50.0" layoutY="100.0"/>
+        <TextField fx:id="kullaniciAdiField" layoutX="150.0" layoutY="100.0" prefWidth="200.0"/>
+        <Label text="Şifre" layoutX="50.0" layoutY="150.0"/>
+        <PasswordField fx:id="sifreField" layoutX="150.0" layoutY="150.0" prefWidth="200.0"/>
+        <Button text="Giriş Yap" layoutX="200.0" layoutY="200.0" onAction="#handleGiris"/>
+        <Button text="Kayıt Ol" layoutX="200.0" layoutY="250.0" onAction="#handleKayitOl"/>
+        <Label fx:id="mesajLabel" layoutX="150.0" layoutY="300.0" textFill="red"/>
+    </children>
+</AnchorPane>
