@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,8 @@ public class MainController {
     private Button personalCareButton;
     @FXML
     private Button clothingButton;
+
+    @FXML Button ExitButton;
 
     @FXML
     private void openTechnologyScene() throws IOException {
@@ -41,5 +44,10 @@ public class MainController {
         Stage stage = (Stage) clothingButton.getScene().getWindow();
         stage.setScene(clothingScene);
         stage.show();
+    }
+
+    @FXML
+    private void exit(){
+        Platform.exit();
     }
 }

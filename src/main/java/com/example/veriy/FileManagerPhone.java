@@ -96,7 +96,7 @@ import java.util.List;
 
 public class FileManagerPhone{
 
-    // TopWear nesnelerini dosyaya kaydetme
+    // Phone nesnelerini dosyaya kaydetme
     public static void savePhoneData(List<Phone> Phonelist, String fileName) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Phone phone : Phonelist) {
@@ -122,7 +122,7 @@ public class FileManagerPhone{
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 11) {
+                if (parts.length == 10) {
                     Phone phone = new Phone(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), parts[6], Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),Boolean.parseBoolean(parts[9]));
                     phoneList.add(phone);
                 }

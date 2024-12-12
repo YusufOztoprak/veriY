@@ -1,13 +1,21 @@
 package com.example.veriy;
 
+import Models.Phone;
 import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class TopWearController {
+    @FXML
+    private Button BackButton;
     @FXML
     private TableView<TopWear> topWearTable;
     @FXML
@@ -52,15 +60,48 @@ public class TopWearController {
     @FXML
     private TextField neckTypeField;
 
-    @FXML
-    private Button backButton;
-
-    // ObservableList for storing TopWear items
     private ObservableList<TopWear> topWearList = FXCollections.observableArrayList();
+    private final String dataFile = "TopWear.txt";
 
-    // Method to handle adding a new TopWear item
     @FXML
-    public void handleAddTopWear() {
+    public void initialize() {
+        // Table column mappings
+        idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
+        nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        stockAmountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        sizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSize()));
+        colorColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getColor()));
+        clothColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCloth()));
+        genderColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGender()));
+        sleeveTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSleeveType()));
+        neckTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNeckType()));
+
+        topWearTable.setItems(topWearList);
+
+        // Verileri dosyadan yükle
+        loadTopWears();
+    }
+    @FXML
+    private void updateProduct(){
+        TopWear selectedPhone = topWearTable.getSelectionModel().getSelectedItem();
+        if (selectedPhone != null){
+            handleAddTopWear();
+        }else {
+            showAlert("Selection Error", "No product selected.");
+        }
+
+
+    }
+
+    @FXML
+    private void beforeScene(){
+
+    }
+
+
+    @FXML
+    private void handleAddTopWear() {
         try {
             String id = idField.getText();
             String name = nameField.getText();
@@ -73,73 +114,71 @@ public class TopWearController {
             String sleeveType = sleeveTypeField.getText();
             String neckType = neckTypeField.getText();
 
-            // Create a new TopWear object and add it to the list
-            TopWear newTopWear = new TopWear(id, name, price, stockAmount, size, color, cloth, gender, sleeveType, neckType);
-            topWearList.add(newTopWear);
+            TopWear topWear = new TopWear(id, name, price, stockAmount, size, color, cloth, gender, sleeveType, neckType);
+            topWearList.add(topWear);
 
-            // Update the TableView
-            topWearTable.setItems(topWearList);
+            saveTopWears();
 
-            // Clear the input fields after adding
-            clearFields();
+            // Formu temizle
+            clearForm();
         } catch (NumberFormatException e) {
-            showErrorMessage("Please enter valid numbers for Price and Stock Amount.");
+            showAlert("Input Error", "Please enter valid data.");
         }
     }
 
-    // Method to handle updating an existing TopWear item
+    /* @FXML
+     private void handleDeleteTopWear() {
+         TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
+         if (selectedTopWear != null) {
+             topWearList.remove(selectedTopWear);
+             saveTopWears();
+         } else {
+             showAlert("Selection Error", "No item selected.");
+         }
+     }*/
     @FXML
-    public void updateProduct() {
-        // Get the selected TopWear from the table
+    private void handleDeleteTopWear() {
         TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
         if (selectedTopWear != null) {
-            try {
-                // Update the selected TopWear object with values from the fields
-                selectedTopWear.setId(idField.getText());
-                selectedTopWear.setName(nameField.getText());
-                selectedTopWear.setPrice(Integer.parseInt(priceField.getText()));
-                selectedTopWear.setAmount(Integer.parseInt(stockAmountField.getText()));
-                selectedTopWear.setSize(sizeField.getText());
-                selectedTopWear.setColor(colorField.getText());
-                selectedTopWear.setCloth(clothField.getText());
-                selectedTopWear.setGender(genderField.getText());
-                selectedTopWear.setSleeveType(sleeveTypeField.getText());
-                selectedTopWear.setNeckType(neckTypeField.getText());
+            // Onay penceresi oluşturuluyor
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete Confirmation");
+            confirmationAlert.setHeaderText("Are you sure you want to delete this product?");
+            confirmationAlert.setContentText("Product: " + selectedTopWear.getName());
 
-                // Refresh the TableView
-                topWearTable.refresh();
-
-                // Clear fields after update
-                clearFields();
-            } catch (NumberFormatException e) {
-                showErrorMessage("Please enter valid numbers for Price and Stock Amount.");
+            // Kullanıcı yanıtını kontrol ediyoruz
+            var result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                topWearList.remove(selectedTopWear);
+                saveTopWears();
+                showAlert("Success", "Product deleted successfully.");
             }
         } else {
-            showErrorMessage("No product selected.");
+            showAlert("Selection Error", "No product selected.");
         }
     }
 
-    // Method to handle deleting a TopWear item
-    @FXML
-    public void handleDeleteTopWear() {
-        TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
-        if (selectedTopWear != null) {
-            topWearList.remove(selectedTopWear);
-            topWearTable.setItems(topWearList);
-        } else {
-            showErrorMessage("No product selected.");
+
+
+    private void saveTopWears() {
+        try {
+            FileManagerTopWear.saveTopWearData(topWearList, dataFile);
+        } catch (IOException e) {
+            showAlert("Save Error", "Failed to save TopWear data.");
         }
     }
 
-    // Method to handle navigating back to the previous scene
-    @FXML
-    public void goToScene() {
-        // Handle scene change logic here (e.g., using SceneManager or Parent/Stage switching)
-        System.out.println("Navigating back to Giyim");
+    private void loadTopWears() {
+        try {
+            List<TopWear> loadedTopWears = FileManagerTopWear.loadTopWearData(dataFile);
+            topWearList.clear();
+            topWearList.addAll(loadedTopWears);
+        } catch (IOException e) {
+            System.out.println("No existing data found, starting fresh.");
+        }
     }
 
-    // Method to clear input fields
-    private void clearFields() {
+    private void clearForm() {
         idField.clear();
         nameField.clear();
         priceField.clear();
@@ -152,31 +191,21 @@ public class TopWearController {
         neckTypeField.clear();
     }
 
-    // Method to show error messages
-    private void showErrorMessage(String message) {
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
-    // Initialize method to set up the TableView columns and load data
     @FXML
-    public void initialize() {
-        idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
-        nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
-        priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
-        stockAmountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
-        sizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSize()));
-        colorColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getColor()));
-        clothColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCloth()));
-        genderColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGender()));
-        sleeveTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSleeveType()));
-        neckTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNeckType()));
-
-        // Set TableView items to the ObservableList
-        topWearTable.setItems(topWearList);
+    private void goToScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Giyim.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) BackButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
     }
 }
 

@@ -1,10 +1,35 @@
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GiyimController" spacing="10" alignment="CENTER">
-    <children>
-        <Button fx:id="BackButton" text="Back to Ana Ekran" onAction="#goToScene" />
-        <Button fx:id="TopButton" text="TopWear" onAction="#openTopScene" />
-        <Button fx:id="BottomButton" text="BottomWear" onAction="#openBottomScene" />
-    </children>
-</HBox>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GiyimController">
+<children>
+    <VBox alignment="CENTER" spacing="20">
+        <Label prefHeight="47.0" prefWidth="265.0" text="                              ALT KATEGORİLER" textFill="#232222">
+            <font>
+                <Font name="Arial Bold" size="12.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" spacing="20">
+            <Button fx:id="TopButton" onAction="#openTopScene" prefHeight="122.0" prefWidth="180.0" text="TopWear" textFill="#b92525">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button fx:id="BottomButton" onAction="#openBottomScene" prefHeight="122.0" prefWidth="180.0" text="BottomWear" textFill="#b92525">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </Button>
+        </HBox>
+        <Button fx:id="BackButton" onAction="#goToScene" prefHeight="44.0" prefWidth="139.0" text="Back to Anaekran" textFill="#b92525">
+            <font>
+                <Font name="Arial Bold" size="12.0" />
+            </font>
+        </Button>
+    </VBox>
+</children>
+</StackPane>
+

@@ -17,7 +17,7 @@ public class Cikolata extends Application {
         primaryStage.setWidth(600);
         primaryStage.setHeight(800);
         primaryStage.show();
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
 
     }
 

@@ -189,9 +189,9 @@ public class PhoneController {
 
     private void loadProducts() {
         try {
-            List<Phone> loadedProducts = FileManagerPhone.loadProducts(dataFile);
+            List<Phone> loadedProductss = FileManagerPhone.loadProducts(dataFile);
             phoneList.clear();
-            phoneList.addAll(loadedProducts);
+            phoneList.addAll(loadedProductss);
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }

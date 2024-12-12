@@ -1,6 +1,7 @@
 package com.example.veriy;
 
 import Models.Shampoo;
+import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ShampooController {
     @FXML
@@ -44,6 +46,7 @@ public class ShampooController {
     private TextField volumeField;
 
     private ObservableList<Shampoo> shampooList = FXCollections.observableArrayList();
+    private final String dataFile = "Shampoo.txt";
 
     @FXML
     public void initialize() {
@@ -57,6 +60,8 @@ public class ShampooController {
 
         // TableView'e liste bağla
         shampooTable.setItems(shampooList);
+
+        loadShampoo();
     }
 
     @FXML
@@ -80,14 +85,9 @@ public class ShampooController {
 
             Shampoo newShampoo = new Shampoo(id, name, price, amount, 0, "N/A", "N/A", hairType, volume);
             shampooList.add(newShampoo);
+            saveShampoo();
 
-            // Alanları temizle
-            idField.clear();
-            nameField.clear();
-            priceField.clear();
-            amountField.clear();
-            hairTypeField.clear();
-            volumeField.clear();
+            clearForm();
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
@@ -101,6 +101,33 @@ public class ShampooController {
         } else {
             showAlert("Selection Error", "No shampoo selected.");
         }
+    }
+    private void saveShampoo() {
+        try {
+            FileManagerShampoo.saveShampooData(shampooList, dataFile);
+        } catch (IOException e) {
+            showAlert("Save Error", "Failed to save TopWear data.");
+        }
+    }
+
+    private void loadShampoo() {
+        try {
+            List<Shampoo> loadedShampoo = FileManagerShampoo.loadShampooData(dataFile);
+            shampooList.clear();
+            shampooList.addAll(loadedShampoo);
+        } catch (IOException e) {
+            System.out.println("No existing data found, starting fresh.");
+        }
+    }
+
+    private void clearForm() {
+        idField.clear();
+        nameField.clear();
+        priceField.clear();
+        amountField.clear();
+        hairTypeField.clear();
+        volumeField.clear();
+
     }
 
     private void showAlert(String title, String message) {

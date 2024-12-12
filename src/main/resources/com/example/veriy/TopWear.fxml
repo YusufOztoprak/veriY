@@ -38,7 +38,7 @@
         <!-- Buttons for adding, updating, and deleting TopWear items -->
         <HBox spacing="10" alignment="CENTER">
             <Button text="Update Product" onAction="#updateProduct" />
-            <Button fx:id="backButton" text="Back To Giyim" onAction="#goToScene"/>
+            <Button fx:id="BackButton" text="Back To Giyim" onAction="#goToScene"/>
             <Button text="Add TopWear" onAction="#handleAddTopWear" />
             <Button text="Delete Selected" onAction="#handleDeleteTopWear" />
         </HBox>
