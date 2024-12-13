@@ -1,7 +1,6 @@
 package com.example.veriy;
 
 import Models.Shampoo;
-import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ShampooController {
+
     @FXML
     private Button BackButton;
 
@@ -41,9 +41,9 @@ public class ShampooController {
     @FXML
     private TextField amountField;
     @FXML
-    private TextField hairTypeField;
+    private ComboBox<String> hairTypeComboBox;
     @FXML
-    private TextField volumeField;
+    private ComboBox<String> volumeComboBox;
 
     private ObservableList<Shampoo> shampooList = FXCollections.observableArrayList();
     private final String dataFile = "Shampoo.txt";
@@ -61,6 +61,11 @@ public class ShampooController {
         // TableView'e liste bağla
         shampooTable.setItems(shampooList);
 
+        // ComboBox'lara seçenekler ekle
+        hairTypeComboBox.setItems(FXCollections.observableArrayList("Dry", "Oily", "Normal", "Curly"));
+        volumeComboBox.setItems(FXCollections.observableArrayList("100", "250", "500", "1000"));
+
+        // Verileri yükle
         loadShampoo();
     }
 
@@ -76,18 +81,37 @@ public class ShampooController {
     @FXML
     private void handleAddShampoo() {
         try {
-            String id = idField.getText();
-            String name = nameField.getText();
-            int price = Integer.parseInt(priceField.getText());
-            int amount = Integer.parseInt(amountField.getText());
-            String hairType = hairTypeField.getText();
-            double volume = Double.parseDouble(volumeField.getText());
+            // Formdan veriyi al
+            String id = idField.getText().trim();
+            String name = nameField.getText().trim();
+            String hairType = hairTypeComboBox.getValue();
+            String volumeStr = volumeComboBox.getValue();
 
-            Shampoo newShampoo = new Shampoo(id, name, price, amount, 0, "N/A", "N/A", hairType, volume);
+            // Girdi kontrolleri
+            if (id.isEmpty() || name.isEmpty() || hairType == null || volumeStr == null) {
+                showAlert("Input Error", "Please fill in all fields.");
+                return;
+            }
+
+            // Sayısal alanlar
+            int price = parseIntegerField(priceField);
+            if (price == -1) return; // Invalid input for price
+
+            int amount = parseIntegerField(amountField);
+            if (amount == -1) return; // Invalid input for amount
+
+            double volume = Double.parseDouble(volumeStr);
+
+            // Yeni Shampoo nesnesi oluştur
+            Shampoo newShampoo = new Shampoo(id, name, price, amount, 0, "N/A", hairType, volume);
             shampooList.add(newShampoo);
+
+            // Veriyi dosyaya kaydet
             saveShampoo();
 
+            // Formu temizle
             clearForm();
+
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
@@ -98,15 +122,17 @@ public class ShampooController {
         Shampoo selectedShampoo = shampooTable.getSelectionModel().getSelectedItem();
         if (selectedShampoo != null) {
             shampooList.remove(selectedShampoo);
+            saveShampoo(); // Dosyayı güncelle
         } else {
             showAlert("Selection Error", "No shampoo selected.");
         }
     }
+
     private void saveShampoo() {
         try {
             FileManagerShampoo.saveShampooData(shampooList, dataFile);
         } catch (IOException e) {
-            showAlert("Save Error", "Failed to save TopWear data.");
+            showAlert("Save Error", "Failed to save Shampoo data.");
         }
     }
 
@@ -125,9 +151,8 @@ public class ShampooController {
         nameField.clear();
         priceField.clear();
         amountField.clear();
-        hairTypeField.clear();
-        volumeField.clear();
-
+        hairTypeComboBox.getSelectionModel().clearSelection();
+        volumeComboBox.getSelectionModel().clearSelection();
     }
 
     private void showAlert(String title, String message) {
@@ -136,5 +161,15 @@ public class ShampooController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Helper method to parse integers with error handling
+    private int parseIntegerField(TextField field) {
+        try {
+            return Integer.parseInt(field.getText().trim());
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter a valid number.");
+            return -1; // Indicates invalid input
+        }
     }
 }
