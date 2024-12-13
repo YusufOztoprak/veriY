@@ -3,6 +3,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Pos?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TopWearController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
         <!-- TableView for displaying TopWear items -->
@@ -27,12 +29,63 @@
             <TextField fx:id="nameField" promptText="Enter Name" />
             <TextField fx:id="priceField" promptText="Enter Price" />
             <TextField fx:id="stockAmountField" promptText="Enter Stock Amount" />
-            <TextField fx:id="sizeField" promptText="Enter Size" />
-            <TextField fx:id="colorField" promptText="Enter Color" />
-            <TextField fx:id="clothField" promptText="Enter Cloth" />
-            <TextField fx:id="genderField" promptText="Enter Gender" />
-            <TextField fx:id="sleeveTypeField" promptText="Enter Sleeve Type" />
-            <TextField fx:id="neckTypeField" promptText="Enter Neck Type" />
+            <ComboBox fx:id="sizeField" promptText="Enter Size" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="XS"/>
+                        <String fx:value="S"/>
+                        <String fx:value="M"/>
+                        <String fx:value="L"/>
+                        <String fx:value="XL"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="colorField" promptText="Enter Color" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Mavi"/>
+                        <String fx:value="Kırmızı"/>
+                        <String fx:value="yeşil"/>
+                        <String fx:value="sarı"/>
+                        <String fx:value="turuncu"/>
+                        <String fx:value="Siyah"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="clothField" promptText="Enter Cloth" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Pamuklu"/>
+                        <String fx:value="Keten"/>
+                        <String fx:value="ipek"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="genderField" promptText="Enter Gender" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Unisex" />
+                        <String fx:value="Male" />
+                        <String fx:value="Female" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="sleeveTypeField" promptText="Enter Sleeve Type" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Uzun kol"/>
+                        <String fx:value="Kısa kol"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="neckTypeField" promptText="Enter Neck Type" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="v yaka"/>
+                        <String fx:value="Polo yaka"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
         </HBox>
 
         <!-- Buttons for adding, updating, and deleting TopWear items -->

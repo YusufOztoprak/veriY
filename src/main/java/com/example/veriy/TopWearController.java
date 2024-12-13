@@ -48,17 +48,17 @@ public class TopWearController {
     @FXML
     private TextField stockAmountField;
     @FXML
-    private TextField sizeField;
+    private ComboBox<String> sizeField;
     @FXML
-    private TextField colorField;
+    private ComboBox<String> colorField;
     @FXML
-    private TextField clothField;
+    private ComboBox<String> clothField;
     @FXML
-    private TextField genderField;
+    private ComboBox<String> genderField;
     @FXML
-    private TextField sleeveTypeField;
+    private ComboBox<String> sleeveTypeField;
     @FXML
-    private TextField neckTypeField;
+    private ComboBox<String> neckTypeField;
 
     private ObservableList<TopWear> topWearList = FXCollections.observableArrayList();
     private final String dataFile = "TopWear.txt";
@@ -107,12 +107,12 @@ public class TopWearController {
             String name = nameField.getText();
             int price = Integer.parseInt(priceField.getText());
             int stockAmount = Integer.parseInt(stockAmountField.getText());
-            String size = sizeField.getText();
-            String color = colorField.getText();
-            String cloth = clothField.getText();
-            String gender = genderField.getText();
-            String sleeveType = sleeveTypeField.getText();
-            String neckType = neckTypeField.getText();
+            String size = sizeField.getValue();
+            String color = colorField.getValue();
+            String cloth = clothField.getValue();
+            String gender = genderField.getValue();
+            String sleeveType = sleeveTypeField.getValue();
+            String neckType = neckTypeField.getValue();
 
             TopWear topWear = new TopWear(id, name, price, stockAmount, size, color, cloth, gender, sleeveType, neckType);
             topWearList.add(topWear);
@@ -126,16 +126,6 @@ public class TopWearController {
         }
     }
 
-    /* @FXML
-     private void handleDeleteTopWear() {
-         TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
-         if (selectedTopWear != null) {
-             topWearList.remove(selectedTopWear);
-             saveTopWears();
-         } else {
-             showAlert("Selection Error", "No item selected.");
-         }
-     }*/
     @FXML
     private void handleDeleteTopWear() {
         TopWear selectedTopWear = topWearTable.getSelectionModel().getSelectedItem();
@@ -183,12 +173,12 @@ public class TopWearController {
         nameField.clear();
         priceField.clear();
         stockAmountField.clear();
-        sizeField.clear();
-        colorField.clear();
-        clothField.clear();
-        genderField.clear();
-        sleeveTypeField.clear();
-        neckTypeField.clear();
+        sizeField.setValue(null); // Seçimi temizle
+        colorField.setValue(null);
+        clothField.setValue(null);
+        genderField.setValue(null);
+        sleeveTypeField.setValue(null);
+        neckTypeField.setValue(null);
     }
 
     private void showAlert(String title, String message) {
