@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Pos?>
 
+
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ParfumeController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
-        <!-- TableView for displaying PCs -->
+        <!-- TableView for displaying Parfumes -->
         <TableView fx:id="parfumeTable" prefWidth="750" prefHeight="400">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="80" text="ID" />
-                <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
-                <TableColumn fx:id="priceColumn" prefWidth="80" text="Price" />
-                <TableColumn fx:id="amountColumn" prefWidth="80" text="Amount" />
-                <TableColumn fx:id="expirationColumn" prefWidth="80" text="Expiration" />
-                <TableColumn fx:id="brandColumn" prefWidth="80" text="Brand" />
-                <TableColumn fx:id="genderTargetColumn" prefWidth="80" text="Gender Target" />
-                <TableColumn fx:id="volumeColumn" prefWidth="80" text="Volume (ml)" />
+                <TableColumn fx:id="idColumn" text="ID" />
+                <TableColumn fx:id="nameColumn" text="Name" />
+                <TableColumn fx:id="priceColumn" text="Price" />
+                <TableColumn fx:id="amountColumn" text="Amount" />
+                <TableColumn fx:id="volumeColumn" text="Volume" />
+                <TableColumn fx:id="genderTargetColumn" text="Gender Target" />
             </columns>
         </TableView>
 
-        <!-- Form for adding products -->
+        <!-- Form for adding Parfume -->
         <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="idField" layoutX="50" layoutY="400" promptText="ID"/>
-            <TextField fx:id="nameField" layoutX="150" layoutY="400" promptText="Name"/>
-            <TextField fx:id="priceField" layoutX="250" layoutY="400" promptText="Price"/>
-            <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount"/>
-            <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration"/>
-            <TextField fx:id="brandField" layoutX="50" layoutY="450" promptText="Brand"/>
-            <TextField fx:id="genderTargetField" layoutX="150" layoutY="450" promptText="Gender Target"/>
-            <TextField fx:id="volumeField" layoutX="250" layoutY="450" promptText="Volume"/>
+            <TextField fx:id="idField" promptText="ID" />
+            <TextField fx:id="nameField" promptText="Name" />
+            <TextField fx:id="priceField" promptText="Price (Only Positive Integers)" />
+            <TextField fx:id="amountField" promptText="Amount (Only Positive Integers)" />
+            <TextField fx:id="volumeField" promptText="Volume (ml)" />
+            <ComboBox fx:id="genderTargetBox" promptText="Gender Target">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Unisex" />
+                        <String fx:value="Male" />
+                        <String fx:value="Female" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
         </HBox>
 
-        <!-- Buttons for adding and deleting products -->
+        <!-- Buttons -->
         <HBox spacing="10" alignment="CENTER">
             <Button fx:id="BackButton" onAction="#goToScene" text="Back to KisiselBakim"/>
             <Button text="Add Product" onAction="#addParfume" />

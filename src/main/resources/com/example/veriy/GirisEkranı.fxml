@@ -3,18 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.veriy.GirisEkranı"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GirisEkranı" alignment="CENTER">
 
     <children>
-        <Label text="Kullanıcı Adı" layoutX="50.0" layoutY="100.0"/>
-        <TextField fx:id="kullaniciAdiField" layoutX="150.0" layoutY="100.0" prefWidth="200.0"/>
-        <Label text="Şifre" layoutX="50.0" layoutY="150.0"/>
-        <PasswordField fx:id="sifreField" layoutX="150.0" layoutY="150.0" prefWidth="200.0"/>
-        <Button text="Giriş Yap" layoutX="200.0" layoutY="200.0" onAction="#handleGiris"/>
-        <Button text="Kayıt Ol" layoutX="200.0" layoutY="250.0" onAction="#handleKayitOl"/>
-        <Label fx:id="mesajLabel" layoutX="150.0" layoutY="300.0" textFill="red"/>
+        <HBox spacing="10.0" alignment="CENTER">
+            <Label text="Kullanıcı Adı" />
+            <TextField fx:id="kullaniciAdiField" prefWidth="200.0" />
+        </HBox>
+
+        <HBox spacing="10.0" alignment="CENTER">
+            <Label text="Şifre" />
+            <PasswordField fx:id="sifreField" prefWidth="200.0" />
+        </HBox>
+
+        <HBox spacing="20.0" alignment="CENTER">
+            <Button onAction="#handleGiris" text="Giriş Yap" />
+            <Button onAction="#handleKayitOl" text="Kayıt Ol" />
+        </HBox>
+
+        <Label fx:id="mesajLabel" prefHeight="18.0" prefWidth="387.0" textFill="red" />
     </children>
-</AnchorPane>
+
+</VBox>

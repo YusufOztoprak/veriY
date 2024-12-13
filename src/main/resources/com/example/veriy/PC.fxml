@@ -35,6 +35,7 @@
 
         <!-- Buttons for adding and deleting products -->
         <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="backButton" onAction="#goToMainScene" text="Back to Technology"/>
             <Button text="Add Product" onAction="#handleAddProduct" />
             <Button text="Delete Selected" onAction="#handleDeleteProduct" />
         </HBox>

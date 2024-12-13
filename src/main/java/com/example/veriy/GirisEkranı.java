@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,10 +11,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GirisEkranı {
-
     @FXML
     private TextField kullaniciAdiField;
 
@@ -41,6 +42,8 @@ public class GirisEkranı {
             } catch (IOException e) {
                 mesajLabel.setText("Ana ekrana geçiş yapılamadı: " + e.getMessage());
             }
+        } else if (kullaniciAdiField.getText().isEmpty()|| sifreField.getText().isEmpty()) {
+            mesajLabel.setText("kullanıcı adı ve şifre boş geçilemez");
         } else if (KullaniciVeritabani.kullanicilar.containsKey(kullaniciAdi)) {
             mesajLabel.setText("Şifre hatalı!");
         } else {

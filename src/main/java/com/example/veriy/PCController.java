@@ -4,13 +4,19 @@ import Models.PC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PCController {
 
+    @FXML
+    private Button backButton;
     @FXML
     private TableView<PC> productTable;
     @FXML
@@ -76,14 +82,86 @@ public class PCController {
     private void handleAddProduct() {
         try {
             String id = idField.getText();
+            if ((id == null || id.isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <id.length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             String name = nameField.getText();
+            if ((name == null || name.isEmpty())) {
+                showAlert("Input Error", "Name cannot be empty.");
+                return;
+            }
+            if ( (5 <name.length())) {
+                showAlert("Input Error", "Name lenght cannot be longher than 5 ");
+                return;
+            }
             int price = Integer.parseInt(priceField.getText());
+            if ((priceField == null || priceField.getText().isEmpty())) {
+                showAlert("Input Error", "Price cannot be empty.");
+                return;
+            }
+            if ( (5 <priceField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             int amount = Integer.parseInt(amountField.getText());
+            if ((amountField == null || amountField.getText().isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <amountField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             int ekranboyutu = Integer.parseInt(screenSizeField.getText());
+            if ((screenSizeField == null || screenSizeField.getText().isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <screenSizeField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             int ram = Integer.parseInt(ramField.getText());
+            if ((ramField == null || ramField.getText().isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <ramField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             int storage = Integer.parseInt(storageField.getText());
+            if ((storageField == null || screenSizeField.getText().isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <screenSizeField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             String cpu = cpuField.getText();
+            if ((cpu == null || cpu.isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <cpu.length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
             int warranty = Integer.parseInt(warrantyField.getText());
+            if ((warrantyField == null || warrantyField.getText().isEmpty())) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            if ( (5 <warrantyField.getText().length())) {
+                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+                return;
+            }
 
             PC pc = new PC(id, name, price, amount, ram, storage, cpu, warranty, ekranboyutu);
             pcList.add(pc);
@@ -142,4 +220,15 @@ public class PCController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private void goToMainScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Teknoloji.fxml"));
+        Scene mainScene = new Scene(loader.load());
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.show();
+    }
+
+
 }

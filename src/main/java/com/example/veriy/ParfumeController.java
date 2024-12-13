@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.PC;
 import Models.Parfume;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParfumeController {
     @FXML
@@ -42,10 +45,9 @@ public class ParfumeController {
     private TextField amountField;
     @FXML
     private TextField volumeField;
+    private final String dataFile = "Parfume.txt";
     @FXML
     private TextField genderTargetField;
-    @FXML
-    private TextField alcoholContentField;
 
     private ObservableList<Parfume> parfumeList = FXCollections.observableArrayList();
 
@@ -61,6 +63,8 @@ public class ParfumeController {
 
         // TableView'e liste bağla
         parfumeTable.setItems(parfumeList);
+
+        loadProducts();
     }
     @FXML
     private void goToScene() throws IOException {
@@ -76,15 +80,25 @@ public class ParfumeController {
         // method implementation
         try {
             String id = idField.getText();
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Gender target cannot be empty.");
+                return;
+            }
             String name = nameField.getText();
             int price = Integer.parseInt(priceField.getText());
             int amount = Integer.parseInt(amountField.getText());
             double volume = Double.parseDouble(volumeField.getText());
             String genderTarget = genderTargetField.getText();
+            if (genderTarget == null || genderTarget.isEmpty()) {
+                showAlert("Input Error", "Gender target cannot be empty.");
+                return;
+            }
+
 
 
             Parfume newParfume = new Parfume(id, name, price, amount, 0, "N/A", "N/A", volume, genderTarget);
             parfumeList.add(newParfume);
+            saveProducts();
 
             // Alanları temizle
             idField.clear();
@@ -103,10 +117,31 @@ public class ParfumeController {
         Parfume selectedParfume = parfumeTable.getSelectionModel().getSelectedItem();
         if (selectedParfume != null) {
             parfumeList.remove(selectedParfume);
+            saveProducts();
         } else {
             showAlert("Selection Error", "No parfume selected.");
         }
     }
+
+    private void saveProducts() {
+        try {
+            List<Parfume> data = new ArrayList<>(parfumeList);
+            FileManagerParfume.saveParfumeData(data, dataFile); // saveData yerine savePCData kullanılmalı
+        } catch (IOException e) {
+            showAlert("Save Error", "Failed to save products to file.");
+        }
+    }
+
+    private void loadProducts() {
+        try {
+            List<Parfume> loadedProducts = FileManagerParfume.loadParfumeData(dataFile); // loadData yerine loadPCData kullanılmalı
+            parfumeList.clear();
+            parfumeList.addAll(loadedProducts);
+        } catch (IOException e) {
+            System.out.println("No existing data found, starting fresh.");
+        }
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
