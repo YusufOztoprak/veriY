@@ -32,8 +32,6 @@ public class ParfumeController {
     private TableColumn<Parfume, Double> volumeColumn;
     @FXML
     private TableColumn<Parfume, String> genderTargetColumn;
-    @FXML
-    private TableColumn<Parfume, Double> alcoholContentColumn;
 
     @FXML
     private TextField idField;
@@ -47,7 +45,7 @@ public class ParfumeController {
     private TextField volumeField;
     private final String dataFile = "Parfume.txt";
     @FXML
-    private TextField genderTargetField;
+    private ComboBox<String> genderTargetBox;
 
     private ObservableList<Parfume> parfumeList = FXCollections.observableArrayList();
 
@@ -88,7 +86,7 @@ public class ParfumeController {
             int price = Integer.parseInt(priceField.getText());
             int amount = Integer.parseInt(amountField.getText());
             double volume = Double.parseDouble(volumeField.getText());
-            String genderTarget = genderTargetField.getText();
+            String genderTarget = genderTargetBox.getValue();
             if (genderTarget == null || genderTarget.isEmpty()) {
                 showAlert("Input Error", "Gender target cannot be empty.");
                 return;
@@ -106,7 +104,6 @@ public class ParfumeController {
             priceField.clear();
             amountField.clear();
             volumeField.clear();
-            genderTargetField.clear();
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }

@@ -21,8 +21,8 @@ public class FileManagerPC {
                     pc.getName(),
                     pc.getPrice(),
                     pc.getAmount(),
-                    pc.getRam(),
-                    pc.getStorage(),
+                    pc.getRam(), // RAM değeri
+                    pc.getStorage(), // Storage değeri
                     pc.getCpu(),
                     pc.getWarranty(),
                     pc.getEkranboyutu());
@@ -46,13 +46,24 @@ public class FileManagerPC {
             String[] parts = line.split(";");
             if (parts.length == 9) { // Her veri doğru şekilde ayrılmışsa
                 try {
+                    // RAM ve Storage değerlerini doğrulama
+                    int ram = Integer.parseInt(parts[4]);
+                    int storage = Integer.parseInt(parts[5]);
+
+                    // Geçerli RAM ve Storage değerlerini kontrol et
+                    if (!isValidRam(ram) || !isValidStorage(storage)) {
+                        System.out.println("Invalid RAM or Storage value: " + line);
+                        continue;  // Geçersizse bu satırı geç
+                    }
+
+                    // PC nesnesi oluşturuluyor
                     PC pc = new PC(
                             parts[0], // id
                             parts[1], // name
                             Integer.parseInt(parts[2]), // price
                             Integer.parseInt(parts[3]), // amount
-                            Integer.parseInt(parts[4]), // ram
-                            Integer.parseInt(parts[5]), // storage
+                            ram, // ram
+                            storage, // storage
                             parts[6], // cpu
                             Integer.parseInt(parts[7]), // warranty
                             Integer.parseInt(parts[8]) // ekranboyutu
@@ -64,5 +75,15 @@ public class FileManagerPC {
             }
         }
         return pcList;
+    }
+
+    // RAM için geçerli değerleri kontrol et
+    private static boolean isValidRam(int ram) {
+        return ram == 8 || ram == 16 || ram == 32 || ram == 64; // 8'in üsleri
+    }
+
+    // Storage için geçerli değerleri kontrol et
+    private static boolean isValidStorage(int storage) {
+        return storage == 128 || storage == 256 || storage == 512 || storage == 1024; // 8'in üsleri
     }
 }

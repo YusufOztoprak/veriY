@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import java.lang.Integer?>
+<?import java.lang.Boolean?>
 <?import javafx.geometry.Pos?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
@@ -27,12 +31,46 @@
             <TextField fx:id="nameField" promptText="Enter Name" />
             <TextField fx:id="priceField" promptText="Enter Price" />
             <TextField fx:id="amountField" promptText="Enter Amount" />
-            <TextField fx:id="ramField" promptText="Enter RAM" />
-            <TextField fx:id="storageField" promptText="Enter Storage" />
-            <TextField fx:id="cpuField" promptText="Enter CPU" />
+            <ComboBox fx:id="ramField" promptText="Enter RAM" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <Integer fx:value="16"/>
+                        <Integer fx:value="32"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="storageField" promptText="Enter Storage" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <Integer fx:value="16"/>
+                        <Integer fx:value="32"/>
+                        <Integer fx:value="64"/>
+                        <Integer fx:value="128"/>
+                        <Integer fx:value="256"/>
+                        <Integer fx:value="512"/>
+                        <Integer fx:value="1024"/>
+
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="cpuField" promptText="Enter CPU" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="snapdragon"/>
+                        <String fx:value="ios 18"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <TextField fx:id="warrantyField" promptText="Enter Warranty" />
             <TextField fx:id="numberOfCamerasField" promptText="Enter numberOfCameras" />
-            <TextField fx:id="fiveGSupportField" promptText="Enter fiveGSupport" />
+            <ComboBox fx:id="fiveGSupportField" promptText="Enter fiveGSupport" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <Boolean fx:value="Evet"/>
+                        <Boolean fx:value="Hayır"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
         </HBox>
 
         <!-- Buttons for adding and deleting products -->

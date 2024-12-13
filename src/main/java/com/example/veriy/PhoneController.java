@@ -51,17 +51,17 @@ public class PhoneController {
     @FXML
     private TextField amountField;
     @FXML
-    private TextField ramField;
+    private ComboBox<Integer> ramField;
     @FXML
-    private TextField storageField;
+    private ComboBox<Integer> storageField;
     @FXML
-    private TextField cpuField;
+    private ComboBox<String> cpuField;
     @FXML
     private TextField warrantyField;
     @FXML
     private TextField numberOfCamerasField;
     @FXML
-    private TextField fiveGSupportField;
+    private ComboBox<Boolean> fiveGSupportField;
 
 
     private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
@@ -100,19 +100,20 @@ public class PhoneController {
             String name = nameField.getText();
             int price = Integer.parseInt(priceField.getText());
             int amount = Integer.parseInt(amountField.getText());
-            int ram = Integer.parseInt(ramField.getText());
-            int storage = Integer.parseInt(storageField.getText());
-            String cpu = cpuField.getText();
+            int ram = Integer.parseInt(ramField.getValue().toString());
+            int storage = Integer.parseInt(storageField.getValue().toString());
+            String cpu = cpuField.getValue();
             int warranty = Integer.parseInt(warrantyField.getText());
             int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
-            boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
+            boolean fiveGSupport = "Yes".equalsIgnoreCase(fiveGSupportField.getValue().toString()); // String -> Boolean
+
 
             Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty,numberOfCameras, fiveGSupport);
             phoneList.add(phone);
 
             saveProducts();
 
-            clearFields();
+            clearFields(false);
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
@@ -153,29 +154,6 @@ public class PhoneController {
 
     @FXML
     private void updateProduct() {
-        Phone selectedPhone = productTable.getSelectionModel().getSelectedItem();
-        if (selectedPhone != null) {
-            try {
-                String id = idField.getText();
-                String name = nameField.getText();
-                int price = Integer.parseInt(priceField.getText());
-                int amount = Integer.parseInt(amountField.getText());
-                int ram = Integer.parseInt(ramField.getText());
-                int storage = Integer.parseInt(storageField.getText());
-                String cpu = cpuField.getText();
-                int warranty = Integer.parseInt(warrantyField.getText());
-                int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
-                boolean fiveGSupport = Boolean.parseBoolean(fiveGSupportField.getText());
-                saveProducts();
-
-
-
-                clearFields();
-            } catch (NumberFormatException e) {
-                showAlert("Input Error", "Please enter valid data.");
-            }
-
-        }showAlert("Selection Error", "No product selected.");
     }
 
 
@@ -197,17 +175,20 @@ public class PhoneController {
         }
     }
 
-    private void clearFields() {
+    private void clearFields(boolean clearComboBoxes) {
         idField.clear();
         nameField.clear();
         priceField.clear();
         amountField.clear();
-        ramField.clear();
-        storageField.clear();
-        cpuField.clear();
         warrantyField.clear();
         numberOfCamerasField.clear();
-        fiveGSupportField.clear();
+        if (clearComboBoxes) {
+            ramField.setValue(null); // Clear RAM ComboBox
+            storageField.setValue(null); // Clear Storage ComboBox
+            cpuField.setValue(null); // Clear CPU ComboBox
+        }
+
+
     }
 
     private void showAlert(String title, String message) {

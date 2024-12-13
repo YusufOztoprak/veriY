@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+
 import Models.PC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +29,7 @@ public class PCController {
     @FXML
     private TableColumn<PC, Integer> amountColumn;
     @FXML
-    private TableColumn<PC, Integer> screenSizeColumn; // `String` yerine `Integer` kullanılmalı
+    private TableColumn<PC, Integer> screenSizeColumn;
     @FXML
     private TableColumn<PC, Integer> ramColumn;
     @FXML
@@ -49,11 +50,11 @@ public class PCController {
     @FXML
     private TextField screenSizeField;
     @FXML
-    private TextField ramField;
+    private ComboBox<Integer> ramField; // ComboBox for RAM
     @FXML
-    private TextField storageField;
+    private ComboBox<Integer> storageField; // ComboBox for Storage
     @FXML
-    private TextField cpuField;
+    private ComboBox<String> cpuField;
     @FXML
     private TextField warrantyField;
 
@@ -62,6 +63,7 @@ public class PCController {
 
     @FXML
     public void initialize() {
+        // Set TableView columns with PC object properties
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
@@ -74,138 +76,113 @@ public class PCController {
 
         productTable.setItems(pcList);
 
-        // Verileri dosyadan yükle
+        // Load products from file
         loadProducts();
+
+        // Populate ComboBoxes with predefined values
+        ramField.setItems(FXCollections.observableArrayList(8, 16, 32, 64));
+        storageField.setItems(FXCollections.observableArrayList(128, 256, 512, 1024));
+
+        // Ensure the data is saved after the table is initialized
+        saveProducts();
     }
 
+    // Add a new product to the list and save it to file
     @FXML
     private void handleAddProduct() {
         try {
             String id = idField.getText();
-            if ((id == null || id.isEmpty())) {
+            if (id == null || id.isEmpty()) {
                 showAlert("Input Error", "Id cannot be empty.");
                 return;
             }
-            if ( (5 <id.length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
+
             String name = nameField.getText();
-            if ((name == null || name.isEmpty())) {
+            if (name == null || name.isEmpty()) {
                 showAlert("Input Error", "Name cannot be empty.");
                 return;
             }
-            if ( (5 <name.length())) {
-                showAlert("Input Error", "Name lenght cannot be longher than 5 ");
-                return;
-            }
+
             int price = Integer.parseInt(priceField.getText());
-            if ((priceField == null || priceField.getText().isEmpty())) {
-                showAlert("Input Error", "Price cannot be empty.");
-                return;
-            }
-            if ( (5 <priceField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            int amount = Integer.parseInt(amountField.getText());
-            if ((amountField == null || amountField.getText().isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <amountField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            int ekranboyutu = Integer.parseInt(screenSizeField.getText());
-            if ((screenSizeField == null || screenSizeField.getText().isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <screenSizeField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            int ram = Integer.parseInt(ramField.getText());
-            if ((ramField == null || ramField.getText().isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <ramField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            int storage = Integer.parseInt(storageField.getText());
-            if ((storageField == null || screenSizeField.getText().isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <screenSizeField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            String cpu = cpuField.getText();
-            if ((cpu == null || cpu.isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <cpu.length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
-                return;
-            }
-            int warranty = Integer.parseInt(warrantyField.getText());
-            if ((warrantyField == null || warrantyField.getText().isEmpty())) {
-                showAlert("Input Error", "Id cannot be empty.");
-                return;
-            }
-            if ( (5 <warrantyField.getText().length())) {
-                showAlert("Input Error", "string lenght cannot be longher than 5 ");
+            if (price <= 0) {
+                showAlert("Input Error", "Please enter a valid price.");
                 return;
             }
 
-            PC pc = new PC(id, name, price, amount, ram, storage, cpu, warranty, ekranboyutu);
+            int amount = Integer.parseInt(amountField.getText());
+            if (amount <= 0) {
+                showAlert("Input Error", "Please enter a valid amount.");
+                return;
+            }
+
+            int screenSize = Integer.parseInt(screenSizeField.getText());
+            if (screenSize <= 0) {
+                showAlert("Input Error", "Please enter a valid screen size.");
+                return;
+            }
+
+            // Get selected values from ComboBoxes
+            Integer ram = ramField.getValue();
+            if (ram == null || ram <= 0) {
+                showAlert("Input Error", "Please select a valid RAM size.");
+                return;
+            }
+
+            Integer storage = storageField.getValue();
+            if (storage == null || storage <= 0) {
+                showAlert("Input Error", "Please select a valid storage size.");
+                return;
+            }
+
+            String cpu = cpuField.getValue();
+            if (cpu == null || cpu.isEmpty()) {
+                showAlert("Input Error", "Please select a valid CPU.");
+                return;
+            }
+
+            int warranty = Integer.parseInt(warrantyField.getText());
+            if (warranty <= 0) {
+                showAlert("Input Error", "Please enter a valid warranty.");
+                return;
+            }
+
+            // Create new PC object and add to list
+            PC pc = new PC(id, name, price, amount, ram, storage, cpu, warranty, screenSize);
             pcList.add(pc);
 
+            // Save updated product list to file
             saveProducts();
-
-            // Alanları temizle
-            idField.clear();
-            nameField.clear();
-            priceField.clear();
-            amountField.clear();
-            screenSizeField.clear();
-            ramField.clear();
-            storageField.clear();
-            cpuField.clear();
-            warrantyField.clear();
+            clearFields(false); // Clear the form, without resetting ComboBox values
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
     }
 
+    // Delete selected product from the list and save to file
     @FXML
     private void handleDeleteProduct() {
         PC selectedPC = productTable.getSelectionModel().getSelectedItem();
         if (selectedPC != null) {
             pcList.remove(selectedPC);
-            saveProducts();
+            saveProducts(); // Save after deletion
         } else {
             showAlert("Selection Error", "No product selected.");
         }
     }
 
+    // Save products to the PC.txt file
     private void saveProducts() {
         try {
-            List<PC> data = new ArrayList<>(pcList);
-            FileManagerPC.savePCData(data, dataFile); // saveData yerine savePCData kullanılmalı
+            FileManagerPC.savePCData(new ArrayList<>(pcList), dataFile);
         } catch (IOException e) {
             showAlert("Save Error", "Failed to save products to file.");
         }
     }
 
+    // Load products from the PC.txt file
     private void loadProducts() {
         try {
-            List<PC> loadedProducts = FileManagerPC.loadPCData(dataFile); // loadData yerine loadPCData kullanılmalı
+            List<PC> loadedProducts = FileManagerPC.loadPCData(dataFile);
             pcList.clear();
             pcList.addAll(loadedProducts);
         } catch (IOException e) {
@@ -213,6 +190,7 @@ public class PCController {
         }
     }
 
+    // Show alert message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -221,6 +199,22 @@ public class PCController {
         alert.showAndWait();
     }
 
+    // Clear the form fields
+    private void clearFields(boolean clearComboBoxes) {
+        idField.clear();
+        nameField.clear();
+        priceField.clear();
+        amountField.clear();
+        screenSizeField.clear();
+        if (clearComboBoxes) {
+            ramField.setValue(null);
+            storageField.setValue(null);
+            cpuField.setValue(null);
+        }
+        warrantyField.clear();
+    }
+
+    // Navigate back to the main scene
     @FXML
     private void goToMainScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/veriy/Teknoloji.fxml"));
@@ -229,6 +223,4 @@ public class PCController {
         stage.setScene(mainScene);
         stage.show();
     }
-
-
 }

@@ -2,9 +2,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Pos?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.collections.ObservableList?>
 
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PCController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+
         <!-- TableView for displaying PCs -->
         <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
             <columns>
@@ -27,9 +31,43 @@
             <TextField fx:id="priceField" promptText="Enter Price" />
             <TextField fx:id="amountField" promptText="Enter Amount" />
             <TextField fx:id="screenSizeField" promptText="Enter Screen Size" />
-            <TextField fx:id="ramField" promptText="Enter RAM" />
-            <TextField fx:id="storageField" promptText="Enter Storage" />
-            <TextField fx:id="cpuField" promptText="Enter CPU" />
+
+            <!-- ComboBox for RAM with predefined options -->
+            <ComboBox fx:id="ramField" promptText="Select RAM">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="8 GB"/>
+                        <String fx:value="16 GB"/>
+                        <String fx:value="32 GB"/>
+                        <String fx:value="64 GB"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- ComboBox for Storage with predefined options -->
+            <ComboBox fx:id="storageField" promptText="Select Storage">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="256 GB"/>
+                        <String fx:value="512 GB"/>
+                        <String fx:value="1 TB"/>
+                        <String fx:value="2 TB"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <ComboBox fx:id="cpuField" promptText="Select CPU">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Intel Core i5"/>
+                        <String fx:value="Intel Core i7"/>
+                        <String fx:value="Intel Core i9"/>
+                        <String fx:value="AMD Ryzen 5"/>
+                        <String fx:value="AMD Ryzen 7"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
             <TextField fx:id="warrantyField" promptText="Enter Warranty" />
         </HBox>
 
