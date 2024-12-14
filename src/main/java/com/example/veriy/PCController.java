@@ -89,7 +89,7 @@ public class PCController {
     }
 
     @FXML
-    private void handleAddProduct() {
+    private void handleAddProduct(){
         try {
             String id = idField.getText();
             if (id == null || id.isEmpty()) {
@@ -99,13 +99,24 @@ public class PCController {
             for (PC existingPc : pcList) {
                 if (existingPc.getId().equals(id)) {
                     showAlert("Duplicate ID Error", "A PC with this ID already exists.");
+                    idField.clear();
                     return;
                 }
             }
+            if (id.length()> 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+                idField.clear();
+                return;
+            }
 
             String name = nameField.getText();
-            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") || name.length() > 50) {
-                showAlert("Input Error", "Name must be valid and less than 50 characters.");
+            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
+                showAlert("Input Error", "Name cannot be empty or integer value..");
+                nameField.clear();
+                return;
+            }if (name.length() > 20){
+                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+                nameField.clear();
                 return;
             }
 
@@ -114,10 +125,12 @@ public class PCController {
                 price = Integer.parseInt(priceField.getText());
                 if (price <= 0 || price > 100000000) {
                     showAlert("Input Error", "Price must be between 1 and 100,000,000.");
+                    priceField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
                 showAlert("Input Error", "Price must be a valid number.");
+                priceField.clear();
                 return;
             }
 
@@ -126,10 +139,12 @@ public class PCController {
                 amount = Integer.parseInt(amountField.getText());
                 if (amount <= 0 || amount > 1000) {
                     showAlert("Input Error", "Amount must be between 1 and 1,000.");
+                    amountField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
                 showAlert("Input Error", "Amount must be a valid number.");
+                amountField.clear();
                 return;
             }
 
@@ -138,10 +153,12 @@ public class PCController {
                 screenSize = Integer.parseInt(screenSizeField.getText());
                 if (screenSize <= 0 || screenSize > 20) {
                     showAlert("Input Error", "Screen size must be between 1 and 20 inches.");
+                    screenSizeField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
                 showAlert("Input Error", "Screen size must be a valid number.");
+                screenSizeField.clear();
                 return;
             }
 
@@ -168,10 +185,16 @@ public class PCController {
                 warranty = Integer.parseInt(warrantyField.getText());
                 if (warranty <= 0) {
                     showAlert("Input Error", "Warranty must be greater than 0.");
+                    warrantyField.clear();
                     return;
+                }
+                if (warranty > 100){
+                    showAlert("Input Error", "warranty cannot be greater than 100.");
+                    warrantyField.clear();
                 }
             } catch (NumberFormatException e) {
                 showAlert("Input Error", "Warranty must be a valid number.");
+                warrantyField.clear();
                 return;
             }
 

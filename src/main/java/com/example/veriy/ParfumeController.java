@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.BottomWear;
 import Models.Parfume;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,42 +84,62 @@ public class ParfumeController {
     private void handleAddProduct() {
         try {
             String id = idField.getText();
-            if (id == null || id.isEmpty() || !id.matches("\\d+")) {  // Ensure ID is not empty and contains only numbers
-                showAlert("Input Error", "Id must be a non-empty number.");
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            for (Parfume existingParfume : parfumeList) {
+                if (existingParfume.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A Parfume with this ID already exists.");
+                    idField.clear();
+                    return;
+                }
+            }
+            if (id.length()> 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+                idField.clear();
                 return;
             }
 
             String name = nameField.getText();
-            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+")) {  // Ensure name contains only letters
-                showAlert("Input Error", "Name must only contain letters.");
+            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
+                showAlert("Input Error", "Name cannot be empty or integer value..");
+                nameField.clear();
+                return;
+            }if (name.length() > 20){
+                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+                nameField.clear();
                 return;
             }
-
-            // Removed brand field
 
             int price;
             try {
                 price = Integer.parseInt(priceField.getText());
-                if (price <= 0) {
-                    showAlert("Input Error", "Price must be a positive number.");
+                if (price <= 0 || price > 100000000) {
+                    showAlert("Input Error", "Price must be between 1 and 100,000,000.");
+                    priceField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Please enter a valid price.");
+                showAlert("Input Error", "Price cannot be empty or String Value.");
+                priceField.clear();
                 return;
             }
 
             int amount;
             try {
                 amount = Integer.parseInt(amountField.getText());
-                if (amount <= 0) {
-                    showAlert("Input Error", "Amount must be a positive number.");
+                if (amount <= 0 || amount > 1000) {
+                    showAlert("Input Error", "Amount must be between 1 and 1,000.");
+                    amountField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Please enter a valid amount.");
+                showAlert("Input Error", "Amount cannot be empty or String Value.");
+                amountField.clear();
                 return;
             }
+
 
             // Get volume from ComboBox (converted to double)
             String volumeStr = volumeField.getValue();
@@ -139,10 +160,12 @@ public class ParfumeController {
                 expirationDate = Integer.parseInt(expirationDateField.getText());
                 if (expirationDate <= 0) {
                     showAlert("Input Error", "Expiration date must be a positive number.");
+                    expirationDateField.clear();
                     return;
                 }
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Please enter a valid expiration date.");
+                showAlert("Input Error", " expiration date cannot be empty or String Value.");
+                expirationDateField.clear();
                 return;
             }
 

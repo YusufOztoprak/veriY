@@ -107,17 +107,86 @@ public class BottomWearController {
     private void handleAddBottomWear() {
         try {
             String id = idField.getText();
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            for (BottomWear existingBottom : bottomWearList) {
+                if (existingBottom.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A TopWear with this ID already exists.");
+                    idField.clear();
+                    return;
+                }
+            }
+            if (id.length()> 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+                idField.clear();
+                return;
+            }
+
             String name = nameField.getText();
-            int price = Integer.parseInt(priceField.getText());
-            int stockAmount = Integer.parseInt(stockAmountField.getText());
+            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
+                showAlert("Input Error", "Name cannot be empty or integer value..");
+                nameField.clear();
+                return;
+            }if (name.length() > 20){
+                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+                nameField.clear();
+                return;
+            }
+
+            int price;
+            try {
+                price = Integer.parseInt(priceField.getText());
+                if (price <= 0 || price > 100000000) {
+                    showAlert("Input Error", "Price must be between 1 and 100,000,000.");
+                    priceField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Price must be a valid number.");
+                priceField.clear();
+                return;
+            }
+
+            int amount;
+            try {
+                amount = Integer.parseInt(stockAmountField.getText());
+                if (amount <= 0 || amount > 1000) {
+                    showAlert("Input Error", "Amount must be between 1 and 1,000.");
+                    stockAmountField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Amount must be a valid number.");
+                stockAmountField.clear();
+                return;
+            }
+
             String size = sizeField.getValue();
+            if (size == null || size.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Size size.");
+                return;
+            }
             String color = colorField.getValue();
+            if (color == null || color.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Color size.");
+                return;
+            }
             String cloth = clothField.getValue();
+            if (cloth == null || cloth.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Cloth size.");
+                return;
+            }
             String gender = genderField.getValue();
+            if (gender == null || gender.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Gender size.");
+                return;
+            }
             boolean hasPockets = hasPocketsCheckBox.isSelected();
 
 
-            BottomWear bottomWear = new BottomWear(id, name, price, stockAmount, size, color, cloth, gender, hasPockets);
+            BottomWear bottomWear = new BottomWear(id, name, price, amount, size, color, cloth, gender, hasPockets);
             bottomWearList.add(bottomWear);
             clearFields();
         } catch (NumberFormatException e) {

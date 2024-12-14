@@ -28,7 +28,17 @@ public class KayitOlEkranı {
     @FXML
     private void handleKayitOl() {
         String kullaniciAdi = yeniKullaniciAdiField.getText();
+        if (kullaniciAdi.length() > 20){
+            mesajLabel.setText("kullanıcı adı uzunluğu en fazla 20 karakter içermelidir...");
+            yeniKullaniciAdiField.clear();
+            return;
+        }
         String sifre = yeniSifreField.getText();
+        if (sifre.length() > 10){
+            mesajLabel.setText("kullanıcı şifresi en fazla 10 karakter uzunluğunda olmalıdır...");
+            yeniSifreField.clear();
+            return;
+        }
 
         if (kullaniciAdi.isEmpty() || sifre.isEmpty()) {
             mesajLabel.setText("Kullanıcı adı ve şifre boş olamaz!");

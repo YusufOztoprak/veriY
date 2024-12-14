@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.PC;
 import Models.Phone;
 import Models.TopWear;
 import javafx.collections.FXCollections;
@@ -104,17 +105,94 @@ public class TopWearController {
     private void handleAddTopWear() {
         try {
             String id = idField.getText();
-            String name = nameField.getText();
-            int price = Integer.parseInt(priceField.getText());
-            int stockAmount = Integer.parseInt(stockAmountField.getText());
-            String size = sizeField.getValue();
-            String color = colorField.getValue();
-            String cloth = clothField.getValue();
-            String gender = genderField.getValue();
-            String sleeveType = sleeveTypeField.getValue();
-            String neckType = neckTypeField.getValue();
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            for (TopWear existingTop : topWearList) {
+                if (existingTop.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A TopWear with this ID already exists.");
+                    idField.clear();
+                    return;
+                }
+            }
+            if (id.length()> 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+                idField.clear();
+                return;
+            }
 
-            TopWear topWear = new TopWear(id, name, price, stockAmount, size, color, cloth, gender, sleeveType, neckType);
+            String name = nameField.getText();
+            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
+                showAlert("Input Error", "Name cannot be empty or integer value..");
+                nameField.clear();
+                return;
+            }if (name.length() > 20){
+                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+                nameField.clear();
+                return;
+            }
+
+            int price;
+            try {
+                price = Integer.parseInt(priceField.getText());
+                if (price <= 0 || price > 100000000) {
+                    showAlert("Input Error", "Price must be between 1 and 100,000,000.");
+                    priceField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Price cannot be empty or String Value.");
+                priceField.clear();
+                return;
+            }
+
+            int amount;
+            try {
+                amount = Integer.parseInt(stockAmountField.getText());
+                if (amount <= 0 || amount > 1000) {
+                    showAlert("Input Error", "Amount must be between 1 and 1,000.");
+                    stockAmountField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Amount cannot be empty or String Value.");
+                stockAmountField.clear();
+                return;
+            }
+
+            String size = sizeField.getValue();
+            if (size == null || size.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Size size.");
+                return;
+            }
+            String color = colorField.getValue();
+            if (color == null || color.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Color size.");
+                return;
+            }
+            String cloth = clothField.getValue();
+            if (cloth == null || cloth.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Cloth size.");
+                return;
+            }
+            String gender = genderField.getValue();
+            if (gender == null || gender.isEmpty()) {
+                showAlert("Input Error", "Please select a valid Gender size.");
+                return;
+            }
+            String sleeveType = sleeveTypeField.getValue();
+            if (sleeveType == null || sleeveType.isEmpty()) {
+                showAlert("Input Error", "Please select a valid SleeveType size.");
+                return;
+            }
+            String neckType = neckTypeField.getValue();
+            if (neckType == null || neckType.isEmpty()) {
+                showAlert("Input Error", "Please select a valid NeckType size.");
+                return;
+            }
+
+            TopWear topWear = new TopWear(id, name, price, amount, size, color, cloth, gender, sleeveType, neckType);
             topWearList.add(topWear);
 
             saveTopWears();

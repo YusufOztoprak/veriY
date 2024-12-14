@@ -46,8 +46,11 @@ public class GirisEkranı {
             mesajLabel.setText("kullanıcı adı ve şifre boş geçilemez");
         } else if (KullaniciVeritabani.kullanicilar.containsKey(kullaniciAdi)) {
             mesajLabel.setText("Şifre hatalı!");
+            sifreField.clear();
         } else {
             mesajLabel.setText("Kullanıcı adı bulunamadı!");
+            kullaniciAdiField.clear();
+            sifreField.clear();
         }
     }
 
