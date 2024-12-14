@@ -1,6 +1,5 @@
 package com.example.veriy;
 
-
 import Models.PC;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

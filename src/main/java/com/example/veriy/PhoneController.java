@@ -94,27 +94,141 @@ public class PhoneController {
     private void addPhone() {
         try {
             String id = idField.getText();
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+
+            // Check if the phone ID already exists
+            for (Phone existingPhone : phoneList) {
+                if (existingPhone.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A phone with this ID already exists.");
+                    return; // Exit the method if a duplicate is found
+                }
+            }
+
             String name = nameField.getText();
-            int price = Integer.parseInt(priceField.getText());
-            int amount = Integer.parseInt(amountField.getText());
-            int ram = Integer.parseInt(ramField.getValue().toString());
-            int storage = Integer.parseInt(storageField.getValue().toString());
+            if (name == null || name.isEmpty()) {
+                showAlert("Input Error", "Name cannot be empty.");
+                return;
+            }
+
+            if (name.length() > 50) {
+                showAlert("Input Error", "Name must be less than 50 characters.");
+                nameField.clear();
+                return;
+            }
+            if (!name.matches("[A-Za-z ]+")) {
+                showAlert("Input Error", "Name must only contain letters.");
+                nameField.clear();
+                return;
+            }
+
+            int price = 0;
+            try {
+                price = Integer.parseInt(priceField.getText());
+                if (price <= 0) {
+                    showAlert("Input Error", "Price cannot be less than 0.");
+                    priceField.clear();
+                    return;
+                }
+                if (price > 100000000) {
+                    showAlert("Input Error", "Price must be less than 100000000.");
+                    priceField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Price cannot be empty or string value.");
+                amountField.clear();
+                return;
+            }
+
+            int amount = 0;
+            try {
+                amount = Integer.parseInt(amountField.getText());
+                if (amount <= 0) {
+                    showAlert("Input Error", "Amount cannot be less than 0.");
+                    amountField.clear();
+                    return;
+                }
+                if (amount > 1000) {
+                    showAlert("Input Error", "Amount must be less than 1000.");
+                    amountField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Amount cannot be empty or string value.");
+                amountField.clear();
+                return;
+            }
+
+            // RAM field check (ComboBox)
+            Integer ramValue = ramField.getValue();
+            if (ramValue == null) {
+                showAlert("Input Error", "Please select a valid RAM size.");
+                return;
+            }
+
+            // Storage field check (ComboBox)
+            Integer storageValue = storageField.getValue();
+            if (storageValue == null) {
+                showAlert("Input Error", "Please select a valid storage size.");
+                return;
+            }
+
             String cpu = cpuField.getValue();
-            int warranty = Integer.parseInt(warrantyField.getText());
-            int numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
-            boolean fiveGSupport = "Yes".equalsIgnoreCase(fiveGSupportField.getValue().toString()); // String -> Boolean
+            if (cpu == null || cpu.isEmpty()) {
+                showAlert("Input Error", "Please select a valid CPU.");
+                return;
+            }
 
+            int warranty = 0;
+            try {
+                warranty = Integer.parseInt(warrantyField.getText());
+                if (warranty <= 0) {
+                    showAlert("Input Error", "Warranty cannot be less than 0.");
+                    warrantyField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input error", "Warranty cannot be empty.");
+                warrantyField.clear();
+                return;
+            }
 
-            Phone phone = new Phone(id, name, price, amount, ram, storage, cpu, warranty,numberOfCameras, fiveGSupport);
+            int numberOfCameras = 0;
+            try {
+                numberOfCameras = Integer.parseInt(numberOfCamerasField.getText());
+                if (numberOfCameras <= 0) {
+                    showAlert("Input Error", "Number of cameras cannot be less than 0.");
+                    numberOfCamerasField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input error", "Number of cameras cannot be empty or string value.");
+                numberOfCamerasField.clear();
+                return;
+            }
+
+            boolean fiveGSupport = "Yes".equalsIgnoreCase(fiveGSupportField.getValue().toString());
+
+            // Create the new phone object
+            Phone phone = new Phone(id, name, price, amount, ramValue, storageValue, cpu, warranty, numberOfCameras, fiveGSupport);
+
+            // Add the new phone to the list
             phoneList.add(phone);
 
+            // Save products (assuming the save method is implemented)
             saveProducts();
 
+            // Clear the input fields after adding the phone
             clearFields(false);
+
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
     }
+
 
     /*@FXML
     private void deletePhone() {
