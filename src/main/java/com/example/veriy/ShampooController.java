@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.Parfume;
 import Models.Shampoo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,14 +147,26 @@ public class ShampooController {
     // Delete the selected parfume from the lis
     @FXML
     private void handleDeleteShampoo() {
-        Shampoo selectedShampoo = shampooTable.getSelectionModel().getSelectedItem();
-        if (selectedShampoo != null) {
-            shampooList.remove(selectedShampoo);
-            saveShampoo(); // Dosyayı güncelle
+        Shampoo selectedShampo = shampooTable.getSelectionModel().getSelectedItem();
+        if (selectedShampo != null) {
+            // Onay penceresi oluşturuluyor
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete Confirmation");
+            confirmationAlert.setHeaderText("Are you sure you want to delete this product?");
+            confirmationAlert.setContentText("Product: " + selectedShampo.getName());
+
+            // Kullanıcı yanıtını kontrol ediyoruz
+            var result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                shampooList.remove(selectedShampo);
+                saveShampoo();
+                showAlert("Success", "Product deleted successfully.");
+            }
         } else {
-            showAlert("Selection Error", "No shampoo selected.");
+            showAlert("Selection Error", "No product selected.");
         }
     }
+
 
     private void saveShampoo() {
         try {

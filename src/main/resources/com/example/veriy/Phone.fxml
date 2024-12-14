@@ -66,8 +66,8 @@
             <ComboBox fx:id="fiveGSupportField" promptText="Enter fiveGSupport" >
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <Boolean fx:value="Evet"/>
-                        <Boolean fx:value="Hayır"/>
+                        <Boolean fx:value="True"/>
+                        <Boolean fx:value="False"/>
                     </FXCollections>
                 </items>
             </ComboBox>
