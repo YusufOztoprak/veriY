@@ -28,6 +28,8 @@ public class ShampooController {
     @FXML
     private TableColumn<Shampoo, Integer> amountColumn;
     @FXML
+    private TableColumn<Shampoo, Integer> expirationColumn;  // Updated column for expiration
+    @FXML
     private TableColumn<Shampoo, String> hairTypeColumn;
     @FXML
     private TableColumn<Shampoo, Double> volumeColumn;
@@ -40,6 +42,8 @@ public class ShampooController {
     private TextField priceField;
     @FXML
     private TextField amountField;
+    @FXML
+    private TextField expirationField;  // Added expiration field
     @FXML
     private ComboBox<String> hairTypeComboBox;
     @FXML
@@ -55,6 +59,7 @@ public class ShampooController {
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        expirationColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getExpiration_date()).asObject());  // Display expiration date
         hairTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getHairType()));
         volumeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getVolume()).asObject());
 
@@ -86,11 +91,20 @@ public class ShampooController {
             String name = nameField.getText().trim();
             String hairType = hairTypeComboBox.getValue();
             String volumeStr = volumeComboBox.getValue();
+            String expirationStr = expirationField.getText().trim();
 
             // Girdi kontrolleri
-            if (id.isEmpty() || name.isEmpty() || hairType == null || volumeStr == null) {
+            if (id.isEmpty() || name.isEmpty() || hairType == null || volumeStr == null || expirationStr.isEmpty()) {
                 showAlert("Input Error", "Please fill in all fields.");
                 return;
+            }
+
+            // Check if the id already exists in the list
+            for (Shampoo existingShampoo : shampooList) {
+                if (existingShampoo.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A shampoo with this ID already exists.");
+                    return;  // Exit the method if a duplicate is found
+                }
             }
 
             // Sayısal alanlar
@@ -100,11 +114,21 @@ public class ShampooController {
             int amount = parseIntegerField(amountField);
             if (amount == -1) return; // Invalid input for amount
 
+            int expirationDate = parseIntegerField(expirationField);
+            if (expirationDate == -1) return; // Invalid input for expiration date
+
             double volume = Double.parseDouble(volumeStr);
 
             // Yeni Shampoo nesnesi oluştur
-            Shampoo newShampoo = new Shampoo(id, name, price, amount, 0, "N/A", hairType, volume);
-            shampooList.add(newShampoo);
+            Shampoo newShampoo = new Shampoo(id, name, price, amount, expirationDate, "N/A", hairType, volume);
+
+            // Veriyi sıralı bir şekilde LinkedList'e ekle
+            List<Shampoo> shampooLinkedList = FileManagerShampoo.loadShampooData(dataFile);
+            FileManagerShampoo.addShampooInSortedOrder(shampooLinkedList, newShampoo);
+
+            // TableView'e sıralı listeyi aktar
+            shampooList = FXCollections.observableArrayList(shampooLinkedList);
+            shampooTable.setItems(shampooList);
 
             // Veriyi dosyaya kaydet
             saveShampoo();
@@ -114,9 +138,12 @@ public class ShampooController {
 
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    // Delete the selected parfume from the lis
     @FXML
     private void handleDeleteShampoo() {
         Shampoo selectedShampoo = shampooTable.getSelectionModel().getSelectedItem();
@@ -151,6 +178,7 @@ public class ShampooController {
         nameField.clear();
         priceField.clear();
         amountField.clear();
+        expirationField.clear();  // Clear expiration field
         hairTypeComboBox.getSelectionModel().clearSelection();
         volumeComboBox.getSelectionModel().clearSelection();
     }

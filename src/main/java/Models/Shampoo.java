@@ -5,8 +5,8 @@ public class Shampoo extends Personal_Care {
     private double volume;
 
     // Constructor for Shampoo
-    public Shampoo(String id, String name, int price, int amount, int expiration_date, String userInstructions, String hairType, double volume) {
-        super(id, name, price, amount, expiration_date, userInstructions);  // Call the constructor of Personal_Care
+    public Shampoo(String id, String name, int price, int amount, int expirationDate, String userInstructions, String hairType, double volume) {
+        super(id, name, price, amount, expirationDate, userInstructions);  // Call the constructor of Personal_Care
         this.hairType = hairType;
         this.volume = volume;
     }

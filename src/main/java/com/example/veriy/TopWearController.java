@@ -198,4 +198,3 @@ public class TopWearController {
         stage.show();
     }
 }
-

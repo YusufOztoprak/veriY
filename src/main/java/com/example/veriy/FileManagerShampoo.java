@@ -1,6 +1,5 @@
 package com.example.veriy;
 
-
 import Models.Shampoo;
 import java.io.*;
 import java.util.ArrayList;
@@ -42,5 +41,20 @@ public class FileManagerShampoo {
             }
         }
         return shampooList;
+    }
+
+    // Şampuanı fiyatına göre sıralı bir şekilde ekler
+    public static void addShampooInSortedOrder(List<Shampoo> shampooList, Shampoo newShampoo) {
+        boolean added = false;
+        for (int i = 0; i < shampooList.size(); i++) {
+            if (newShampoo.getPrice() < shampooList.get(i).getPrice()) {
+                shampooList.add(i, newShampoo);
+                added = true;
+                break;
+            }
+        }
+        if (!added) {
+            shampooList.add(newShampoo);
+        }
     }
 }

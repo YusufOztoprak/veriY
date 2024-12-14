@@ -16,9 +16,6 @@ import java.util.List;
 public class PhoneController {
     @FXML
     private Button backButton;
-
-
-
     @FXML
     private TableView<Phone> productTable;
     @FXML

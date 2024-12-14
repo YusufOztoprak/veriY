@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ParfumeController {
@@ -58,7 +59,7 @@ public class ParfumeController {
 
     @FXML
     public void initialize() {
-        // Set TableView columns with Parfume object properties
+        // TableView sütunlarını Parfume nesnesinin özelliklerine bağlama
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
@@ -68,15 +69,14 @@ public class ParfumeController {
         expirationDateColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getExpiration_date()).asObject());
         userInstructionsColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getUserInstructions()));
 
-        productTable.setItems(parfumeList);
-
-        // Populate ComboBoxes with predefined options
+        // ComboBox'ları doldurma
         genderTargetComboBox.setItems(FXCollections.observableArrayList("Unisex", "Men", "Women"));
         volumeField.setItems(FXCollections.observableArrayList("50", "100", "150", "200"));
 
-        // Load parfume data from file
+        // Parfüm verilerini yükleme
         loadProducts();
     }
+
 
     // Add a new parfume to the list and save it to file
     @FXML
@@ -152,13 +152,20 @@ public class ParfumeController {
                 return;
             }
 
-            // Create new Parfume object and add to list
+            // Yeni Parfume nesnesi oluştur
             Parfume parfume = new Parfume(id, name, price, amount, expirationDate, userInstructions, volume, genderTarget);
-            parfumeList.add(parfume);
 
-            // Save updated parfume list to file
+            // LinkedList'e sıralı ekle
+            LinkedList<Parfume> parfumeLinkedList = new LinkedList<>(parfumeList);
+            FileManagerParfume.addParfumeInSortedOrder(parfumeLinkedList, parfume);
+
+            // ObservableList'i güncelle
+            parfumeList = FXCollections.observableArrayList(parfumeLinkedList);
+            productTable.setItems(parfumeList);
+
+            // Veriyi dosyaya kaydet
             saveProducts();
-            clearFields(); // Clear the form fields
+            clearFields(); // Alanları temizle
         } catch (NumberFormatException e) {
             showAlert("Input Error", "Please enter valid data.");
         }
@@ -185,16 +192,22 @@ public class ParfumeController {
         }
     }
 
-    // Load parfumes from file
     private void loadProducts() {
         try {
-            List<Parfume> loadedParfumes = FileManagerParfume.loadParfumeData(dataFile);
-            parfumeList.clear();
-            parfumeList.addAll(loadedParfumes);
+            // LinkedList ile sıralı verileri yükle
+            LinkedList<Parfume> sortedParfumeList = FileManagerParfume.loadParfumeData(dataFile);
+
+            // LinkedList'i ObservableList'e dönüştür
+            parfumeList = FXCollections.observableArrayList(sortedParfumeList);
+
+            // TableView'e listeyi ata
+            productTable.setItems(parfumeList);
+
         } catch (IOException e) {
-            System.out.println("No existing data found, starting fresh.");
+            showAlert("Load Error", "Failed to load parfume data: " + e.getMessage());
         }
     }
+
 
     // Show alert with given title and message
     private void showAlert(String title, String message) {
