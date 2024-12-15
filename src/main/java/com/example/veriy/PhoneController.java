@@ -182,6 +182,7 @@ public class PhoneController implements Initializable {
             Integer ramValue = ramField.getValue();
             if (ramValue == null) {
                 showAlert("Input Error", "Please select a valid RAM size.");
+                ramField.setValue(null);
                 return;
             }
 
@@ -306,13 +307,6 @@ public class PhoneController implements Initializable {
         amountField.clear();
         warrantyField.clear();
         numberOfCamerasField.clear();
-        if (clearComboBoxes) {
-            ramField.setValue(null); // Clear RAM ComboBox
-            storageField.setValue(null); // Clear Storage ComboBox
-            cpuField.setValue(null); // Clear CPU ComboBox
-        }
-
-
     }
 
     private void showAlert(String title, String message) {
