@@ -1,0 +1,124 @@
+/* Genel Arka Plan ve Düzen */
+.root {
+    -fx-background-color: #2c2c2c;  /* Daha koyu gri arka plan */
+}
+
+/* StackPane */
+.stack-pane {
+    -fx-background-color: #3e3e3e; /* Orta koyu gri arka plan */
+    -fx-border-color: #555555; /* Daha açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0.0, 0, 5); /* Hafif gölge efekti */
+}
+
+/* Başlık kısmı */
+.label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff; /* Beyaz metin rengi */
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* TextField, ComboBox ve CheckBox'lar */
+.text-field, .combo-box, .check-box {
+    -fx-background-color: #404040; /* Koyu gri arka plan */
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-border-color: #555555; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+    -fx-pref-width: 180px; /* Pref width artırıldı */
+}
+
+/* ComboBox yazı rengi */
+.combo-box .text {
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+}
+
+/* ComboBox prompt metinleri için açık renk */
+.combo-box .prompt-text {
+    -fx-text-fill: #b0bec5; /* Açık gri prompt metin rengi */
+}
+
+/* TextField, ComboBox ve CheckBox odaklanınca */
+.text-field:focused, .combo-box:focused {
+    -fx-background-color: #616161; /* Orta ton gri odaklanma rengi */
+    -fx-border-color: #00bcd4; /* Mavi odaklanma sınırı */
+}
+
+/* TableView ve TableColumn */
+.table-view {
+    -fx-background-color: #3e3e3e; /* Orta koyu gri arka plan rengi */
+    -fx-border-color: #555555; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: transparent; /* Hücre sınırlarını kaldırdık */
+}
+
+/* TableColumn başlıkları */
+.table-view .column-header {
+    -fx-background-color: #555555; /* Orta gri başlık arka planı */
+    -fx-text-fill: #ffffff; /* Beyaz metin rengi */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px; /* Başlık yazı boyutu */
+}
+
+/* TableView satırları */
+.table-view .row-cell {
+    -fx-background-color: #404040; /* Koyu gri satır arka planı */
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+}
+
+/* Hover durumunda TableView satırları */
+.table-view .row-cell:hover {
+    -fx-background-color: #555555; /* Hover durumunda açık gri */
+}
+
+/* Seçilen satır */
+.table-view .row-cell:selected {
+    -fx-background-color: #00bcd4; /* Seçilen satırda mavi */
+    -fx-text-fill: white; /* Seçilen satırdaki metin rengi beyaz */
+}
+
+/* Buttonlar */
+.button {
+    -fx-background-color: #00bcd4; /* Canlı mavi buton rengi */
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 12px 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.0, 0, 5); /* Hafif gölge efekti */
+}
+
+/* Hover durumunda buton */
+.button:hover {
+    -fx-background-color: #0097a7; /* Koyu mavi hover rengi */
+}
+
+/* Basıldığında buton */
+.button:pressed {
+    -fx-background-color: #00838f; /* Daha koyu mavi */
+}
+
+/* VBox Düzeni */
+.vbox {
+    -fx-spacing: 18px;
+    -fx-alignment: center;
+    -fx-padding: 25px;
+}
+
+/* HBox Düzeni */
+.hbox {
+    -fx-spacing: 18px;
+    -fx-alignment: center;
+    -fx-padding: 25px;
+}
+
+/* Hedef metin stilini belirleyin */
+.button .text {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}

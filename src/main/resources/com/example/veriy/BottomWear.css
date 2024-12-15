@@ -1,0 +1,161 @@
+/* Genel Arka Plan ve Düzen */
+.root {
+    -fx-background-color: #f5f5f5;  /* Açık gri arka plan */
+}
+
+/* StackPane */
+.stack-pane {
+    -fx-background-color: #ffffff; /* Beyaz arka plan */
+    -fx-border-color: #cccccc; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.0, 0, 5); /* Hafif gölge efekti */
+}
+
+/* Başlık kısmı */
+.label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333; /* Koyu gri metin rengi */
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* TextField, ComboBox ve CheckBox'lar */
+.text-field, .combo-box, .check-box {
+    -fx-background-color: #ffffff; /* Beyaz arka plan */
+    -fx-text-fill: #333333; /* Koyu gri metin */
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-border-color: #cccccc; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-pref-width: 150px;
+}
+
+/* ComboBox Yazı Rengi ve Arka Planı */
+.combo-box {
+    -fx-background-color: #ffffff; /* Beyaz arka plan */
+    -fx-text-fill: #333333; /* Koyu gri metin */
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-border-color: #cccccc; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-pref-width: 150px;
+}
+
+/* ComboBox Yazı Rengi */
+.combo-box .text {
+    -fx-text-fill: #333333; /* Koyu gri metin */
+}
+
+/* ComboBox Açılır Menü */
+.combo-box .list-cell {
+    -fx-background-color: #ffffff; /* Beyaz arka plan */
+    -fx-text-fill: #333333; /* Koyu gri metin */
+}
+
+/* ComboBox Odaklanınca */
+.combo-box:focused {
+    -fx-background-color: #f0f0f0; /* Açık gri odaklanma rengi */
+    -fx-border-color: #00bcd4; /* Mavi odaklanma sınırı */
+}
+
+/* ComboBox İçin Açık Prompt Metin Rengi */
+.combo-box .prompt-text {
+    -fx-text-fill: #888888; /* Orta gri prompt metin rengi */
+}
+
+/* TextField, ComboBox ve CheckBox odaklanınca */
+.text-field:focused, .combo-box:focused {
+    -fx-background-color: #f0f0f0; /* Açık gri odaklanma rengi */
+    -fx-border-color: #00bcd4; /* Mavi odaklanma sınırı */
+}
+
+/* TableView ve TableColumn */
+.table-view {
+    -fx-background-color: #ffffff; /* Beyaz arka plan rengi */
+    -fx-border-color: #cccccc; /* Açık gri sınır */
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: transparent; /* Hücre sınırlarını kaldırdık */
+}
+
+/* TableColumn başlıkları */
+.table-view .column-header {
+    -fx-background-color: #f0f0f0; /* Açık gri başlık arka planı */
+    -fx-text-fill: #333333; /* Koyu gri metin rengi */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px; /* Başlık yazı boyutu */
+}
+
+/* TableView satırları */
+.table-view .row-cell {
+    -fx-background-color: #ffffff; /* Beyaz satır arka planı */
+    -fx-text-fill: #333333; /* Koyu gri metin */
+}
+
+/* Hover durumunda TableView satırları */
+.table-view .row-cell:hover {
+    -fx-background-color: #f0f0f0; /* Hover durumunda açık gri */
+}
+
+/* Seçilen satır */
+.table-view .row-cell:selected {
+    -fx-background-color: #00bcd4; /* Seçilen satırda mavi */
+    -fx-text-fill: white; /* Seçilen satırdaki metin rengi beyaz */
+}
+
+/* Buttonlar */
+.button {
+    -fx-background-color: #ff7043; /* Canlı turuncu buton rengi */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.0, 0, 5); /* Hafif gölge efekti */
+}
+
+/* Hover durumunda buton */
+.button:hover {
+    -fx-background-color: #f57c00; /* Daha koyu turuncu hover rengi */
+}
+
+/* Basıldığında buton */
+.button:pressed {
+    -fx-background-color: #e64a19; /* Daha koyu turuncu */
+}
+
+/* "Back" butonu için özel stil */
+.button#BackButton {
+    -fx-background-color: #eeeeee; /* Açık gri buton */
+    -fx-text-fill: #ff7043; /* Açık kırmızı metin */
+}
+
+/* Hover durumunda "Back" butonu */
+.button#BackButton:hover {
+    -fx-background-color: #cccccc; /* Daha açık gri hover */
+}
+
+/* VBox Düzeni */
+.vbox {
+    -fx-spacing: 15px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* HBox Düzeni */
+.hbox {
+    -fx-spacing: 15px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* Hedef metin stilini belirleyin */
+.button .text {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+

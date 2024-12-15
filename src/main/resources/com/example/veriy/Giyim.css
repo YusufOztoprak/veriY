@@ -1,84 +1,77 @@
 /* Genel Arka Plan */
 .root {
-    -fx-background-color: linear-gradient(to bottom, #e9ecef, #f1f3f5); /* Açık gri gradyan */
-    -fx-font-family: "Arial";
+    -fx-background-color: #212121; /* Koyu gri-siyah */
 }
 
-/* Etiketler (Label) için stil */
+/* Genel düzen */
+.stack-pane {
+    -fx-background-color: #303030; /* Koyu gri */
+    -fx-border-color: #424242; /* Koyu gri sınır */
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0.0, 0, 10); /* Hafif gölge efekti */
+}
+
+/* Başlık kısmı */
 .label {
     -fx-font-size: 16px;
-    -fx-text-fill: #343a40; /* Koyu gri ton */
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 2);
+    -fx-text-fill: #e0e0e0; /* Açık gri metin rengi */
+    -fx-alignment: center;
+    -fx-padding: 15px;
 }
 
-/* Button için temel stil */
+/* Düğmeler */
 .button {
-    -fx-background-color: linear-gradient(to bottom, #ffcccb, #e63946); /* Pembe-kırmızı geçiş */
-    -fx-text-fill: #ffffff; /* Beyaz metin */
+    -fx-background-color: linear-gradient(to bottom, #00bcd4, #008c99); /* Teknolojik mavi */
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 3);
-    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+    -fx-padding: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.0, 0, 5); /* Hafif gölge efekti */
 }
 
+/* Düğme üzerine gelince (hover efekti) */
 .button:hover {
     -fx-background-color: linear-gradient(to bottom, #0288d1, #0277b3); /* Daha koyu mavi */
 }
 
+/* Düğme basıldığında (pressed durumu) */
 .button:pressed {
-    -fx-background-color: #a4161a; /* Basıldığında koyu kırmızı */
+    -fx-background-color: #01579b; /* Çok koyu mavi */
 }
 
-/* Geri butonu için farklılaştırma */
-#BackButton {
-    -fx-background-color: linear-gradient(to bottom, #adb5bd, #6c757d); /* Gri tonlarda geri butonu */
+/* 'Back' butonu */
+.button#backButton {
+    -fx-background-color: linear-gradient(to bottom, #d32f2f, #c2185b); /* Koyu kırmızı */
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
 }
 
-#BackButton:hover {
-    -fx-background-color: linear-gradient(to bottom, #6c757d, #495057);
+/* Back butonu üzerine gelince */
+.button#backButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #c2185b, #9c1e56); /* Koyu kırmızı hover */
 }
 
-#BackButton:pressed {
-    -fx-background-color: #343a40;
+/* Düğme içindeki yazı */
+.button .text {
+    -fx-font-size: 12px;
 }
 
-/* VBox ve HBox düzenleri */
+/* VBox ve HBox düzeni */
 .vbox {
+    -fx-spacing: 25px;
     -fx-alignment: center;
-    -fx-spacing: 20px;
-    -fx-padding: 20px;
+    -fx-padding: 25px;
 }
 
 .hbox {
-    -fx-alignment: center;
-    -fx-spacing: 20px;
-    -fx-padding: 20px;
-}
-
-/* Button metinleri */
-#TopButton, #BottomButton {
-    -fx-font-size: 14px;
-}
-
-/* StackPane düzeni */
-.stack-pane {
+    -fx-spacing: 25px;
     -fx-alignment: center;
 }
 
-/* Genel buton metin stili */
-.button .text {
-    -fx-font-family: "Arial";
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-}
-
-/* Arka Plan Etkisi */
-.stack-pane {
-    -fx-background-color: #f1f3f5; /* Açık gri arka plan */
-    -fx-border-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0.0, 0, 10);
+/* İkonların ve metinlerin konumu */
+.stack-pane > * {
+    -fx-alignment: center;
 }

@@ -11,7 +11,7 @@
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
 
         <!-- TableView for displaying Parfumes -->
-        <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
+        <TableView fx:id="productTable" prefWidth="750"  stylesheets="@Parfume.css"  prefHeight="400">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
