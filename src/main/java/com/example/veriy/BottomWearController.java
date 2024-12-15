@@ -1,6 +1,7 @@
 package com.example.veriy;
 
 import Models.BottomWear;
+import Models.PC;
 import Models.TopWear;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.LinkedList;
 
 public class BottomWearController {
     @FXML
@@ -73,8 +75,7 @@ public class BottomWearController {
     @FXML
     private Button BackButton;
 
-    private ObservableList<BottomWear> bottomWearList = FXCollections.observableArrayList();
-
+    private final LinkedList<BottomWear> bottomWearList = new LinkedList<>();
     @FXML
     public void initialize() {
         // TableView sütunlarını veri modeline bağla
@@ -89,7 +90,7 @@ public class BottomWearController {
         hasPocketsColumn.setCellValueFactory(new PropertyValueFactory<>("hasPockets"));
 
         // TableView'e veri bağla
-        bottomWearTable.setItems(bottomWearList);
+        updateTableView();
 
         loadBottomWears();
     }
@@ -187,7 +188,9 @@ public class BottomWearController {
 
 
             BottomWear bottomWear = new BottomWear(id, name, price, amount, size, color, cloth, gender, hasPockets);
-            bottomWearList.add(bottomWear);
+            FileManagerBottomWear.addBottomWearInSortedOrder(bottomWearList,bottomWear);
+            updateTableView();
+            saveBottomWears();
             clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Geçersiz giriş: Lütfen tüm alanları doğru doldurun.");
@@ -208,6 +211,7 @@ public class BottomWearController {
             var result = confirmationAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 bottomWearList.remove(selectedBottomWear);
+                updateTableView();
                 saveBottomWears();
                 showAlert("Success", "Product deleted successfully.");
             }
@@ -262,6 +266,7 @@ public class BottomWearController {
             List<BottomWear> loadedBottomWears = FileManagerBottomWear.loadBottomWearData(dataFile);
             bottomWearList.clear();
             bottomWearList.addAll(loadedBottomWears);
+            updateTableView();
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }
@@ -272,6 +277,11 @@ public class BottomWearController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private void updateTableView() {
+        ObservableList<BottomWear> observableList = FXCollections.observableArrayList(bottomWearList);
+        bottomWearTable.setItems(observableList);
+        bottomWearTable.refresh();
     }
 
 }

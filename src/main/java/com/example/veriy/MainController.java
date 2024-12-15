@@ -4,12 +4,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 public class MainController {
-
+    @FXML
+    private Label nameLabel;
     @FXML
     private Button technologyButton;
     @FXML
@@ -28,6 +30,9 @@ public class MainController {
         stage.show();
     }
 
+    public void getName(String name){
+        nameLabel.setText(name);
+    }
     @FXML
     private void openPersonalCareScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("KisiselBakim.fxml"));

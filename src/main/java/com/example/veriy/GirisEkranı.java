@@ -34,6 +34,8 @@ public class GirisEkranı {
             // Ana ekran sahnesine geçiş
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AnaEkran.fxml"));
+                //MainController mainController = loader.getController();
+                //mainController.getName(kullaniciAdiField.getText());
                 Scene anaEkran = new Scene(loader.load());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(anaEkran);

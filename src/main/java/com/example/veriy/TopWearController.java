@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.BottomWear;
 import Models.PC;
 import Models.Phone;
 import Models.TopWear;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TopWearController {
@@ -61,7 +63,7 @@ public class TopWearController {
     @FXML
     private ComboBox<String> neckTypeField;
 
-    private ObservableList<TopWear> topWearList = FXCollections.observableArrayList();
+    private final LinkedList<TopWear> TopWearList = new LinkedList<>();
     private final String dataFile = "TopWear.txt";
 
     @FXML
@@ -78,7 +80,7 @@ public class TopWearController {
         sleeveTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSleeveType()));
         neckTypeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNeckType()));
 
-        topWearTable.setItems(topWearList);
+        updateTableView();
 
         // Verileri dosyadan yükle
         loadTopWears();
@@ -109,7 +111,7 @@ public class TopWearController {
                 showAlert("Input Error", "Id cannot be empty.");
                 return;
             }
-            for (TopWear existingTop : topWearList) {
+            for (TopWear existingTop :TopWearList) {
                 if (existingTop.getId().equals(id)) {
                     showAlert("Duplicate ID Error", "A TopWear with this ID already exists.");
                     idField.clear();
@@ -193,8 +195,8 @@ public class TopWearController {
             }
 
             TopWear topWear = new TopWear(id, name, price, amount, size, color, cloth, gender, sleeveType, neckType);
-            topWearList.add(topWear);
-
+            FileManagerTopWear.addTopWearInSortedOrder(TopWearList,topWear);
+            updateTableView();
             saveTopWears();
 
             // Formu temizle
@@ -217,7 +219,8 @@ public class TopWearController {
             // Kullanıcı yanıtını kontrol ediyoruz
             var result = confirmationAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                topWearList.remove(selectedTopWear);
+                TopWearList.remove(selectedTopWear);
+                updateTableView();
                 saveTopWears();
                 showAlert("Success", "Product deleted successfully.");
             }
@@ -230,7 +233,7 @@ public class TopWearController {
 
     private void saveTopWears() {
         try {
-            FileManagerTopWear.saveTopWearData(topWearList, dataFile);
+            FileManagerTopWear.saveTopWearData(TopWearList, dataFile);
         } catch (IOException e) {
             showAlert("Save Error", "Failed to save TopWear data.");
         }
@@ -239,8 +242,9 @@ public class TopWearController {
     private void loadTopWears() {
         try {
             List<TopWear> loadedTopWears = FileManagerTopWear.loadTopWearData(dataFile);
-            topWearList.clear();
-            topWearList.addAll(loadedTopWears);
+            TopWearList.clear();
+            TopWearList.addAll(loadedTopWears);
+            updateTableView();
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }
@@ -275,4 +279,10 @@ public class TopWearController {
         stage.setScene(mainScene);
         stage.show();
     }
+    private void updateTableView() {
+        ObservableList<TopWear> observableList = FXCollections.observableArrayList(TopWearList);
+        topWearTable.setItems(observableList);
+        topWearTable.refresh();
+    }
+
 }

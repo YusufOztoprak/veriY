@@ -1,2 +1,3 @@
 2,aaaaaaa,1,1,8,128,Intel Core i5,1,1
+21123,daw,10,1,8,128,Intel Core i5,1,1
 11,aaaa,11,3,32,512,AMD Ryzen 5,3,14

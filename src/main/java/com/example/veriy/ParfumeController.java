@@ -1,6 +1,5 @@
 package com.example.veriy;
 
-import Models.BottomWear;
 import Models.Parfume;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ParfumeController {
@@ -54,7 +54,7 @@ public class ParfumeController {
     @FXML
     private TextField userInstructionsField;
 
-    private ObservableList<Parfume> parfumeList = FXCollections.observableArrayList();
+    private final LinkedList<Parfume> parfumeList = new LinkedList<>();
     private final String dataFile = "Parfume.txt";
 
     @FXML
@@ -69,7 +69,7 @@ public class ParfumeController {
         expirationDateColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getExpiration_date()).asObject());
         userInstructionsColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getUserInstructions()));
 
-        productTable.setItems(parfumeList);
+        updateTableView();
 
         // Populate ComboBoxes with predefined options
         genderTargetComboBox.setItems(FXCollections.observableArrayList("Unisex", "Men", "Women"));
@@ -79,6 +79,11 @@ public class ParfumeController {
         loadProducts();
     }
 
+    private void updateTableView() {
+        ObservableList<Parfume> observableList = FXCollections.observableArrayList(parfumeList);
+        productTable.setItems(observableList);
+        productTable.refresh();
+    }
     // Add a new parfume to the list and save it to file
     @FXML
     private void handleAddProduct() {
@@ -177,7 +182,8 @@ public class ParfumeController {
 
             // Create new Parfume object and add to list
             Parfume parfume = new Parfume(id, name, price, amount, expirationDate, userInstructions, volume, genderTarget);
-            parfumeList.add(parfume);
+            FileManagerParfume.addParfumeInSortedOrder(parfumeList,parfume);
+            updateTableView();
 
             // Save updated parfume list to file
             saveProducts();
@@ -193,6 +199,7 @@ public class ParfumeController {
         Parfume selectedParfume = productTable.getSelectionModel().getSelectedItem();
         if (selectedParfume != null) {
             parfumeList.remove(selectedParfume);
+            updateTableView();
             saveProducts(); // Save updated list to file
         } else {
             showAlert("Selection Error", "No parfume selected.");
@@ -214,6 +221,7 @@ public class ParfumeController {
             List<Parfume> loadedParfumes = FileManagerParfume.loadParfumeData(dataFile);
             parfumeList.clear();
             parfumeList.addAll(loadedParfumes);
+            updateTableView();
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }

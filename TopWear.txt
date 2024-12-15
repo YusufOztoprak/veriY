@@ -1,3 +1,4 @@
 1,1,1,1,XS,Mavi,Pamuklu,Unisex,Uzun kol,v yaka
-1321,111,111,1221,XS,Mavi,Keten,Unisex,Uzun kol,v yaka
 2,a,1,1,XS,Mavi,Pamuklu,Male,Uzun kol,v yaka
+232,adssd,10,1,XS,Mavi,Pamuklu,Unisex,Uzun kol,v yaka
+1321,111,111,1221,XS,Mavi,Keten,Unisex,Uzun kol,v yaka

@@ -1,5 +1,6 @@
 package com.example.veriy;
 
+import Models.PC;
 import Models.Phone;
 
 import java.io.*;
@@ -44,7 +45,7 @@ public class FileManagerPhone {
      * @throws IOException if an I/O error occurs
      */
     public static List<Phone> loadProducts(String fileName) throws IOException {
-        List<Phone> phoneList = new ArrayList<>();
+        LinkedList<Phone> phoneList = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -63,7 +64,7 @@ public class FileManagerPhone {
                                 Integer.parseInt(parts[8]), // number of cameras
                                 Boolean.parseBoolean(parts[9]) // 5G support
                         );
-                        phoneList.add(phone);
+                        addPhoneInSortedOrder(phoneList, phone);
                     } catch (NumberFormatException e) {
                         System.err.println("Skipping malformed line: " + line);
                     }
@@ -84,17 +85,16 @@ public class FileManagerPhone {
     public static void addPhoneInSortedOrder(LinkedList<Phone> phoneList, Phone phone) {
         if (phoneList.isEmpty() || phone.getPrice() < phoneList.getFirst().getPrice()) {
             phoneList.addFirst(phone);
-            return;
-        }
-
-        int index = 0;
-        for (Phone p : phoneList) {
-            if (phone.getPrice() < p.getPrice()) {
-                break;
+        } else {
+            int index = 0;
+            for (Phone existingPhone : phoneList) {
+                if (phone.getPrice() < existingPhone.getPrice()) {
+                    break;
+                }
+                index++;
             }
-            index++;
+            phoneList.add(index, phone);
         }
-        phoneList.add(index, phone);
     }
 }
 

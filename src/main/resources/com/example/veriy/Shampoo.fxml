@@ -2,10 +2,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Pos?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.collections.ObservableList?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
 
-<?import java.lang.String?>
+
+<?import javafx.scene.text.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
         <!-- TableView for displaying shampoos -->
@@ -24,13 +25,27 @@
         <!-- Form for adding shampoos -->
         <HBox spacing="10" alignment="CENTER">
             <!-- ID TextField -->
-            <TextField fx:id="idField" layoutX="50" layoutY="400" promptText="Enter ID"/>
+            <TextField fx:id="idField" layoutX="50" layoutY="400" promptText="Enter ID">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font></TextField>
 
-            <TextField fx:id="nameField" layoutX="150" layoutY="400" promptText="Name"/>
-            <TextField fx:id="priceField" layoutX="250" layoutY="400" promptText="Price"/>
-            <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount"/>
-            <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration"/>
-
+            <TextField fx:id="nameField" layoutX="150" layoutY="400" promptText="Name">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font></TextField>
+            <TextField fx:id="priceField" layoutX="250" layoutY="400" promptText="Price">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font></TextField>
+            <TextField fx:id="amountField" layoutX="350" layoutY="400" promptText="Amount">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font></TextField>
+            <TextField fx:id="expirationField" layoutX="450" layoutY="400" promptText="Expiration">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font></TextField>
             <!-- Hair Type ComboBox -->
             <ComboBox fx:id="hairTypeComboBox" layoutX="550" layoutY="450" promptText="Select Hair Type">
                 <items>
@@ -58,9 +73,18 @@
 
         <!-- Buttons for adding and deleting products -->
         <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="BackButton" onAction="#goToScene" text="Back to KisiselBakim"/>
-            <Button text="Add Shampoo" onAction="#handleAddShampoo" />
-            <Button text="Delete Selected" onAction="#handleDeleteShampoo" />
+            <Button fx:id="BackButton" onAction="#goToScene" text="Back to KisiselBakim" textFill="#b71e1e">
+            <font>
+                <Font name="Arial Bold" size="12.0"/>
+            </font></Button>
+            <Button text="Add Shampoo" onAction="#handleAddShampoo" textFill="#b71e1e">
+                <font>
+                    <Font name="Arial Bold" size="12.0"/>
+                </font></Button>
+            <Button text="Delete Selected" onAction="#handleDeleteShampoo" textFill="#b71e1e">
+                <font>
+                    <Font name="Arial Bold" size="12.0"/>
+                </font></Button>
         </HBox>
     </VBox>
 </StackPane>

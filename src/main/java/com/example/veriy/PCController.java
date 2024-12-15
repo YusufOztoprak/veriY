@@ -64,7 +64,6 @@ public class PCController {
     private final LinkedList<PC> pcList = new LinkedList<>();
     private final String dataFile = "PC.txt";
 
-    @FXML
     public void initialize() {
         // Set TableView columns with PC object properties
         idColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId()));

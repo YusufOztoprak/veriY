@@ -2,26 +2,23 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.KayitOlEkranı"
-      prefHeight="400.0" prefWidth="600.0" alignment="CENTER" spacing="20.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.KayitOlEkranı">
 
     <children>
-        <HBox spacing="10.0" alignment="CENTER">
-            <Label text="Yeni Kullanıcı Adı" />
-            <TextField fx:id="yeniKullaniciAdiField" prefWidth="200.0" />
-        </HBox>
-
-        <HBox spacing="10.0" alignment="CENTER">
-            <Label text="Yeni Şifre" />
-            <PasswordField fx:id="yeniSifreField" prefWidth="200.0" />
-        </HBox>
-
-        <HBox spacing="20.0" alignment="CENTER">
-            <Button text="Kayıt Ol" onAction="#handleKayitOl" />
-            <Button fx:id="BackButton" text="Geri" onAction="#goToMainScene" />
-        </HBox>
-
-        <Label fx:id="mesajLabel" textFill="red" alignment="CENTER" />
+        <Label layoutX="54.0" layoutY="104.0" text="Yeni Kullanıcı Adı:" />
+        <TextField fx:id="yeniKullaniciAdiField" alignment="CENTER" layoutX="200.0" layoutY="100.0" prefHeight="26.0" prefWidth="200.0" />
+        <Label layoutX="50.0" layoutY="150.0" text="             Yeni Şifre:" />
+        <PasswordField fx:id="yeniSifreField" layoutX="200.0" layoutY="150.0" prefWidth="200.0" />
+        <Button layoutX="200.0" layoutY="200.0" onAction="#handleKayitOl" text="Kayıt Ol" textFill="#b71919">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="BackButton" layoutX="300.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToMainScene" text="Geri" textFill="#b71919">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="mesajLabel" layoutX="163.0" layoutY="306.0" prefHeight="18.0" prefWidth="255.0" textFill="red" />
     </children>
-</VBox>
+</AnchorPane>

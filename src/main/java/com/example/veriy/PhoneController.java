@@ -1,19 +1,24 @@
 package com.example.veriy;
 
+import Models.PC;
 import Models.Phone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class PhoneController {
+public class PhoneController implements Initializable {
     @FXML
     private Button backButton;
     @FXML
@@ -61,11 +66,11 @@ public class PhoneController {
     private ComboBox<Boolean> fiveGSupportField;
 
 
-    private ObservableList<Phone> phoneList = FXCollections.observableArrayList();
+    private LinkedList<Phone> phoneList = new LinkedList<>();
     private final String dataFile = "Phone.txt";
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
@@ -77,9 +82,15 @@ public class PhoneController {
         numberOfCamerasColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNumberofCameras()).asObject());
         fiveGSupportColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleBooleanProperty(data.getValue().isFiveGsupport()).asObject());
 
-        productTable.setItems(phoneList);
+        updateTableView();
 
         loadProducts();
+    }
+
+    private void updateTableView() {
+        ObservableList<Phone> observableList = FXCollections.observableArrayList(phoneList);
+        productTable.setItems(observableList);
+        productTable.refresh();
     }
 
     @FXML
@@ -98,6 +109,11 @@ public class PhoneController {
                 showAlert("Input Error", "Id cannot be empty.");
                 return;
             }
+            if (id.length() > 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters. ");
+                idField.clear();
+                return;
+            }
 
             // Check if the phone ID already exists
             for (Phone existingPhone : phoneList) {
@@ -113,8 +129,8 @@ public class PhoneController {
                 return;
             }
 
-            if (name.length() > 50) {
-                showAlert("Input Error", "Name must be less than 50 characters.");
+            if (name.length() > 20) {
+                showAlert("Input Error", "Name must be less than 20 characters.");
                 nameField.clear();
                 return;
             }
@@ -212,20 +228,15 @@ public class PhoneController {
 
             boolean fiveGSupport = "Yes".equalsIgnoreCase(fiveGSupportField.getValue().toString());
 
-            // Create the new phone object
             Phone phone = new Phone(id, name, price, amount, ramValue, storageValue, cpu, warranty, numberOfCameras, fiveGSupport);
 
-            // Add the new phone to the list
-            phoneList.add(phone);
-
-            // Save products (assuming the save method is implemented)
+            FileManagerPhone.addPhoneInSortedOrder(phoneList, phone); // Sıralı ekleme
+            updateTableView();
             saveProducts();
-
-            // Clear the input fields after adding the phone
             clearFields(false);
 
-        } catch (NumberFormatException e) {
-            showAlert("Input Error", "Please enter valid data.");
+        } catch (Exception e) {
+            showAlert("Error", "Unexpected error occurred.");
         }
     }
 
@@ -254,6 +265,7 @@ public class PhoneController {
             var result = confirmationAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 phoneList.remove(selectedPhone);
+                updateTableView();
                 saveProducts();
                 showAlert("Success", "Product deleted successfully.");
             }
@@ -281,6 +293,7 @@ public class PhoneController {
             List<Phone> loadedProductss = FileManagerPhone.loadProducts(dataFile);
             phoneList.clear();
             phoneList.addAll(loadedProductss);
+            updateTableView();
         } catch (IOException e) {
             System.out.println("No existing data found, starting fresh.");
         }

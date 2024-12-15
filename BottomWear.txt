@@ -1,0 +1,3 @@
+112,dasd,2,1,XS,Mavi,Pamuklu,Unisex,true
+223,efefe,3,1,XS,Mavi,Pamuklu,Unisex,true
+2112,dddqw,10,1,XS,Mavi,Pamuklu,Unisex,true

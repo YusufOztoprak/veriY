@@ -88,36 +88,66 @@ public class ShampooController {
     private void handleAddShampoo() {
         try {
             // Formdan veriyi al
-            String id = idField.getText().trim();
-            String name = nameField.getText().trim();
-            String hairType = hairTypeComboBox.getValue();
-            String volumeStr = volumeComboBox.getValue();
-            String expirationStr = expirationField.getText().trim();
-
-            // Girdi kontrolleri
-            if (id.isEmpty() || name.isEmpty() || hairType == null || volumeStr == null || expirationStr.isEmpty()) {
-                showAlert("Input Error", "Please fill in all fields.");
+            String id = idField.getText();
+            if (id == null || id.isEmpty()) {
+                showAlert("Input Error", "Id cannot be empty.");
+                return;
+            }
+            for (Shampoo existingShampoo : shampooList) {
+                if (existingShampoo.getId().equals(id)) {
+                    showAlert("Duplicate ID Error", "A Parfume with this ID already exists.");
+                    idField.clear();
+                    return;
+                }
+            }
+            if (id.length()> 20){
+                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+                idField.clear();
                 return;
             }
 
-            // Check if the id already exists in the list
-            for (Shampoo existingShampoo : shampooList) {
-                if (existingShampoo.getId().equals(id)) {
-                    showAlert("Duplicate ID Error", "A shampoo with this ID already exists.");
-                    return;  // Exit the method if a duplicate is found
-                }
+            String name = nameField.getText();
+            if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
+                showAlert("Input Error", "Name cannot be empty or integer value..");
+                nameField.clear();
+                return;
+            }if (name.length() > 20){
+                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+                nameField.clear();
+                return;
             }
 
-            // Sayısal alanlar
-            int price = parseIntegerField(priceField);
-            if (price == -1) return; // Invalid input for price
+            int price;
+            try {
+                price = Integer.parseInt(priceField.getText());
+                if (price <= 0 || price > 100000000) {
+                    showAlert("Input Error", "Price must be between 1 and 100,000,000.");
+                    priceField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Price cannot be empty or String Value.");
+                priceField.clear();
+                return;
+            }
 
-            int amount = parseIntegerField(amountField);
-            if (amount == -1) return; // Invalid input for amount
-
+            int amount;
+            try {
+                amount = Integer.parseInt(amountField.getText());
+                if (amount <= 0 || amount > 1000) {
+                    showAlert("Input Error", "Amount must be between 1 and 1,000.");
+                    amountField.clear();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Input Error", "Amount cannot be empty or String Value.");
+                amountField.clear();
+                return;
+            }
             int expirationDate = parseIntegerField(expirationField);
-            if (expirationDate == -1) return; // Invalid input for expiration date
-
+            String hairType = hairTypeComboBox.getValue();
+            String volumeStr = volumeComboBox.getValue();
+            String expirationStr = expirationField.getText().trim();
             double volume = Double.parseDouble(volumeStr);
 
             // Yeni Shampoo nesnesi oluştur
