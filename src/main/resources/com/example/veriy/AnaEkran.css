@@ -1,0 +1,98 @@
+/* Genel Arka Plan ve Düzen */
+.root {
+    -fx-background-color: #2b2b2b;  /* Koyu gri arka plan */
+}
+
+.stack-pane {
+    -fx-background-color: #353535; /* Koyu gri-buzlu cam arka plan */
+    -fx-border-color: #484848; /* Koyu gri sınır */
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.0, 0, 5); /* Hafif gölge efekti */
+}
+
+/* Başlık kısmı */
+.label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e5e5e5; /* Açık gri metin rengi */
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* Kullanıcı adı metni */
+.label#nameLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #b3b3b3; /* Açık gri kullanıcı adı metni */
+}
+
+/* Kategori başlıkları */
+.label#categoryLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #dcdcdc; /* Açık gri kategori metni */
+    -fx-alignment: center;
+    -fx-padding: 15px;
+}
+
+/* Tüm Butonlar */
+.button {
+    -fx-background-color: #1e90ff; /* Mavi tonlarında buton */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.0, 0, 5); /* Hafif gölge efekti */
+    -fx-alignment: center;
+}
+
+/* Hover durumunda buton */
+.button:hover {
+    -fx-background-color: #4682b4; /* Koyu mavi hover */
+}
+
+/* Basıldığında buton */
+.button:pressed {
+    -fx-background-color: #01579b; /* Çok koyu mavi */
+}
+
+/* 'Exit' butonu özel stil */
+.button#ExitButton {
+    -fx-background-color: #ac2626; /* Koyu kırmızı */
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-font-size: 12px;
+}
+
+/* Exit butonu hover */
+.button#ExitButton:hover {
+    -fx-background-color: #9b1e1e; /* Koyu kırmızı hover */
+}
+
+/* HBox Düzeni */
+.hbox {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* VBox Düzeni */
+.vbox {
+    -fx-spacing: 25px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* Resim Alanı */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.0, 0, 5); /* Hafif gölge efekti */
+    -fx-background-color: transparent;
+}
+
+/* Buton metin stili */
+.button .text {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

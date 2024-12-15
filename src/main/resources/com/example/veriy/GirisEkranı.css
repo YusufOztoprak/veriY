@@ -1,0 +1,70 @@
+/* General background for the scene */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #1c3b57, #0f243e); /* Derin mavi gradyan */
+}
+
+/* Label styling */
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #d0e6f7; /* Açık mavi tonunda metin */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 2, 0, 0, 1);
+}
+
+/* Title label style */
+.label:first-child {
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 3, 0, 1, 2);
+}
+
+/* TextField and PasswordField styling */
+.text-field, .password-field {
+    -fx-background-color: linear-gradient(to bottom, #f0f8ff, #c9e8ff); /* Hafif mavi arka plan */
+    -fx-border-color: #1b4f72;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Button general styling */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #2471a3, #1b4f72); /* Koyu mavi buton */
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+    -fx-font-family: "Arial Bold";
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #2e86c1, #2471a3); /* Daha parlak mavi ton */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 4, 0, 0, 2);
+}
+
+/* Error message label style */
+#mesajLabel {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-text-fill: #f1948a; /* Açık kırmızı hata mesajı */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* HBox spacing and alignment */
+.hbox {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+/* VBox alignment and spacing */
+.vbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}

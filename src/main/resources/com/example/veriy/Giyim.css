@@ -1,0 +1,84 @@
+/* Genel Arka Plan */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #e9ecef, #f1f3f5); /* Açık gri gradyan */
+    -fx-font-family: "Arial";
+}
+
+/* Etiketler (Label) için stil */
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #343a40; /* Koyu gri ton */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 2);
+}
+
+/* Button için temel stil */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #ffcccb, #e63946); /* Pembe-kırmızı geçiş */
+    -fx-text-fill: #ffffff; /* Beyaz metin */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #0288d1, #0277b3); /* Daha koyu mavi */
+}
+
+.button:pressed {
+    -fx-background-color: #a4161a; /* Basıldığında koyu kırmızı */
+}
+
+/* Geri butonu için farklılaştırma */
+#BackButton {
+    -fx-background-color: linear-gradient(to bottom, #adb5bd, #6c757d); /* Gri tonlarda geri butonu */
+}
+
+#BackButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #6c757d, #495057);
+}
+
+#BackButton:pressed {
+    -fx-background-color: #343a40;
+}
+
+/* VBox ve HBox düzenleri */
+.vbox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
+
+.hbox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
+
+/* Button metinleri */
+#TopButton, #BottomButton {
+    -fx-font-size: 14px;
+}
+
+/* StackPane düzeni */
+.stack-pane {
+    -fx-alignment: center;
+}
+
+/* Genel buton metin stili */
+.button .text {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Arka Plan Etkisi */
+.stack-pane {
+    -fx-background-color: #f1f3f5; /* Açık gri arka plan */
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0.0, 0, 10);
+}
