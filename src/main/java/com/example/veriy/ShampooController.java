@@ -146,7 +146,15 @@ public class ShampooController {
             }
             int expirationDate = parseIntegerField(expirationField);
             String hairType = hairTypeComboBox.getValue();
+            if (hairType == null || hairType.isEmpty()) {
+                showAlert("Input Error", "Please select a valid CPU.");
+                return;
+            }
             String volumeStr = volumeComboBox.getValue();
+            if (volumeStr == null || volumeStr.isEmpty()) {
+                showAlert("Input Error", "Please select a valid CPU.");
+                return;
+            }
             String expirationStr = expirationField.getText().trim();
             double volume = Double.parseDouble(volumeStr);
 

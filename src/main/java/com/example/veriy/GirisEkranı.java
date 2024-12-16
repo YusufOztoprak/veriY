@@ -23,6 +23,16 @@ public class GirisEkranı {
 
     @FXML
     private Label mesajLabel;
+    @FXML
+
+
+    public void initialize() {
+        // Kullanıcı adı için 20 karakter sınırı
+        addCharacterLimit(kullaniciAdiField, 20);
+
+        // Şifre için 15 karakter sınırı
+        addCharacterLimit(sifreField, 15);
+    }
 
     @FXML
     private void handleGiris(ActionEvent event) {
@@ -70,4 +80,15 @@ public class GirisEkranı {
             mesajLabel.setText("Kayıt ekranına geçiş yapılamadı: " + e.getMessage());
         }
     }
+    private void addCharacterLimit(TextField textField, int maxLength) {
+        // TextField'in metin değişimini dinleyen bir listener ekliyoruz
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Yeni metin belirtilen uzunluğu aşıyorsa
+            if (newValue != null && newValue.length() > maxLength) {
+                // Eski değeri geri yükler (sınıra uymayan değişikliği reddeder)
+                textField.setText(oldValue);
+            }
+        });
+    }
+
 }

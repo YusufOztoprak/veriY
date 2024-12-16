@@ -3,7 +3,9 @@ package com.example.veriy;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +55,21 @@ public class MainController {
 
     @FXML
     private void exit(){
-        Platform.exit();
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Delete Confirmation");
+        confirmationAlert.setHeaderText("Are you sure you want to exit?");
+
+        // Kullanıcı yanıtını kontrol ediyoruz
+        var result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit();
+        }
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

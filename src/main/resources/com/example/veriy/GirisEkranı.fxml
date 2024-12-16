@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0"  stylesheets="@GirisEkranı.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GirisEkranı">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" stylesheets="@GirisEkranı.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GirisEkranı">
 
     <children>
-      <Label prefHeight="38.0" prefWidth="400.0" text="                                           Kullanıcı Giriş Ekranı">
+      <Label prefHeight="149.0" prefWidth="400.0" text="                                Kullanıcı Giriş Ekranı">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
         <HBox alignment="CENTER" spacing="10.0">
             <Label text="Kullanıcı Adı" />
-            <TextField fx:id="kullaniciAdiField" prefHeight="9.0" prefWidth="240.0" />
+            <TextField fx:id="kullaniciAdiField" prefHeight="9.0" prefWidth="252.0" />
         </HBox>
 
         <HBox alignment="CENTER" spacing="10.0">
@@ -27,11 +23,11 @@
         </HBox>
 
         <HBox alignment="CENTER" spacing="20.0">
-            <Button onAction="#handleGiris" text="Giriş Yap" />
-            <Button onAction="#handleKayitOl" text="Kayıt Ol" />
+            <Button onAction="#handleGiris" prefHeight="32.0" prefWidth="137.0" text="Giriş Yap" />
+            <Button onAction="#handleKayitOl" prefHeight="32.0" prefWidth="121.0" text="Kayıt Ol" />
         </HBox>
 
-        <Label fx:id="mesajLabel" prefHeight="18.0" prefWidth="387.0" textFill="red" />
+        <Label fx:id="mesajLabel" prefHeight="63.0" prefWidth="387.0" textFill="red" />
     </children>
 
 </VBox>

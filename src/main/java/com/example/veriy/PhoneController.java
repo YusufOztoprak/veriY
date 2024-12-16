@@ -269,6 +269,7 @@ public class PhoneController implements Initializable {
                 updateTableView();
                 saveProducts();
                 showAlert("Success", "Product deleted successfully.");
+
             }
         } else {
             showAlert("Selection Error", "No product selected.");

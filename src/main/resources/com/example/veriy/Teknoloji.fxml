@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Teknoloji.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TeknolojiController">
+<StackPane prefHeight="600.0" prefWidth="800.0" stylesheets="@Teknoloji.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TeknolojiController">
     <children>
         <VBox alignment="CENTER" spacing="20">
-            <Label prefHeight="47.0" prefWidth="265.0" text="                              ALT KATEGORİLER" textFill="#232222">
+            <Label prefHeight="47.0" prefWidth="265.0" text=" ALT KATEGORİLER" textFill="#232222">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font>

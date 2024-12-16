@@ -29,7 +29,7 @@ public class KayitOlEkranı {
     private void handleKayitOl() {
         String kullaniciAdi = yeniKullaniciAdiField.getText();
         if (kullaniciAdi.length() > 20){
-            mesajLabel.setText("kullanıcı adı uzunluğu en fazla 20 karakter içermelidir...");
+            mesajLabel.setText("kullanıcı adı uzunluğu en fazla 10 karakter içermelidir...");
             yeniKullaniciAdiField.clear();
             return;
         }
