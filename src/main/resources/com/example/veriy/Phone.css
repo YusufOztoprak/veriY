@@ -20,8 +20,8 @@
     -fx-background-color: #ffffff; /* Beyaz arka plan */
     -fx-border-color: #cccccc; /* Açık gri sınır */
     -fx-border-width: 1px;
-    -fx-table-cell-border-color: transparent; /* Hücre sınırlarını kaldırır */
     -fx-padding: 10px;
+    -fx-table-cell-border-color: transparent; /* Hücre sınırlarını kaldırır */
 }
 
 /* TableView Başlık Stilleri */

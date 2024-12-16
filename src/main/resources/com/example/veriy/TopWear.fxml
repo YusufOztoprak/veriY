@@ -7,7 +7,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.text.Font?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TopWearController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800"  stylesheets="@TopWear.css" prefHeight="600">
         <!-- TableView for displaying TopWear items -->
         <TableView fx:id="topWearTable" prefWidth="750" prefHeight="400">
             <columns>

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
-    <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="800" spacing="10">
+    <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="800" stylesheets="@Phone.css" spacing="10">
         <!-- TableView for displaying PCs -->
         <TableView fx:id="productTable" prefHeight="400" prefWidth="750">
             <columns>

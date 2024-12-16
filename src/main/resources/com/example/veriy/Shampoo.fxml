@@ -8,7 +8,7 @@
 
 <?import javafx.scene.text.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ShampooController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" stylesheets="@Shampoo.css" prefHeight="600">
         <!-- TableView for displaying shampoos -->
         <TableView fx:id="shampooTable" prefWidth="750" prefHeight="400">
             <columns>
