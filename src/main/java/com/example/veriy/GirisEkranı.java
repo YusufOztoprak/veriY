@@ -55,7 +55,7 @@ public class GirisEkranı {
                 mesajLabel.setText("Ana ekrana geçiş yapılamadı: " + e.getMessage());
             }
         } else if (kullaniciAdiField.getText().isEmpty()|| sifreField.getText().isEmpty()) {
-            mesajLabel.setText("kullanıcı adı ve şifre boş geçilemez");
+            mesajLabel.setText("kullanıcı adı veya şifre boş geçilemez");
         } else if (KullaniciVeritabani.kullanicilar.containsKey(kullaniciAdi)) {
             mesajLabel.setText("Şifre hatalı!");
             sifreField.clear();

@@ -71,8 +71,11 @@ public class TopWearController {
         // Table column mappings
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        addCharacterLimit(nameField,15);
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        addCharacterLimit(priceField,9);
         stockAmountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        addCharacterLimit(stockAmountField,9);
         sizeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getSize()));
         colorColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getColor()));
         clothColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCloth()));
@@ -84,6 +87,16 @@ public class TopWearController {
 
         // Verileri dosyadan yükle
         loadTopWears();
+    }
+    private void addCharacterLimit(TextField textField, int maxLength) {
+        // TextField'in metin değişimini dinleyen bir listener ekliyoruz
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Yeni metin belirtilen uzunluğu aşıyorsa
+            if (newValue != null && newValue.length() > maxLength) {
+                // Eski değeri geri yükler (sınıra uymayan değişikliği reddeder)
+                textField.setText(oldValue);
+            }
+        });
     }
     @FXML
     private void updateProduct(){
@@ -118,10 +131,32 @@ public class TopWearController {
                     return;
                 }
             }
-            if (id.length()> 20){
-                showAlert("Input Error", "Id cannot be longer than 20 chracters.");
+            if (id.length()> 15){
+                showAlert("Input Error", "Id cannot be longer than 15 chracters.");
                 idField.clear();
                 return;
+            }
+            if (!id.matches("^[A-Za-z0-9-]+$")) {  // Sadece harf, rakam ve tire kontrolü
+                showAlert("Input Error", "Id can only contain letters, numbers, and the '-' character.");
+                idField.clear();
+                return;
+            }
+
+            /// Sayısal kısmı ayıklama ve kontrol etme
+            String numericPart = id.replaceAll("[^0-9]", ""); // Harfleri temizleyip sadece sayıları alır
+            if (!numericPart.isEmpty()) { // Eğer sayısal kısım varsa kontrol et
+                try {
+                    int numericValue = Integer.parseInt(numericPart);
+                    if (numericValue > 1000000) { // Sayısal değerin sınırı
+                        showAlert("Input Error", "The numeric part of the ID cannot be greater than 1,000,000.");
+                        idField.clear();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    showAlert("Input Error", "Numeric part of the ID is invalid.");
+                    idField.clear();
+                    return;
+                }
             }
 
             String name = nameField.getText();
@@ -129,8 +164,8 @@ public class TopWearController {
                 showAlert("Input Error", "Name cannot be empty or integer value..");
                 nameField.clear();
                 return;
-            }if (name.length() > 20){
-                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+            }if (name.length() > 10){
+                showAlert("Input Error", "Name cannot be longer than 10 chracters.");
                 nameField.clear();
                 return;
             }
@@ -158,7 +193,7 @@ public class TopWearController {
                     return;
                 }
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Amount cannot be empty or String Value.");
+                showAlert("Input Error", "Amount cannot be empty or String Value .");
                 stockAmountField.clear();
                 return;
             }

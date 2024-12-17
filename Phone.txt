@@ -1,3 +1,2 @@
 1323,qewqwe,1,1,16,16,snapdragon,1,1,false
-23,erew,3,1,16,16,snapdragon,1,1,false
-3,dfdfd,5,3,16,64,snapdragon,23,3,false
+1,aga,1,1,16,16,snapdragon,1,1,false

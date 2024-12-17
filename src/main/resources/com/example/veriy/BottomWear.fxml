@@ -7,19 +7,19 @@
 <?import java.lang.String?>
 <?import javafx.scene.text.Font?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.BottomWearController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" stylesheets="@BottomWear.css" prefHeight="600">
+    <VBox spacing="10" alignment="TOP_CENTER" prefHeight="780" prefWidth="1540.0" stylesheets="@BottomWear.css">
         <!-- TableView for displaying BottomWear items -->
         <TableView fx:id="bottomWearTable" prefWidth="750" prefHeight="400">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="120" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
-                <TableColumn fx:id="stockAmountColumn" text="Stock Amount" prefWidth="100" />
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="120" />
+                <TableColumn fx:id="stockAmountColumn" text="Stock Amount" prefWidth="260" />
                 <TableColumn fx:id="sizeColumn" text="Size" prefWidth="100" />
-                <TableColumn fx:id="colorColumn" text="Color" prefWidth="100" />
-                <TableColumn fx:id="clothColumn" text="Cloth" prefWidth="100" />
-                <TableColumn fx:id="genderColumn" text="Gender" prefWidth="100" />
-                <TableColumn fx:id="hasPocketsColumn" text="Has Pockets" prefWidth="100" />
+                <TableColumn fx:id="colorColumn" text="Color" prefWidth="200" />
+                <TableColumn fx:id="clothColumn" text="Cloth" prefWidth="120" />
+                <TableColumn fx:id="genderColumn" text="Gender" prefWidth="120" />
+                <TableColumn fx:id="hasPocketsColumn" text="Has Pockets" prefWidth="200" />
             </columns>
         </TableView>
 

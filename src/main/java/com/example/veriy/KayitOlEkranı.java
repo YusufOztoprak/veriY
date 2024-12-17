@@ -33,6 +33,21 @@ public class KayitOlEkranı {
             yeniKullaniciAdiField.clear();
             return;
         }
+
+        if (!kullaniciAdi.matches("^[A-Za-z0-9]+$")) {  // Sadece harf ve rakam kontrolü, tire yok
+            mesajLabel.setText("Kullanıcı adı sadece harf ve rakam içerebilir.");
+            return;
+        }
+        // Kullanıcı adı sadece rakamlardan oluşuyorsa (isteğe bağlı bir kontrol)
+        if (kullaniciAdi.matches("[0-9]+")) {
+            mesajLabel.setText("Kullanıcı adı sadece rakamlardan oluşamaz.");
+            return;
+        }
+        // Eğer başta veya sonda boşluk varsa (isteğe bağlı kontrol)
+        if (kullaniciAdi.startsWith(" ") || kullaniciAdi.endsWith(" ")) {
+            mesajLabel.setText("Kullanıcı adı başında veya sonunda boşluk olamaz.");
+            return;
+        }
         String sifre = yeniSifreField.getText();
         if (sifre.length() > 10){
             mesajLabel.setText("kullanıcı şifresi en fazla 10 karakter uzunluğunda olmalıdır...");

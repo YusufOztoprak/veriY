@@ -1,80 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Pos?>
 
-<?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TopWearController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800"  stylesheets="@TopWear.css" prefHeight="600">
+
+<StackPane prefHeight="780" prefWidth="1540.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.TopWearController">
+    <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="800" spacing="10" stylesheets="@TopWear.css">
         <!-- TableView for displaying TopWear items -->
-        <TableView fx:id="topWearTable" prefWidth="750" prefHeight="400">
+        <TableView fx:id="topWearTable" prefHeight="400" prefWidth="750">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
-                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
-                <TableColumn fx:id="stockAmountColumn" text="Stock Amount" prefWidth="100" />
-                <TableColumn fx:id="sizeColumn" text="Size" prefWidth="100" />
-                <TableColumn fx:id="colorColumn" text="Color" prefWidth="100" />
-                <TableColumn fx:id="clothColumn" text="Cloth" prefWidth="100" />
-                <TableColumn fx:id="genderColumn" text="Gender" prefWidth="100" />
-                <TableColumn fx:id="sleeveTypeColumn" text="Sleeve Type" prefWidth="100" />
-                <TableColumn fx:id="neckTypeColumn" text="Neck Type" prefWidth="100" />
+                <TableColumn fx:id="idColumn" prefWidth="145.0" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="160.0" text="Price" />
+                <TableColumn fx:id="stockAmountColumn" prefWidth="155.0" text="Stock Amount" />
+                <TableColumn fx:id="sizeColumn" prefWidth="155.0" text="Size" />
+                <TableColumn fx:id="colorColumn" prefWidth="155.0" text="Color" />
+                <TableColumn fx:id="clothColumn" prefWidth="155.0" text="Cloth" />
+                <TableColumn fx:id="genderColumn" prefWidth="155.0" text="Gender" />
+                <TableColumn fx:id="sleeveTypeColumn" prefWidth="155.0" text="Sleeve Type" />
+                <TableColumn fx:id="neckTypeColumn" prefWidth="155.0" text="Neck Type" />
             </columns>
         </TableView>
 
         <!-- Form for adding or updating TopWear -->
-        <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="idField" promptText="Enter ID" >
+        <HBox alignment="CENTER" spacing="10">
+            <TextField fx:id="idField" promptText="Enter ID">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="nameField" promptText="Enter Name" >
+            <TextField fx:id="nameField" promptText="Enter Name">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="priceField" promptText="Enter Price" >
+            <TextField fx:id="priceField" promptText="Enter Price">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="stockAmountField" promptText="Enter Stock Amount" >
+            <TextField fx:id="stockAmountField" promptText="Enter Stock Amount">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <ComboBox fx:id="sizeField" promptText="Enter Size" >
+            <ComboBox fx:id="sizeField" promptText="Enter Size">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="XS"/>
-                        <String fx:value="S"/>
-                        <String fx:value="M"/>
-                        <String fx:value="L"/>
-                        <String fx:value="XL"/>
+                        <String fx:value="XS" />
+                        <String fx:value="S" />
+                        <String fx:value="M" />
+                        <String fx:value="L" />
+                        <String fx:value="XL" />
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="colorField" promptText="Enter Color" >
+            <ComboBox fx:id="colorField" promptText="Enter Color">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Mavi"/>
-                        <String fx:value="Kırmızı"/>
-                        <String fx:value="yeşil"/>
-                        <String fx:value="sarı"/>
-                        <String fx:value="turuncu"/>
-                        <String fx:value="Siyah"/>
+                        <String fx:value="Mavi" />
+                        <String fx:value="Kırmızı" />
+                        <String fx:value="yeşil" />
+                        <String fx:value="sarı" />
+                        <String fx:value="turuncu" />
+                        <String fx:value="Siyah" />
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="clothField" promptText="Enter Cloth" >
+            <ComboBox fx:id="clothField" promptText="Enter Cloth">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Pamuklu"/>
-                        <String fx:value="Keten"/>
-                        <String fx:value="ipek"/>
+                        <String fx:value="Pamuklu" />
+                        <String fx:value="Keten" />
+                        <String fx:value="ipek" />
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="genderField" promptText="Enter Gender" >
+            <ComboBox fx:id="genderField" promptText="Enter Gender">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Unisex" />
@@ -83,37 +89,37 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="sleeveTypeField" promptText="Enter Sleeve Type" >
+            <ComboBox fx:id="sleeveTypeField" promptText="Enter Sleeve Type">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Uzun kol"/>
-                        <String fx:value="Kısa kol"/>
+                        <String fx:value="Uzun kol" />
+                        <String fx:value="Kısa kol" />
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="neckTypeField" promptText="Enter Neck Type" >
+            <ComboBox fx:id="neckTypeField" promptText="Enter Neck Type">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="v yaka"/>
-                        <String fx:value="Polo yaka"/>
+                        <String fx:value="v yaka" />
+                        <String fx:value="Polo yaka" />
                     </FXCollections>
                 </items>
             </ComboBox>
         </HBox>
 
         <!-- Buttons for adding, updating, and deleting TopWear items -->
-        <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="BackButton" text="Back To Giyim" onAction="#goToScene"  textFill="#b71e1e">
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="BackButton" onAction="#goToScene" text="Back To Giyim" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
-            <Button text="Add TopWear" onAction="#handleAddTopWear"  textFill="#b71e1e">
+            <Button onAction="#handleAddTopWear" text="Add TopWear" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
-            <Button text="Delete Selected" onAction="#handleDeleteTopWear"  textFill="#b71e1e">
+            <Button onAction="#handleDeleteTopWear" text="Delete Selected" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
         </HBox>
 

@@ -68,14 +68,18 @@ public class PCController {
         // Set TableView columns with PC object properties
         idColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
+        addCharacterLimit(nameField,20);
         priceColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        addCharacterLimit(priceField,9);
         amountColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        addCharacterLimit(amountField,9);
         screenSizeColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getEkranboyutu()).asObject());
+        addCharacterLimit(screenSizeField,9);
         ramColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getRam()).asObject());
         storageColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getStorage()).asObject());
         cpuColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCpu()));
         warrantyColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getWarranty()).asObject());
-
+        addCharacterLimit(warrantyField,9);
         // Populate TableView with initial data
         updateTableView();
 
@@ -107,17 +111,40 @@ public class PCController {
                 idField.clear();
                 return;
             }
+            if (!id.matches("^[A-Za-z0-9-]+$")) {  // Sadece harf, rakam ve tire kontrolü
+                showAlert("Input Error", "Id can only contain letters, numbers, and the '-' character.");
+                idField.clear();
+                return;
+            }
+
+            /// Sayısal kısmı ayıklama ve kontrol etme
+            String numericPart = id.replaceAll("[^0-9]", ""); // Harfleri temizleyip sadece sayıları alır
+            if (!numericPart.isEmpty()) { // Eğer sayısal kısım varsa kontrol et
+                try {
+                    int numericValue = Integer.parseInt(numericPart);
+                    if (numericValue > 1000000) { // Sayısal değerin sınırı
+                        showAlert("Input Error", "The numeric part of the ID cannot be greater than 1,000,000.");
+                        idField.clear();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    showAlert("Input Error", "Numeric part of the ID is invalid.");
+                    idField.clear();
+                    return;
+                }
+            }
 
             String name = nameField.getText();
             if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
                 showAlert("Input Error", "Name cannot be empty or integer value..");
                 nameField.clear();
                 return;
-            }if (name.length() > 20){
-                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+            }if (name.length() > 10) {
+                showAlert("Input Error", "Name cannot be longer than 10 chracters.");
                 nameField.clear();
                 return;
             }
+
 
             int price;
             try {
@@ -190,6 +217,7 @@ public class PCController {
                 if (warranty > 100){
                     showAlert("Input Error", "warranty cannot be greater than 100.");
                     warrantyField.clear();
+                    return;
                 }
             } catch (NumberFormatException e) {
                 showAlert("Input Error", "Warranty must be a valid number.");
@@ -282,5 +310,15 @@ public class PCController {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(mainScene);
         stage.show();
+    }
+    private void addCharacterLimit(TextField textField, int maxLength) {
+        // TextField'in metin değişimini dinleyen bir listener ekliyoruz
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Yeni metin belirtilen uzunluğu aşıyorsa
+            if (newValue != null && newValue.length() > maxLength) {
+                // Eski değeri geri yükler (sınıra uymayan değişikliği reddeder)
+                textField.setText(oldValue);
+            }
+        });
     }
 }

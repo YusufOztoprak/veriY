@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="600.0" prefWidth="800.0" stylesheets="@Giyim.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GiyimController">
+<StackPane prefHeight="780" prefWidth="1540.0" stylesheets="@Giyim.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.GiyimController">
 <children>
     <VBox alignment="CENTER" spacing="20">
         <Label prefHeight="47.0" prefWidth="265.0" text="              ALT KATEGORİLER" textFill="#232222">

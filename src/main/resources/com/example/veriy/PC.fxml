@@ -7,22 +7,23 @@
 <?import javafx.scene.text.*?>
 
 <StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PCController">
-    <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="800"  stylesheets="@PC.css" spacing="10">
+    <VBox alignment="TOP_CENTER" prefHeight="780" prefWidth="1540.0"  stylesheets="@PC.css" spacing="10">
 
         <!-- TableView for displaying PCs -->
         <TableView fx:id="productTable" prefHeight="400" prefWidth="750">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="100" text="ID" />
                 <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
-                <TableColumn fx:id="priceColumn" prefWidth="100" text="Price" />
-                <TableColumn fx:id="amountColumn" prefWidth="100" text="Amount" />
-                <TableColumn fx:id="screenSizeColumn" prefWidth="100" text="Screen Size" />
-                <TableColumn fx:id="ramColumn" prefWidth="100" text="RAM" />
-                <TableColumn fx:id="storageColumn" prefWidth="100" text="Storage" />
-                <TableColumn fx:id="cpuColumn" prefWidth="100" text="CPU" />
-                <TableColumn fx:id="warrantyColumn" prefWidth="100" text="Warranty" />
+                <TableColumn fx:id="priceColumn" prefWidth="120" text="Price" /> <!-- Daha geniş fiyat sütunu -->
+                <TableColumn fx:id="amountColumn" prefWidth="120" text="Amount" /> <!-- Daha geniş Amount sütunu -->
+                <TableColumn fx:id="screenSizeColumn" prefWidth="120" text="Screen Size" /> <!-- Daha geniş Screen Size sütunu -->
+                <TableColumn fx:id="ramColumn" prefWidth="120" text="RAM" /> <!-- Daha geniş RAM sütunu -->
+                <TableColumn fx:id="storageColumn" prefWidth="120" text="Storage" /> <!-- Daha geniş Storage sütunu -->
+                <TableColumn fx:id="cpuColumn" prefWidth="120" text="CPU" /> <!-- Daha geniş CPU sütunu -->
+                <TableColumn fx:id="warrantyColumn" prefWidth="120" text="Warranty" /> <!-- Daha geniş Warranty sütunu -->
             </columns>
         </TableView>
+
 
         <!-- Form for adding products -->
         <HBox alignment="CENTER" spacing="10">

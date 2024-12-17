@@ -6,39 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
-    <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="800" stylesheets="@Phone.css" spacing="10">
+<StackPane prefHeight="780" prefWidth="1540.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.PhoneController">
+    <VBox alignment="TOP_CENTER" prefHeight="881.0" prefWidth="1402.0" spacing="10" stylesheets="@Phone.css">
         <!-- TableView for displaying PCs -->
-        <TableView fx:id="productTable" prefHeight="400" prefWidth="750">
+        <TableView fx:id="productTable" prefHeight="395.0" prefWidth="1482.0">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" />
-                <TableColumn fx:id="nameColumn" text="Name" />
-                <TableColumn fx:id="priceColumn" text="Price" />
-                <TableColumn fx:id="amountColumn" text="Amount" />
-                <TableColumn fx:id="ramColumn" text="RAM" />
-                <TableColumn fx:id="storageColumn" text="Storage" />
-                <TableColumn fx:id="cpuColumn" text="CPU" />
-                <TableColumn fx:id="warrantyColumn" text="Warranty" />
-                <TableColumn fx:id="numberOfCamerasColumn" text="Cameras" />
-                <TableColumn fx:id="fiveGSupportColumn" text="5G Support" />
+                <TableColumn fx:id="idColumn" prefWidth="160" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="170" text="Price" />
+                <TableColumn fx:id="amountColumn" prefWidth="160" text="Amount" />
+                <TableColumn fx:id="ramColumn" prefWidth="150" text="RAM" />
+                <TableColumn fx:id="storageColumn" prefWidth="120" text="Storage" />
+                <TableColumn fx:id="cpuColumn" prefWidth="120" text="CPU" />
+                <TableColumn fx:id="warrantyColumn" prefWidth="120" text="Warranty" />
+                <TableColumn fx:id="numberOfCamerasColumn" prefWidth="150" text="Cameras" />
+                <TableColumn fx:id="fiveGSupportColumn" prefWidth="120" text="5G Support" />
             </columns>
         </TableView>
 
+
         <!-- Form for adding products -->
         <HBox alignment="CENTER" spacing="10">
-            <TextField fx:id="idField" promptText="Enter ID" >
+            <TextField fx:id="idField" promptText="Enter ID">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="nameField" promptText="Enter Name" >
+            <TextField fx:id="nameField" promptText="Enter Name">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="priceField" promptText="Enter Price" >
+            <TextField fx:id="priceField" promptText="Enter Price">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="amountField" promptText="Enter Amount" >
+            <TextField fx:id="amountField" promptText="Enter Amount">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
@@ -72,11 +73,11 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <TextField fx:id="warrantyField" promptText="Enter Warranty" >
+            <TextField fx:id="warrantyField" promptText="Enter Warranty">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="numberOfCamerasField" promptText="Enter numberOfCameras" >
+            <TextField fx:id="numberOfCamerasField" promptText="Enter numberOfCameras">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
@@ -100,9 +101,9 @@
             <font>
                <Font name="Arial Bold" size="12.0" />
             </font></Button>
-            <Button onAction="#deletePhone" text="DeleteSelected" textFill="#b71e1e" >
+            <Button onAction="#deletePhone" text="DeleteSelected" textFill="#b71e1e">
             <font>
-                <Font name="Arial Bold" size="12.0"/>
+                <Font name="Arial Bold" size="12.0" />
 
             </font></Button>
         </HBox>

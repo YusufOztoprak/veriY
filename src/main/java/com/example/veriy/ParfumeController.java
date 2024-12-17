@@ -1,6 +1,7 @@
 package com.example.veriy;
 
 import Models.Parfume;
+import Models.Phone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -62,11 +63,15 @@ public class ParfumeController {
         // Set TableView columns with Parfume object properties
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        addCharacterLimit(nameField,20);
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
+        addCharacterLimit(priceField,9);
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
+        addCharacterLimit(amountField,9);
         volumeColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getVolume()).asObject());
         genderTargetColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenderTarget()));
         expirationDateColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getExpiration_date()).asObject());
+        addCharacterLimit(expirationDateField,9);
         userInstructionsColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getUserInstructions()));
 
         updateTableView();
@@ -77,6 +82,16 @@ public class ParfumeController {
 
         // Load parfume data from file
         loadProducts();
+    }
+    private void addCharacterLimit(TextField textField, int maxLength) {
+        // TextField'in metin değişimini dinleyen bir listener ekliyoruz
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Yeni metin belirtilen uzunluğu aşıyorsa
+            if (newValue != null && newValue.length() > maxLength) {
+                // Eski değeri geri yükler (sınıra uymayan değişikliği reddeder)
+                textField.setText(oldValue);
+            }
+        });
     }
 
     private void updateTableView() {
@@ -105,14 +120,37 @@ public class ParfumeController {
                 idField.clear();
                 return;
             }
+            if (!id.matches("^[A-Za-z0-9-]+$")) {  // Sadece harf, rakam ve tire kontrolü
+                showAlert("Input Error", "Id can only contain letters, numbers, and the '-' character.");
+                idField.clear();
+                return;
+            }
+
+
+            /// Sayısal kısmı ayıklama ve kontrol etme
+            String numericPart = id.replaceAll("[^0-9]", ""); // Harfleri temizleyip sadece sayıları alır
+            if (!numericPart.isEmpty()) { // Eğer sayısal kısım varsa kontrol et
+                try {
+                    int numericValue = Integer.parseInt(numericPart);
+                    if (numericValue > 1000000) { // Sayısal değerin sınırı
+                        showAlert("Input Error", "The numeric part of the ID cannot be greater than 1,000,000.");
+                        idField.clear();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    showAlert("Input Error", "Numeric part of the ID is invalid.");
+                    idField.clear();
+                    return;
+                }
+            }
 
             String name = nameField.getText();
             if (name == null || name.isEmpty() || !name.matches("[A-Za-z ]+") ) {
                 showAlert("Input Error", "Name cannot be empty or integer value..");
                 nameField.clear();
                 return;
-            }if (name.length() > 20){
-                showAlert("Input Error", "Name cannot be longer than 20 chracters.");
+            }if (name.length() > 15){
+                showAlert("Input Error", "Name cannot be longer than 15 chracters.");
                 nameField.clear();
                 return;
             }
@@ -163,8 +201,13 @@ public class ParfumeController {
             int expirationDate;
             try {
                 expirationDate = Integer.parseInt(expirationDateField.getText());
-                if (expirationDate <= 0) {
-                    showAlert("Input Error", "Expiration date must be a positive number.");
+                if (expirationDate <= 2024) {
+                    showAlert("Input Error", "Expiration date must be a greater than today.");
+                    expirationDateField.clear();
+                    return;
+                }
+                if (expirationDate > 2100){
+                    showAlert("Input Error ","Expiration date cannot be greater than 2100");
                     expirationDateField.clear();
                     return;
                 }
@@ -175,10 +218,57 @@ public class ParfumeController {
             }
 
             String userInstructions = userInstructionsField.getText();
+
+            // Boş olma durumu kontrolü
             if (userInstructions == null || userInstructions.isEmpty()) {
                 showAlert("Input Error", "Please enter user instructions.");
+                expirationDateField.clear();
                 return;
             }
+
+            // Uzunluk sınırı kontrolü (örneğin 500 karakterden fazla olamaz)
+            if (userInstructions.length() > 500) {
+                showAlert("Input Error", "User instructions cannot exceed 500 characters.");
+                expirationDateField.clear();
+                return;
+            }
+
+            // Özel karakter kontrolü (istenmeyen karakterler var mı?)
+            if (userInstructions.matches(".*[<>\"'&].*")) {
+                showAlert("Input Error", "User instructions cannot contain special characters like <, >, \", ', or &.");
+                expirationDateField.clear();
+                return;
+            }
+
+            // Sadece rakam içermesi durumu (örneğin sadece rakam içeriyorsa hatalı olabilir)
+            if (userInstructions.matches("[0-9]+")) {
+                showAlert("Input Error", "User instructions cannot be numeric.");
+                expirationDateField.clear();
+                return;
+            }
+
+            // Boşluk ile başlama ya da bitme kontrolü
+            if (userInstructions.startsWith(" ") || userInstructions.endsWith(" ")) {
+                showAlert("Input Error", "User instructions cannot start or end with a space.");
+                expirationDateField.clear();
+                return;
+            }
+
+            // Yalnızca büyük harfleri içeriyorsa (isteğe bağlı)
+            if (userInstructions.equals(userInstructions.toUpperCase())) {
+                showAlert("Input Error", "User instructions cannot be in all uppercase letters.");
+                expirationDateField.clear();
+                return;
+            }
+
+            // Eğer belirli bir dilde karakterler varsa (örneğin sadece İngilizce karakterler istiyorsanız)
+            if (!userInstructions.matches("[a-zA-Z0-9 ]*")) {
+                showAlert("Input Error", "User instructions can only contain alphanumeric characters and spaces.");
+                expirationDateField.clear();
+                return;
+            }
+
+
 
             // Create new Parfume object and add to list
             Parfume parfume = new Parfume(id, name, price, amount, expirationDate, userInstructions, volume, genderTarget);
@@ -198,11 +288,23 @@ public class ParfumeController {
     private void handleDeleteProduct() {
         Parfume selectedParfume = productTable.getSelectionModel().getSelectedItem();
         if (selectedParfume != null) {
-            parfumeList.remove(selectedParfume);
-            updateTableView();
-            saveProducts(); // Save updated list to file
+            // Onay penceresi oluşturuluyor
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete Confirmation");
+            confirmationAlert.setHeaderText("Are you sure you want to delete this product?");
+            confirmationAlert.setContentText("Product: " + selectedParfume.getName());
+
+            // Kullanıcı yanıtını kontrol ediyoruz
+            var result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                parfumeList.remove(selectedParfume);
+                updateTableView();
+                saveProducts();
+                showAlert("Success", "Product deleted successfully.");
+
+            }
         } else {
-            showAlert("Selection Error", "No parfume selected.");
+            showAlert("Selection Error", "No product selected.");
         }
     }
 

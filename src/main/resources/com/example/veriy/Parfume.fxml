@@ -8,21 +8,22 @@
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ParfumeController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" stylesheets="@Parfume.css"   prefHeight="600">
+    <VBox spacing="10" alignment="TOP_CENTER" prefHeight="780" prefWidth="1540.0" stylesheets="@Parfume.css">
 
         <!-- TableView for displaying Parfumes -->
         <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100" />
-                <TableColumn fx:id="amountColumn" text="Amount" prefWidth="100" />
-                <TableColumn fx:id="volumeColumn" text="Volume" prefWidth="100" />
-                <TableColumn fx:id="genderTargetColumn" text="Gender Target" prefWidth="100" />
-                <TableColumn fx:id="expirationDateColumn" text="Expiration Date" prefWidth="100" />
-                <TableColumn fx:id="userInstructionsColumn" text="User Instructions" prefWidth="100" />
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="120" /> <!-- Daha geniş fiyat sütunu -->
+                <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120" /> <!-- Daha geniş Amount sütunu -->
+                <TableColumn fx:id="volumeColumn" text="Volume" prefWidth="120" /> <!-- Daha geniş Volume sütunu -->
+                <TableColumn fx:id="genderTargetColumn" text="Gender Target" prefWidth="120" /> <!-- Daha geniş Gender Target sütunu -->
+                <TableColumn fx:id="expirationDateColumn" text="Expiration Date" prefWidth="120" />
+                <TableColumn fx:id="userInstructionsColumn" text="User Instructions" prefWidth="250" />
             </columns>
         </TableView>
+
 
         <!-- Form for adding parfumes -->
         <HBox spacing="10" alignment="CENTER">
