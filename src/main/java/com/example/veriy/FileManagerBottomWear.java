@@ -1,8 +1,6 @@
 package com.example.veriy;
 
 import Models.BottomWear;
-import Models.Phone;
-import Models.TopWear;
 
 import java.io.*;
 import java.util.ArrayList;

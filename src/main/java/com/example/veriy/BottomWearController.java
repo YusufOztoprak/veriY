@@ -1,14 +1,14 @@
 package com.example.veriy;
 
 import Models.BottomWear;
-import Models.PC;
-import Models.TopWear;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -90,7 +90,9 @@ public class BottomWearController {
         colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
         clothColumn.setCellValueFactory(new PropertyValueFactory<>("cloth"));
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        hasPocketsColumn.setCellValueFactory(new PropertyValueFactory<>("hasPockets"));
+        hasPocketsColumn.setCellValueFactory(cellData ->
+                new SimpleBooleanProperty(cellData.getValue().hasPockets()));
+        hasPocketsColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
 
         // TableView'e veri bağla
         updateTableView();
@@ -220,6 +222,7 @@ public class BottomWearController {
                 return;
             }
             boolean hasPockets = hasPocketsCheckBox.isSelected();
+
 
 
             BottomWear bottomWear = new BottomWear(id, name, price, amount, size, color, cloth, gender, hasPockets);

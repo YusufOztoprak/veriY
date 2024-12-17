@@ -1,2 +1,7 @@
 abc-123,fdsdf,2,2,XS,Mavi,Keten,Unisex,true
+2,a,5,5,M,Kırmızı,Keten,Male,true
+8,aaaaa,7,8,M,yeşil,Keten,Male,true
+1,aaa,12,3,M,sarı,Pamuklu,Male,true
+3,gg,67,6,M,Kırmızı,Keten,Male,true
+5,wfe,76,32,M,yeşil,Keten,Male,false
 vgftb,btretb,56546,156,XS,Mavi,Pamuklu,Unisex,false
