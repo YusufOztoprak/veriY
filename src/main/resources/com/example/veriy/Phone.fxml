@@ -97,7 +97,7 @@
             <font>
                <Font name="Arial Bold" size="12.0" />
             </font></Button>
-            <Button onAction="#addPhone" text="AddProduct" textFill="#b71e1e">
+            <Button onAction="#addPhone" text="Add Phone" textFill="#b71e1e">
             <font>
                <Font name="Arial Bold" size="12.0" />
             </font></Button>
