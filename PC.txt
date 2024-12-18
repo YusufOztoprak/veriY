@@ -1,3 +1,1 @@
-21123,daw,10,1,8,128,Intel Core i5,1,1
-11,aaaa,11,3,32,512,AMD Ryzen 5,3,14
-saam,fcsjrghnrg,3233,234,8,128,Intel Core i5,435136346,3
+pc-1,victus,2000,5,8,128,Intel Core i7,2,8

@@ -222,49 +222,49 @@ public class ParfumeController {
             // Boş olma durumu kontrolü
             if (userInstructions == null || userInstructions.isEmpty()) {
                 showAlert("Input Error", "Please enter user instructions.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
             // Uzunluk sınırı kontrolü (örneğin 500 karakterden fazla olamaz)
             if (userInstructions.length() > 500) {
                 showAlert("Input Error", "User instructions cannot exceed 500 characters.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
             // Özel karakter kontrolü (istenmeyen karakterler var mı?)
             if (userInstructions.matches(".*[<>\"'&].*")) {
                 showAlert("Input Error", "User instructions cannot contain special characters like <, >, \", ', or &.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
             // Sadece rakam içermesi durumu (örneğin sadece rakam içeriyorsa hatalı olabilir)
             if (userInstructions.matches("[0-9]+")) {
                 showAlert("Input Error", "User instructions cannot be numeric.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
-            // Boşluk ile başlama ya da bitme kontrolü
-            if (userInstructions.startsWith(" ") || userInstructions.endsWith(" ")) {
+            // Cümlenin başında veya sonunda boşluk olup olmadığını kontrol edin
+            if (userInstructions.trim().length() != userInstructions.length()) {
                 showAlert("Input Error", "User instructions cannot start or end with a space.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
             // Yalnızca büyük harfleri içeriyorsa (isteğe bağlı)
             if (userInstructions.equals(userInstructions.toUpperCase())) {
                 showAlert("Input Error", "User instructions cannot be in all uppercase letters.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 
             // Eğer belirli bir dilde karakterler varsa (örneğin sadece İngilizce karakterler istiyorsanız)
             if (!userInstructions.matches("[a-zA-Z0-9 ]*")) {
                 showAlert("Input Error", "User instructions can only contain alphanumeric characters and spaces.");
-                expirationDateField.clear();
+                userInstructionsField.clear();
                 return;
             }
 

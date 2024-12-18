@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Pos?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.collections.ObservableList?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.veriy.ParfumeController">
-    <VBox spacing="10" alignment="TOP_CENTER" prefHeight="780" prefWidth="1540.0" stylesheets="@Parfume.css">
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.veriy.ParfumeController">
+    <VBox alignment="TOP_CENTER" prefHeight="780" prefWidth="1540.0" spacing="10" stylesheets="@Parfume.css">
 
         <!-- TableView for displaying Parfumes -->
-        <TableView fx:id="productTable" prefWidth="750" prefHeight="400">
+        <TableView fx:id="productTable" prefHeight="400" prefWidth="750">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
-                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="120" /> <!-- Daha geniş fiyat sütunu -->
-                <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120" /> <!-- Daha geniş Amount sütunu -->
-                <TableColumn fx:id="volumeColumn" text="Volume" prefWidth="120" /> <!-- Daha geniş Volume sütunu -->
-                <TableColumn fx:id="genderTargetColumn" text="Gender Target" prefWidth="120" /> <!-- Daha geniş Gender Target sütunu -->
-                <TableColumn fx:id="expirationDateColumn" text="Expiration Date" prefWidth="120" />
-                <TableColumn fx:id="userInstructionsColumn" text="User Instructions" prefWidth="250" />
+                <TableColumn fx:id="idColumn" prefWidth="290.0" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="157.0" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="160.0" text="Price" /> <!-- Daha geniş fiyat sütunu -->
+                <TableColumn fx:id="amountColumn" prefWidth="157.0" text="Amount" /> <!-- Daha geniş Amount sütunu -->
+                <TableColumn fx:id="volumeColumn" prefWidth="135.0" text="Volume" /> <!-- Daha geniş Volume sütunu -->
+                <TableColumn fx:id="genderTargetColumn" prefWidth="165.0" text="Gender Target" /> <!-- Daha geniş Gender Target sütunu -->
+                <TableColumn fx:id="expirationDateColumn" prefWidth="130.0" text="Expiration Date" />
+                <TableColumn fx:id="userInstructionsColumn" prefWidth="250" text="User Instructions" />
             </columns>
         </TableView>
 
 
         <!-- Form for adding parfumes -->
-        <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="idField" promptText="Enter ID" >
+        <HBox alignment="CENTER" spacing="10">
+            <TextField fx:id="idField" promptText="Enter ID">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="nameField" promptText="Enter Name" >
+            <TextField fx:id="nameField" promptText="Enter Name">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="priceField" promptText="Enter Price" >
+            <TextField fx:id="priceField" promptText="Enter Price">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
-            <TextField fx:id="amountField" promptText="Enter Amount" >
+            <TextField fx:id="amountField" promptText="Enter Amount">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font></TextField>
@@ -47,10 +52,10 @@
             <ComboBox fx:id="volumeField" promptText="Select Volume">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="50"/>
-                        <String fx:value="100"/>
-                        <String fx:value="150"/>
-                        <String fx:value="200"/>
+                        <String fx:value="50" />
+                        <String fx:value="100" />
+                        <String fx:value="150" />
+                        <String fx:value="200" />
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -59,9 +64,9 @@
             <ComboBox fx:id="genderTargetComboBox" promptText="Select Gender Target">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Unisex"/>
-                        <String fx:value="Men"/>
-                        <String fx:value="Women"/>
+                        <String fx:value="Unisex" />
+                        <String fx:value="Men" />
+                        <String fx:value="Women" />
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -78,18 +83,18 @@
         </HBox>
 
         <!-- Buttons for adding and deleting parfumes -->
-        <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="backButton" onAction="#goToMainScene" text="Back to Personal Care"  textFill="#b71e1e">
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="backButton" onAction="#goToMainScene" text="Back to Personal Care" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
-            <Button text="Add Parfume" onAction="#handleAddProduct"  textFill="#b71e1e">
+            <Button onAction="#handleAddProduct" text="Add Parfume" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
-            <Button text="Delete Selected" onAction="#handleDeleteProduct"  textFill="#b71e1e">
+            <Button onAction="#handleDeleteProduct" text="Delete Selected" textFill="#b71e1e">
                 <font>
-                    <Font name="Arial Bold" size="12.0"/>
+                    <Font name="Arial Bold" size="12.0" />
                 </font></Button>
         </HBox>
     </VBox>

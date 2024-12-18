@@ -1,5 +1,1 @@
-2312,adsadw,2,1,50.0,Unisex,1,1
-1,a,3,3,100.0,Women,2067,bbb
-12,wd,5,2,50.0,Unisex,1,1
-7,ccc,11,6,150.0,Men,2046,erf
-2,dg,12,2,150.0,Men,2035,aaaa
+Perf-1,Mad,1000,1,100.0,Unisex,2030,kullan

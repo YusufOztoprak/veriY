@@ -1,7 +1,1 @@
-1,1,1,1,XS,Mavi,Pamuklu,Unisex,Uzun kol,v yaka
-2,a,1,1,XS,Mavi,Pamuklu,Male,Uzun kol,v yaka
-4,aa,2,3,M,yeşil,Keten,Male,Uzun kol,Polo yaka
-232,adssd,10,1,XS,Mavi,Pamuklu,Unisex,Uzun kol,v yaka
-1321,111,111,1221,XS,Mavi,Keten,Unisex,Uzun kol,v yaka
-21323,thdnjhbtber,35673,1,XS,Mavi,Pamuklu,Male,Uzun kol,v yaka
-35425,grrsgg,67365,656,XS,Mavi,Pamuklu,Unisex,Uzun kol,v yaka
+TWear-1,kazak,500,3,XS,Kırmızı,Pamuklu,Unisex,Uzun kol,Polo yaka

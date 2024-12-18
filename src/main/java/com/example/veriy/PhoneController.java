@@ -74,6 +74,7 @@ public class PhoneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        addCharacterLimit(nameField, 20);
         priceColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPrice()).asObject());
         addCharacterLimit(priceField,9);
         amountColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getAmount()).asObject());
@@ -167,8 +168,8 @@ public class PhoneController implements Initializable {
                 return;
             }
 
-            if (name.length() > 20) {
-                showAlert("Input Error", "Name must be less than 20 characters.");
+            if (name.length() > 15) {
+                showAlert("Input Error", "Name must be less than 15 characters.");
                 nameField.clear();
                 return;
             }
@@ -259,13 +260,18 @@ public class PhoneController implements Initializable {
                     numberOfCamerasField.clear();
                     return;
                 }
+                if(numberOfCameras >  5){
+                    showAlert("Input Error","Number of cameras cannot be greater than 5");
+                    numberOfCamerasField.clear();
+                    return;
+                }
             } catch (NumberFormatException e) {
                 showAlert("Input error", "Number of cameras cannot be empty or string value.");
                 numberOfCamerasField.clear();
                 return;
             }
 
-            boolean fiveGSupport = "Yes".equalsIgnoreCase(fiveGSupportField.getValue().toString());
+            boolean fiveGSupport = "true".equalsIgnoreCase(fiveGSupportField.getValue().toString());
 
             Phone phone = new Phone(id, name, price, amount, ramValue, storageValue, cpu, warranty, numberOfCameras, fiveGSupport);
 
@@ -355,4 +361,5 @@ public class PhoneController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

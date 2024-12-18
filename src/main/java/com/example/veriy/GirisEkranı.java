@@ -50,6 +50,7 @@ public class GirisEkranı {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(anaEkran);
                 stage.setTitle("Ana Ekran");
+                stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {
                 mesajLabel.setText("Ana ekrana geçiş yapılamadı: " + e.getMessage());
